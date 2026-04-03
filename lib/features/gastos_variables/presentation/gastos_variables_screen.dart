@@ -209,8 +209,8 @@ class _GastoTile extends StatelessWidget {
       ),
       child: ListTile(
         leading: CircleAvatar(
-          backgroundColor: AppColors.expense.withValues(alpha: 0.1),
-          child: Icon(icon, color: AppColors.expense, size: 20),
+          backgroundColor: AppColors.variable.withValues(alpha: 0.1),
+          child: Icon(icon, color: AppColors.variable, size: 20),
         ),
         title: Text(gasto.descripcion, style: theme.textTheme.bodyLarge),
         subtitle: Text(
@@ -228,7 +228,7 @@ class _GastoTile extends StatelessWidget {
           CurrencyFormatter.format(gasto.monto, symbol: simbolo),
           style: theme.textTheme.bodyMedium?.copyWith(
             fontWeight: FontWeight.w600,
-            color: AppColors.expense,
+            color: AppColors.variable,
           ),
         ),
         onTap: onEdit,

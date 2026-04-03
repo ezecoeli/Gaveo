@@ -8,6 +8,7 @@ class AppColors {
   static const Color primaryContainer = Color(0xFFD8F3DC);
   static const Color income = Color(0xFF2D6A4F);
   static const Color expense = Color(0xFFE63946);
+  static const Color variable = Color(0xFF9575CD); // gastos variables
   static const Color savings = Color(0xFF457B9D);
   static const Color delivery = Color(0xFFE76F51);
   static const Color warning = Color(0xFFF4A261);

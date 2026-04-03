@@ -210,7 +210,7 @@ class _DashboardBody extends StatelessWidget {
           label: context.l10n.gastosVariables,
           amount: summary.totalGastosVariables,
           simbolo: simbolo,
-          color: const Color(0xFF9575CD),
+          color: AppColors.variable,
           icon: Icons.shopping_bag_outlined,
         ).animate(delay: 200.ms).fadeIn(duration: 300.ms).slideY(begin: 0.08, curve: Curves.easeOut),
         _DeliveryTile(summary: summary, simbolo: simbolo).animate(delay: 260.ms).fadeIn(duration: 300.ms).slideY(begin: 0.08, curve: Curves.easeOut),
@@ -450,7 +450,7 @@ class _ExpenseBreakdownCard extends StatelessWidget {
     final data = [
       (l10n.gastosFijos, summary.totalGastosFijos, AppColors.expense),
       (l10n.gastosVariables, summary.totalGastosVariables,
-          const Color(0xFF9575CD)), // violeta — contraste claro vs rojo y naranja
+          AppColors.variable),
       (l10n.delivery, summary.totalDelivery, AppColors.delivery),
       (l10n.ahorros, summary.totalAhorros, AppColors.savings),
     ].where((e) => e.$2 > 0).toList();
