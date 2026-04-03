@@ -136,5 +136,11 @@
   "inactivo": "Inactive",
   "totalMensual": "Monthly total",
   "metaLabel": "Target",
-  "confirmarEliminarMeta": "Delete this goal?"
+  "confirmarEliminarMeta": "Delete this goal?",
+
+  "hola": "Hello, {nombre}",
+  "distribucionGastos": "Expense breakdown",
+  "sinDatosGrafico": "No expenses to display",
+  "pagadosDe": "{pagados} of {total} paid",
+  "gastadoDe": "{gastado} of {presupuesto}"
 }

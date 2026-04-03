@@ -823,6 +823,36 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'¿Eliminar esta meta?'**
   String get confirmarEliminarMeta;
+
+  /// No description provided for @hola.
+  ///
+  /// In es, this message translates to:
+  /// **'Hola, {nombre}'**
+  String hola(String nombre);
+
+  /// No description provided for @distribucionGastos.
+  ///
+  /// In es, this message translates to:
+  /// **'Distribución de gastos'**
+  String get distribucionGastos;
+
+  /// No description provided for @sinDatosGrafico.
+  ///
+  /// In es, this message translates to:
+  /// **'Sin gastos para mostrar'**
+  String get sinDatosGrafico;
+
+  /// No description provided for @pagadosDe.
+  ///
+  /// In es, this message translates to:
+  /// **'{pagados} de {total} pagados'**
+  String pagadosDe(int pagados, int total);
+
+  /// No description provided for @gastadoDe.
+  ///
+  /// In es, this message translates to:
+  /// **'{gastado} de {presupuesto}'**
+  String gastadoDe(String gastado, String presupuesto);
 }
 
 class _AppLocalizationsDelegate

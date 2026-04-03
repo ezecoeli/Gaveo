@@ -375,4 +375,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get confirmarEliminarMeta => 'Delete this goal?';
+
+  @override
+  String hola(String nombre) {
+    return 'Hello, $nombre';
+  }
+
+  @override
+  String get distribucionGastos => 'Expense breakdown';
+
+  @override
+  String get sinDatosGrafico => 'No expenses to display';
+
+  @override
+  String pagadosDe(int pagados, int total) {
+    return '$pagados of $total paid';
+  }
+
+  @override
+  String gastadoDe(String gastado, String presupuesto) {
+    return '$gastado of $presupuesto';
+  }
 }

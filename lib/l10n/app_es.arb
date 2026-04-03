@@ -261,5 +261,30 @@
   "metaLabel": "Objetivo",
   "@metaLabel": {},
   "confirmarEliminarMeta": "¿Eliminar esta meta?",
-  "@confirmarEliminarMeta": {}
+  "@confirmarEliminarMeta": {},
+
+  "hola": "Hola, {nombre}",
+  "@hola": {
+    "placeholders": {
+      "nombre": { "type": "String" }
+    }
+  },
+  "distribucionGastos": "Distribución de gastos",
+  "@distribucionGastos": {},
+  "sinDatosGrafico": "Sin gastos para mostrar",
+  "@sinDatosGrafico": {},
+  "pagadosDe": "{pagados} de {total} pagados",
+  "@pagadosDe": {
+    "placeholders": {
+      "pagados": { "type": "int" },
+      "total": { "type": "int" }
+    }
+  },
+  "gastadoDe": "{gastado} de {presupuesto}",
+  "@gastadoDe": {
+    "placeholders": {
+      "gastado": { "type": "String" },
+      "presupuesto": { "type": "String" }
+    }
+  }
 }

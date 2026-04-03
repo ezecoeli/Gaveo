@@ -6,6 +6,8 @@ class DashboardSummary {
   final double totalDelivery;
   final double presupuestoDelivery;
   final double totalAhorros;
+  final int gastosFijosPagadosCount;
+  final int gastosFijosTotalCount;
 
   const DashboardSummary({
     required this.totalIngresos,
@@ -15,6 +17,8 @@ class DashboardSummary {
     required this.totalDelivery,
     required this.presupuestoDelivery,
     required this.totalAhorros,
+    this.gastosFijosPagadosCount = 0,
+    this.gastosFijosTotalCount = 0,
   });
 
   double get saldoDisponible =>
