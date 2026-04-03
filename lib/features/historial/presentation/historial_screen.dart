@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -57,7 +58,7 @@ class HistorialScreen extends ConsumerWidget {
                   );
               context.go('/');
             },
-          ),
+          ).animate(delay: (50 * index).ms).fadeIn(duration: 300.ms).slideY(begin: 0.06, curve: Curves.easeOut),
         ),
       ),
     );

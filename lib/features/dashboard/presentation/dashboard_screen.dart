@@ -1,5 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -179,7 +180,10 @@ class _DashboardBody extends StatelessWidget {
         _SaldoCard(
             summary: summary,
             simbolo: simbolo,
-            nombreUsuario: nombreUsuario),
+            nombreUsuario: nombreUsuario)
+            .animate()
+            .fadeIn(duration: 400.ms)
+            .slideY(begin: 0.1, curve: Curves.easeOut),
         const SizedBox(height: 12),
         _SummaryTile(
           label: context.l10n.ingresos,
@@ -188,7 +192,7 @@ class _DashboardBody extends StatelessWidget {
           color: AppColors.income,
           icon: Icons.arrow_downward,
           onTap: () => context.push('/ingresos'),
-        ),
+        ).animate(delay: 80.ms).fadeIn(duration: 300.ms).slideY(begin: 0.08, curve: Curves.easeOut),
         _SummaryTile(
           label: context.l10n.gastosFijos,
           amount: summary.totalGastosFijos,
@@ -201,24 +205,24 @@ class _DashboardBody extends StatelessWidget {
                   summary.gastosFijosTotalCount,
                 )
               : null,
-        ),
+        ).animate(delay: 140.ms).fadeIn(duration: 300.ms).slideY(begin: 0.08, curve: Curves.easeOut),
         _SummaryTile(
           label: context.l10n.gastosVariables,
           amount: summary.totalGastosVariables,
           simbolo: simbolo,
           color: AppColors.expense,
           icon: Icons.shopping_bag_outlined,
-        ),
-        _DeliveryTile(summary: summary, simbolo: simbolo),
+        ).animate(delay: 200.ms).fadeIn(duration: 300.ms).slideY(begin: 0.08, curve: Curves.easeOut),
+        _DeliveryTile(summary: summary, simbolo: simbolo).animate(delay: 260.ms).fadeIn(duration: 300.ms).slideY(begin: 0.08, curve: Curves.easeOut),
         _SummaryTile(
           label: context.l10n.ahorros,
           amount: summary.totalAhorros,
           simbolo: simbolo,
           color: AppColors.savings,
           icon: Icons.savings_outlined,
-        ),
+        ).animate(delay: 320.ms).fadeIn(duration: 300.ms).slideY(begin: 0.08, curve: Curves.easeOut),
         const SizedBox(height: 12),
-        _ExpenseBreakdownCard(summary: summary),
+        _ExpenseBreakdownCard(summary: summary).animate(delay: 380.ms).fadeIn(duration: 300.ms).slideY(begin: 0.08, curve: Curves.easeOut),
       ],
     );
   }
