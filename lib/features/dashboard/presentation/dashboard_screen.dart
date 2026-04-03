@@ -450,7 +450,7 @@ class _ExpenseBreakdownCard extends StatelessWidget {
     final data = [
       (l10n.gastosFijos, summary.totalGastosFijos, AppColors.expense),
       (l10n.gastosVariables, summary.totalGastosVariables,
-          const Color(0xFFE57373)),
+          const Color(0xFF9575CD)), // violeta — contraste claro vs rojo y naranja
       (l10n.delivery, summary.totalDelivery, AppColors.delivery),
       (l10n.ahorros, summary.totalAhorros, AppColors.savings),
     ].where((e) => e.$2 > 0).toList();
