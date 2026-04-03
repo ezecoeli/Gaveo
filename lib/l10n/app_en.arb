@@ -90,5 +90,22 @@
   "fecha": "Date",
   "ingresoAgregado": "Income recorded",
   "ingresoActualizado": "Income updated",
-  "ingresoEliminado": "Income deleted"
+  "ingresoEliminado": "Income deleted",
+
+  "agregarGastoVariable": "Add variable expense",
+  "editarGastoVariable": "Edit variable expense",
+  "sinGastosVariables": "No expenses this month",
+  "sinGastosVariablesDesc": "Tap + to record an expense",
+  "descripcion": "Description",
+  "gastoVariableAgregado": "Expense recorded",
+  "gastoVariableActualizado": "Expense updated",
+  "gastoVariableEliminado": "Expense deleted",
+  "catImprevisto": "Unexpected",
+  "catComida": "Food",
+  "catTransporte": "Transport",
+  "catRopa": "Clothing",
+  "catEntretenimiento": "Entertainment",
+  "catFarmacia": "Pharmacy",
+  "catHogar": "Home",
+  "catOtro": "Other"
 }

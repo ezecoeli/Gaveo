@@ -565,6 +565,102 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Ingreso eliminado'**
   String get ingresoEliminado;
+
+  /// No description provided for @agregarGastoVariable.
+  ///
+  /// In es, this message translates to:
+  /// **'Agregar gasto variable'**
+  String get agregarGastoVariable;
+
+  /// No description provided for @editarGastoVariable.
+  ///
+  /// In es, this message translates to:
+  /// **'Editar gasto variable'**
+  String get editarGastoVariable;
+
+  /// No description provided for @sinGastosVariables.
+  ///
+  /// In es, this message translates to:
+  /// **'Sin gastos este mes'**
+  String get sinGastosVariables;
+
+  /// No description provided for @sinGastosVariablesDesc.
+  ///
+  /// In es, this message translates to:
+  /// **'Tocá + para registrar un gasto'**
+  String get sinGastosVariablesDesc;
+
+  /// No description provided for @descripcion.
+  ///
+  /// In es, this message translates to:
+  /// **'Descripción'**
+  String get descripcion;
+
+  /// No description provided for @gastoVariableAgregado.
+  ///
+  /// In es, this message translates to:
+  /// **'Gasto registrado'**
+  String get gastoVariableAgregado;
+
+  /// No description provided for @gastoVariableActualizado.
+  ///
+  /// In es, this message translates to:
+  /// **'Gasto actualizado'**
+  String get gastoVariableActualizado;
+
+  /// No description provided for @gastoVariableEliminado.
+  ///
+  /// In es, this message translates to:
+  /// **'Gasto eliminado'**
+  String get gastoVariableEliminado;
+
+  /// No description provided for @catImprevisto.
+  ///
+  /// In es, this message translates to:
+  /// **'Imprevisto'**
+  String get catImprevisto;
+
+  /// No description provided for @catComida.
+  ///
+  /// In es, this message translates to:
+  /// **'Comida'**
+  String get catComida;
+
+  /// No description provided for @catTransporte.
+  ///
+  /// In es, this message translates to:
+  /// **'Transporte'**
+  String get catTransporte;
+
+  /// No description provided for @catRopa.
+  ///
+  /// In es, this message translates to:
+  /// **'Ropa'**
+  String get catRopa;
+
+  /// No description provided for @catEntretenimiento.
+  ///
+  /// In es, this message translates to:
+  /// **'Entretenimiento'**
+  String get catEntretenimiento;
+
+  /// No description provided for @catFarmacia.
+  ///
+  /// In es, this message translates to:
+  /// **'Farmacia'**
+  String get catFarmacia;
+
+  /// No description provided for @catHogar.
+  ///
+  /// In es, this message translates to:
+  /// **'Hogar'**
+  String get catHogar;
+
+  /// No description provided for @catOtro.
+  ///
+  /// In es, this message translates to:
+  /// **'Otro'**
+  String get catOtro;
 }
 
 class _AppLocalizationsDelegate

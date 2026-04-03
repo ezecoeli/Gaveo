@@ -246,4 +246,52 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get ingresoEliminado => 'Ingreso eliminado';
+
+  @override
+  String get agregarGastoVariable => 'Agregar gasto variable';
+
+  @override
+  String get editarGastoVariable => 'Editar gasto variable';
+
+  @override
+  String get sinGastosVariables => 'Sin gastos este mes';
+
+  @override
+  String get sinGastosVariablesDesc => 'Tocá + para registrar un gasto';
+
+  @override
+  String get descripcion => 'Descripción';
+
+  @override
+  String get gastoVariableAgregado => 'Gasto registrado';
+
+  @override
+  String get gastoVariableActualizado => 'Gasto actualizado';
+
+  @override
+  String get gastoVariableEliminado => 'Gasto eliminado';
+
+  @override
+  String get catImprevisto => 'Imprevisto';
+
+  @override
+  String get catComida => 'Comida';
+
+  @override
+  String get catTransporte => 'Transporte';
+
+  @override
+  String get catRopa => 'Ropa';
+
+  @override
+  String get catEntretenimiento => 'Entretenimiento';
+
+  @override
+  String get catFarmacia => 'Farmacia';
+
+  @override
+  String get catHogar => 'Hogar';
+
+  @override
+  String get catOtro => 'Otro';
 }
