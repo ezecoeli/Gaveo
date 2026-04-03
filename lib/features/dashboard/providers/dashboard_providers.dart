@@ -28,6 +28,10 @@ class SelectedMonth extends _$SelectedMonth {
       state = next;
     }
   }
+
+  void setMonth(int mes, int anio) {
+    state = (mes: mes, anio: anio);
+  }
 }
 
 // ── Dashboard summary ─────────────────────────────────────────────────────────

@@ -148,5 +148,9 @@
   "generandoPDF": "Generating summary...",
   "resumenMensual": "Monthly summary",
   "notifVencimientoTitle": "Due today",
-  "notifVencimientoBody": "{nombre} is due today"
+  "notifVencimientoBody": "{nombre} is due today",
+
+  "historial": "History",
+  "gastos": "Expenses",
+  "saldo": "Balance"
 }

@@ -883,6 +883,24 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'{nombre} vence hoy'**
   String notifVencimientoBody(String nombre);
+
+  /// No description provided for @historial.
+  ///
+  /// In es, this message translates to:
+  /// **'Historial'**
+  String get historial;
+
+  /// No description provided for @gastos.
+  ///
+  /// In es, this message translates to:
+  /// **'Gastos'**
+  String get gastos;
+
+  /// No description provided for @saldo.
+  ///
+  /// In es, this message translates to:
+  /// **'Saldo'**
+  String get saldo;
 }
 
 class _AppLocalizationsDelegate

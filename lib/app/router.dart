@@ -8,6 +8,7 @@ import '../features/dashboard/presentation/dashboard_screen.dart';
 import '../features/delivery/presentation/delivery_screen.dart';
 import '../features/gastos_fijos/presentation/gastos_fijos_screen.dart';
 import '../features/gastos_variables/presentation/gastos_variables_screen.dart';
+import '../features/historial/presentation/historial_screen.dart';
 import '../features/ingresos/presentation/ingresos_screen.dart';
 
 final appRouter = GoRouter(
@@ -46,6 +47,10 @@ final appRouter = GoRouter(
     GoRoute(
       path: '/configuracion',
       builder: (_, __) => const ConfiguracionScreen(),
+    ),
+    GoRoute(
+      path: '/historial',
+      builder: (_, __) => const HistorialScreen(),
     ),
   ],
 );

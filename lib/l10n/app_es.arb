@@ -301,5 +301,12 @@
     "placeholders": {
       "nombre": { "type": "String" }
     }
-  }
+  },
+
+  "historial": "Historial",
+  "@historial": {},
+  "gastos": "Gastos",
+  "@gastos": {},
+  "saldo": "Saldo",
+  "@saldo": {}
 }

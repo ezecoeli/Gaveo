@@ -71,6 +71,12 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
         title: _MonthSelector(mes: monthState.mes, anio: monthState.anio),
         centerTitle: true,
         actions: [
+          // Historial
+          IconButton(
+            icon: const Icon(Icons.history_rounded),
+            tooltip: context.l10n.historial,
+            onPressed: () => context.push('/historial'),
+          ),
           // Export PDF
           summaryAsync.whenOrNull(
                 data: (summary) => IconButton(

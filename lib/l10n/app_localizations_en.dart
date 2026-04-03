@@ -413,4 +413,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String notifVencimientoBody(String nombre) {
     return '$nombre is due today';
   }
+
+  @override
+  String get historial => 'History';
+
+  @override
+  String get gastos => 'Expenses';
+
+  @override
+  String get saldo => 'Balance';
 }
