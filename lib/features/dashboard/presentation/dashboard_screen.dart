@@ -210,7 +210,7 @@ class _DashboardBody extends StatelessWidget {
           label: context.l10n.gastosVariables,
           amount: summary.totalGastosVariables,
           simbolo: simbolo,
-          color: AppColors.expense,
+          color: const Color(0xFF9575CD),
           icon: Icons.shopping_bag_outlined,
         ).animate(delay: 200.ms).fadeIn(duration: 300.ms).slideY(begin: 0.08, curve: Curves.easeOut),
         _DeliveryTile(summary: summary, simbolo: simbolo).animate(delay: 260.ms).fadeIn(duration: 300.ms).slideY(begin: 0.08, curve: Curves.easeOut),
