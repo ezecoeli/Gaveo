@@ -6,15 +6,17 @@ Aplicación móvil para la gestión financiera del hogar. Registra ingresos, gas
 
 ## Características
 
-- **Dashboard mensual**: saldo disponible, % comprometido y resumen de todas las categorías
+- **Dashboard mensual**: saldo disponible, % comprometido y resumen de todas las categorías con gráfico de distribución
 - **Ingresos**: registro de fuentes de ingreso por mes
-- **Gastos fijos**: servicios y cuotas recurrentes con seguimiento de pago
-- **Gastos variables**: imprevistos y compras esporádicas
-- **Delivery**: control de gasto en apps de envío con presupuesto mensual y alertas
+- **Gastos fijos**: servicios y cuotas recurrentes con seguimiento de pago mes a mes
+- **Gastos variables**: imprevistos y compras esporádicas por categoría
+- **Delivery**: control de pedidos con presupuesto mensual y alerta de umbral
 - **Ahorros**: metas de ahorro con monto mensual y objetivo total
-- **Navegación por meses**: acceso a historial con límite de 1 mes adelante
-- **Internacionalización**: soporte completo para Español e Inglés (ARB files)
-- **Selector de moneda**: picker curado con ~40 monedas (LATAM + globales) con bandera, nombre y símbolo
+- **Historial**: resumen de los últimos 12 meses; toca un mes para navegar directo a él
+- **Notificaciones locales**: aviso el día que vence cada gasto fijo
+- **Exportación PDF**: resumen mensual completo compartible desde el Dashboard
+- **Internacionalización**: soporte completo Español / Inglés (ARB files)
+- **Selector de moneda**: picker curado con ~40 monedas (LATAM + globales)
 
 ---
 
@@ -52,8 +54,8 @@ Aplicación móvil para la gestión financiera del hogar. Registra ingresos, gas
 
 ```bash
 # 1. Clonar el repositorio
-git clone <url-del-repo>
-cd gaveo
+git clone https://github.com/ezecoeli/Gaveo.git
+cd Gaveo
 
 # 2. Instalar dependencias
 flutter pub get
@@ -79,20 +81,20 @@ lib/
 │   ├── router.dart              # Configuración GoRouter
 │   └── theme/                   # Colores, tipografía, tema Material 3
 ├── core/
-│   ├── database/                # AppDatabase (Drift) y migraciones
+│   ├── database/                # AppDatabase (Drift) + 6 DAOs
+│   ├── services/                # NotificationService, ReporteService
 │   ├── utils/                   # Formateadores, extensiones, date utils
-│   └── constants/               # Constantes globales (AppConstants, currencies)
+│   └── constants/               # AppConstants, lista de monedas curadas
 ├── l10n/                        # ARB files (app_es.arb, app_en.arb) → AppLocalizations
-├── features/
-│   ├── dashboard/               # Resumen financiero mensual
-│   ├── ingresos/                # Gestión de ingresos
-│   ├── gastos_fijos/            # Gastos recurrentes + tracking de pago
-│   ├── gastos_variables/        # Gastos imprevistos
-│   ├── delivery/                # Control de delivery con presupuesto
-│   └── ahorros/                 # Metas de ahorro
-└── shared/
-    ├── widgets/                 # Widgets reutilizables entre features
-    └── models/                  # Modelos compartidos
+└── features/
+    ├── dashboard/               # Resumen financiero mensual + gráfico
+    ├── ingresos/                # Gestión de ingresos
+    ├── gastos_fijos/            # Gastos recurrentes + tracking de pago
+    ├── gastos_variables/        # Gastos imprevistos por categoría
+    ├── delivery/                # Control de delivery con presupuesto
+    ├── ahorros/                 # Metas de ahorro
+    ├── historial/               # Resumen de los últimos 12 meses
+    └── configuracion/           # Perfil, moneda, idioma, presupuesto delivery
 ```
 
 Cada feature sigue la estructura `data/` + `providers/` + `presentation/`.
@@ -103,6 +105,7 @@ Cada feature sigue la estructura `data/` + `providers/` + `presentation/`.
 
 - **Nav bar (5 ítems):** Dashboard · Gastos Fijos · Variables · Delivery · Ahorros
 - **Ingresos:** accesible tocando la tarjeta de ingresos en el Dashboard
+- **Historial:** botón `🕐` en el AppBar del Dashboard
 - **Configuración:** ícono de engranaje en el AppBar del Dashboard (nombre, moneda, idioma)
 
 ---
@@ -137,12 +140,3 @@ flutter test
 ```
 
 ---
-
-## Convenciones de código
-
-- **Clases**: `PascalCase`
-- **Variables y métodos**: `camelCase`
-- **Archivos**: `snake_case`
-- Código fuente en inglés; textos de UI en español
-- `const` constructores siempre que sea posible
-- Widgets > 200 líneas → extraer en sub-widgets
