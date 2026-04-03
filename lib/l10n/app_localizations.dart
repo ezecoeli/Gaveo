@@ -661,6 +661,72 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Otro'**
   String get catOtro;
+
+  /// No description provided for @agregarDelivery.
+  ///
+  /// In es, this message translates to:
+  /// **'Agregar pedido'**
+  String get agregarDelivery;
+
+  /// No description provided for @editarDelivery.
+  ///
+  /// In es, this message translates to:
+  /// **'Editar pedido'**
+  String get editarDelivery;
+
+  /// No description provided for @sinDelivery.
+  ///
+  /// In es, this message translates to:
+  /// **'Sin pedidos este mes'**
+  String get sinDelivery;
+
+  /// No description provided for @sinDeliveryDesc.
+  ///
+  /// In es, this message translates to:
+  /// **'Tocá + para registrar un pedido'**
+  String get sinDeliveryDesc;
+
+  /// No description provided for @deliveryAgregado.
+  ///
+  /// In es, this message translates to:
+  /// **'Pedido registrado'**
+  String get deliveryAgregado;
+
+  /// No description provided for @deliveryActualizado.
+  ///
+  /// In es, this message translates to:
+  /// **'Pedido actualizado'**
+  String get deliveryActualizado;
+
+  /// No description provided for @deliveryEliminado.
+  ///
+  /// In es, this message translates to:
+  /// **'Pedido eliminado'**
+  String get deliveryEliminado;
+
+  /// No description provided for @plataformaOpcional.
+  ///
+  /// In es, this message translates to:
+  /// **'Plataforma (opcional)'**
+  String get plataformaOpcional;
+
+  /// No description provided for @presupuestoNoDefinido.
+  ///
+  /// In es, this message translates to:
+  /// **'Sin presupuesto definido'**
+  String get presupuestoNoDefinido;
+
+  /// No description provided for @gastadoLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'Gastado'**
+  String get gastadoLabel;
+
+  /// No description provided for @presupuestoLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'Presupuesto'**
+  String get presupuestoLabel;
 }
 
 class _AppLocalizationsDelegate

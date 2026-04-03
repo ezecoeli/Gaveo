@@ -294,4 +294,37 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get catOtro => 'Other';
+
+  @override
+  String get agregarDelivery => 'Add order';
+
+  @override
+  String get editarDelivery => 'Edit order';
+
+  @override
+  String get sinDelivery => 'No orders this month';
+
+  @override
+  String get sinDeliveryDesc => 'Tap + to log an order';
+
+  @override
+  String get deliveryAgregado => 'Order recorded';
+
+  @override
+  String get deliveryActualizado => 'Order updated';
+
+  @override
+  String get deliveryEliminado => 'Order deleted';
+
+  @override
+  String get plataformaOpcional => 'Platform (optional)';
+
+  @override
+  String get presupuestoNoDefinido => 'No budget defined';
+
+  @override
+  String get gastadoLabel => 'Spent';
+
+  @override
+  String get presupuestoLabel => 'Budget';
 }

@@ -107,5 +107,17 @@
   "catEntretenimiento": "Entertainment",
   "catFarmacia": "Pharmacy",
   "catHogar": "Home",
-  "catOtro": "Other"
+  "catOtro": "Other",
+
+  "agregarDelivery": "Add order",
+  "editarDelivery": "Edit order",
+  "sinDelivery": "No orders this month",
+  "sinDeliveryDesc": "Tap + to log an order",
+  "deliveryAgregado": "Order recorded",
+  "deliveryActualizado": "Order updated",
+  "deliveryEliminado": "Order deleted",
+  "plataformaOpcional": "Platform (optional)",
+  "presupuestoNoDefinido": "No budget defined",
+  "gastadoLabel": "Spent",
+  "presupuestoLabel": "Budget"
 }

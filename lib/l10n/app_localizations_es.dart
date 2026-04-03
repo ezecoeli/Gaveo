@@ -294,4 +294,37 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get catOtro => 'Otro';
+
+  @override
+  String get agregarDelivery => 'Agregar pedido';
+
+  @override
+  String get editarDelivery => 'Editar pedido';
+
+  @override
+  String get sinDelivery => 'Sin pedidos este mes';
+
+  @override
+  String get sinDeliveryDesc => 'Tocá + para registrar un pedido';
+
+  @override
+  String get deliveryAgregado => 'Pedido registrado';
+
+  @override
+  String get deliveryActualizado => 'Pedido actualizado';
+
+  @override
+  String get deliveryEliminado => 'Pedido eliminado';
+
+  @override
+  String get plataformaOpcional => 'Plataforma (opcional)';
+
+  @override
+  String get presupuestoNoDefinido => 'Sin presupuesto definido';
+
+  @override
+  String get gastadoLabel => 'Gastado';
+
+  @override
+  String get presupuestoLabel => 'Presupuesto';
 }
