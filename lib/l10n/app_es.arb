@@ -286,5 +286,20 @@
       "gastado": { "type": "String" },
       "presupuesto": { "type": "String" }
     }
+  },
+
+  "exportarPDF": "Exportar resumen",
+  "@exportarPDF": {},
+  "generandoPDF": "Generando resumen...",
+  "@generandoPDF": {},
+  "resumenMensual": "Resumen mensual",
+  "@resumenMensual": {},
+  "notifVencimientoTitle": "Vencimiento hoy",
+  "@notifVencimientoTitle": {},
+  "notifVencimientoBody": "{nombre} vence hoy",
+  "@notifVencimientoBody": {
+    "placeholders": {
+      "nombre": { "type": "String" }
+    }
   }
 }

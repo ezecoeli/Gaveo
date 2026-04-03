@@ -142,5 +142,11 @@
   "distribucionGastos": "Expense breakdown",
   "sinDatosGrafico": "No expenses to display",
   "pagadosDe": "{pagados} of {total} paid",
-  "gastadoDe": "{gastado} of {presupuesto}"
+  "gastadoDe": "{gastado} of {presupuesto}",
+
+  "exportarPDF": "Export summary",
+  "generandoPDF": "Generating summary...",
+  "resumenMensual": "Monthly summary",
+  "notifVencimientoTitle": "Due today",
+  "notifVencimientoBody": "{nombre} is due today"
 }

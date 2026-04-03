@@ -10,6 +10,9 @@ import '../../configuracion/providers/configuracion_providers.dart';
 import '../../configuracion/presentation/widgets/onboarding_bottom_sheet.dart';
 import '../../../../app/theme/app_colors.dart';
 import '../../../../core/constants/app_constants.dart';
+import '../../../../core/database/app_database.dart';
+import '../../../../core/services/notification_service.dart';
+import '../../../../core/services/reporte_service.dart';
 import '../../../../core/utils/currency_formatter.dart';
 import '../../../../core/utils/date_utils.dart';
 import '../../../../core/utils/extensions.dart';
@@ -23,6 +26,7 @@ class DashboardScreen extends ConsumerStatefulWidget {
 
 class _DashboardScreenState extends ConsumerState<DashboardScreen> {
   bool _onboardingShown = false;
+  bool _notificationsScheduled = false;
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +43,25 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
       }
     });
 
+    // Schedule notifications once per session after data loads
+    if (!_notificationsScheduled) {
+      ref.listen(dashboardSummaryProvider, (_, next) {
+        next.whenData((_) async {
+          if (_notificationsScheduled) return;
+          _notificationsScheduled = true;
+          final db = ref.read(appDatabaseProvider);
+          final l10n = context.l10n;
+          final gastosFijos =
+              await db.gastosFijosDao.getGastosFijosActivos();
+          if (!context.mounted) return;
+          await NotificationService.scheduleVencimientosHoy(
+            gastosFijos,
+            bodyBuilder: (nombre) => l10n.notifVencimientoBody(nombre),
+          );
+        });
+      });
+    }
+
     final config = configAsync.valueOrNull;
     final simbolo = config?.simbolo ?? '\$';
     final nombreUsuario = config?.nombreUsuario ?? '';
@@ -48,6 +71,29 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
         title: _MonthSelector(mes: monthState.mes, anio: monthState.anio),
         centerTitle: true,
         actions: [
+          // Export PDF
+          summaryAsync.whenOrNull(
+                data: (summary) => IconButton(
+                  icon: const Icon(Icons.picture_as_pdf_outlined),
+                  tooltip: context.l10n.exportarPDF,
+                  onPressed: () async {
+                    if (config == null) return;
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                          content: Text(context.l10n.generandoPDF),
+                          duration: const Duration(seconds: 1)),
+                    );
+                    await ReporteService.compartirResumenMensual(
+                      summary: summary,
+                      config: config,
+                      mes: monthState.mes,
+                      anio: monthState.anio,
+                      locale: Localizations.localeOf(context).languageCode,
+                    );
+                  },
+                ),
+              ) ??
+              const SizedBox.shrink(),
           IconButton(
             icon: const Icon(Icons.settings_outlined),
             onPressed: () => context.push('/configuracion'),

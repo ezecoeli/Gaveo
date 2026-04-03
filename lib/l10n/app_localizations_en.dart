@@ -396,4 +396,21 @@ class AppLocalizationsEn extends AppLocalizations {
   String gastadoDe(String gastado, String presupuesto) {
     return '$gastado of $presupuesto';
   }
+
+  @override
+  String get exportarPDF => 'Export summary';
+
+  @override
+  String get generandoPDF => 'Generating summary...';
+
+  @override
+  String get resumenMensual => 'Monthly summary';
+
+  @override
+  String get notifVencimientoTitle => 'Due today';
+
+  @override
+  String notifVencimientoBody(String nombre) {
+    return '$nombre is due today';
+  }
 }

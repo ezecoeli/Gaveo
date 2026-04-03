@@ -853,6 +853,36 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'{gastado} de {presupuesto}'**
   String gastadoDe(String gastado, String presupuesto);
+
+  /// No description provided for @exportarPDF.
+  ///
+  /// In es, this message translates to:
+  /// **'Exportar resumen'**
+  String get exportarPDF;
+
+  /// No description provided for @generandoPDF.
+  ///
+  /// In es, this message translates to:
+  /// **'Generando resumen...'**
+  String get generandoPDF;
+
+  /// No description provided for @resumenMensual.
+  ///
+  /// In es, this message translates to:
+  /// **'Resumen mensual'**
+  String get resumenMensual;
+
+  /// No description provided for @notifVencimientoTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Vencimiento hoy'**
+  String get notifVencimientoTitle;
+
+  /// No description provided for @notifVencimientoBody.
+  ///
+  /// In es, this message translates to:
+  /// **'{nombre} vence hoy'**
+  String notifVencimientoBody(String nombre);
 }
 
 class _AppLocalizationsDelegate
