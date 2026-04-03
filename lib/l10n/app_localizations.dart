@@ -511,6 +511,60 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Suscripciones'**
   String get catSuscripciones;
+
+  /// No description provided for @agregarIngreso.
+  ///
+  /// In es, this message translates to:
+  /// **'Agregar ingreso'**
+  String get agregarIngreso;
+
+  /// No description provided for @editarIngreso.
+  ///
+  /// In es, this message translates to:
+  /// **'Editar ingreso'**
+  String get editarIngreso;
+
+  /// No description provided for @sinIngresos.
+  ///
+  /// In es, this message translates to:
+  /// **'Sin ingresos este mes'**
+  String get sinIngresos;
+
+  /// No description provided for @sinIngresosDesc.
+  ///
+  /// In es, this message translates to:
+  /// **'Tocá + para registrar un ingreso'**
+  String get sinIngresosDesc;
+
+  /// No description provided for @fuente.
+  ///
+  /// In es, this message translates to:
+  /// **'Fuente de ingreso'**
+  String get fuente;
+
+  /// No description provided for @fecha.
+  ///
+  /// In es, this message translates to:
+  /// **'Fecha'**
+  String get fecha;
+
+  /// No description provided for @ingresoAgregado.
+  ///
+  /// In es, this message translates to:
+  /// **'Ingreso registrado'**
+  String get ingresoAgregado;
+
+  /// No description provided for @ingresoActualizado.
+  ///
+  /// In es, this message translates to:
+  /// **'Ingreso actualizado'**
+  String get ingresoActualizado;
+
+  /// No description provided for @ingresoEliminado.
+  ///
+  /// In es, this message translates to:
+  /// **'Ingreso eliminado'**
+  String get ingresoEliminado;
 }
 
 class _AppLocalizationsDelegate

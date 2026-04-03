@@ -219,4 +219,31 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get catSuscripciones => 'Subscriptions';
+
+  @override
+  String get agregarIngreso => 'Add income';
+
+  @override
+  String get editarIngreso => 'Edit income';
+
+  @override
+  String get sinIngresos => 'No income this month';
+
+  @override
+  String get sinIngresosDesc => 'Tap + to record income';
+
+  @override
+  String get fuente => 'Income source';
+
+  @override
+  String get fecha => 'Date';
+
+  @override
+  String get ingresoAgregado => 'Income recorded';
+
+  @override
+  String get ingresoActualizado => 'Income updated';
+
+  @override
+  String get ingresoEliminado => 'Income deleted';
 }

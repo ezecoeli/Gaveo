@@ -153,5 +153,24 @@
   "catEducacion": "Educación",
   "@catEducacion": {},
   "catSuscripciones": "Suscripciones",
-  "@catSuscripciones": {}
+  "@catSuscripciones": {},
+
+  "agregarIngreso": "Agregar ingreso",
+  "@agregarIngreso": {},
+  "editarIngreso": "Editar ingreso",
+  "@editarIngreso": {},
+  "sinIngresos": "Sin ingresos este mes",
+  "@sinIngresos": {},
+  "sinIngresosDesc": "Tocá + para registrar un ingreso",
+  "@sinIngresosDesc": {},
+  "fuente": "Fuente de ingreso",
+  "@fuente": {},
+  "fecha": "Fecha",
+  "@fecha": {},
+  "ingresoAgregado": "Ingreso registrado",
+  "@ingresoAgregado": {},
+  "ingresoActualizado": "Ingreso actualizado",
+  "@ingresoActualizado": {},
+  "ingresoEliminado": "Ingreso eliminado",
+  "@ingresoEliminado": {}
 }

@@ -175,6 +175,7 @@ class _SummaryRow extends StatelessWidget {
           amount: summary.totalIngresos,
           color: AppColors.income,
           icon: Icons.arrow_downward,
+          onTap: () => context.push('/ingresos'),
         ),
         _SummaryTile(
           label: context.l10n.gastosFijos,
@@ -211,12 +212,14 @@ class _SummaryTile extends StatelessWidget {
     required this.amount,
     required this.color,
     required this.icon,
+    this.onTap,
   });
 
   final String label;
   final double amount;
   final Color color;
   final IconData icon;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -229,10 +232,18 @@ class _SummaryTile extends StatelessWidget {
           child: Icon(icon, color: color, size: 20),
         ),
         title: Text(label, style: theme.textTheme.bodyMedium),
-        trailing: Text(
-          CurrencyFormatter.format(amount),
-          style: theme.textTheme.titleMedium?.copyWith(color: color),
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              CurrencyFormatter.format(amount),
+              style: theme.textTheme.titleMedium?.copyWith(color: color),
+            ),
+            if (onTap != null) ...
+              [const SizedBox(width: 4), Icon(Icons.chevron_right, color: theme.colorScheme.onSurfaceVariant, size: 18)],
+          ],
         ),
+        onTap: onTap,
       ),
     );
   }

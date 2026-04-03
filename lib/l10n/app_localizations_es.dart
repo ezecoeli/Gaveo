@@ -219,4 +219,31 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get catSuscripciones => 'Suscripciones';
+
+  @override
+  String get agregarIngreso => 'Agregar ingreso';
+
+  @override
+  String get editarIngreso => 'Editar ingreso';
+
+  @override
+  String get sinIngresos => 'Sin ingresos este mes';
+
+  @override
+  String get sinIngresosDesc => 'Tocá + para registrar un ingreso';
+
+  @override
+  String get fuente => 'Fuente de ingreso';
+
+  @override
+  String get fecha => 'Fecha';
+
+  @override
+  String get ingresoAgregado => 'Ingreso registrado';
+
+  @override
+  String get ingresoActualizado => 'Ingreso actualizado';
+
+  @override
+  String get ingresoEliminado => 'Ingreso eliminado';
 }

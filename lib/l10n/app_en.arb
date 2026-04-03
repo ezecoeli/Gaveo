@@ -80,5 +80,15 @@
   "catSeguro": "Insurance",
   "catSalud": "Health",
   "catEducacion": "Education",
-  "catSuscripciones": "Subscriptions"
+  "catSuscripciones": "Subscriptions",
+
+  "agregarIngreso": "Add income",
+  "editarIngreso": "Edit income",
+  "sinIngresos": "No income this month",
+  "sinIngresosDesc": "Tap + to record income",
+  "fuente": "Income source",
+  "fecha": "Date",
+  "ingresoAgregado": "Income recorded",
+  "ingresoActualizado": "Income updated",
+  "ingresoEliminado": "Income deleted"
 }
