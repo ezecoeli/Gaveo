@@ -327,4 +327,52 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get presupuestoLabel => 'Presupuesto';
+
+  @override
+  String get agregarMeta => 'Agregar meta';
+
+  @override
+  String get editarMeta => 'Editar meta';
+
+  @override
+  String get sinAhorros => 'Sin metas de ahorro';
+
+  @override
+  String get sinAhorrosDesc => 'Tocá + para crear tu primera meta';
+
+  @override
+  String get metaAgregada => 'Meta creada';
+
+  @override
+  String get metaActualizada => 'Meta actualizada';
+
+  @override
+  String get metaEliminada => 'Meta eliminada';
+
+  @override
+  String get nombreMeta => 'Nombre de la meta';
+
+  @override
+  String get montoMensual => 'Ahorro mensual';
+
+  @override
+  String get montoObjetivo => 'Monto objetivo (opcional)';
+
+  @override
+  String get emojiMeta => 'Emoji';
+
+  @override
+  String get activo => 'Activo';
+
+  @override
+  String get inactivo => 'Inactivo';
+
+  @override
+  String get totalMensual => 'Total mensual';
+
+  @override
+  String get metaLabel => 'Objetivo';
+
+  @override
+  String get confirmarEliminarMeta => '¿Eliminar esta meta?';
 }

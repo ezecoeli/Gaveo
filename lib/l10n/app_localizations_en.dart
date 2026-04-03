@@ -327,4 +327,52 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get presupuestoLabel => 'Budget';
+
+  @override
+  String get agregarMeta => 'Add goal';
+
+  @override
+  String get editarMeta => 'Edit goal';
+
+  @override
+  String get sinAhorros => 'No savings goals';
+
+  @override
+  String get sinAhorrosDesc => 'Tap + to create your first goal';
+
+  @override
+  String get metaAgregada => 'Goal created';
+
+  @override
+  String get metaActualizada => 'Goal updated';
+
+  @override
+  String get metaEliminada => 'Goal deleted';
+
+  @override
+  String get nombreMeta => 'Goal name';
+
+  @override
+  String get montoMensual => 'Monthly savings';
+
+  @override
+  String get montoObjetivo => 'Target amount (optional)';
+
+  @override
+  String get emojiMeta => 'Emoji';
+
+  @override
+  String get activo => 'Active';
+
+  @override
+  String get inactivo => 'Inactive';
+
+  @override
+  String get totalMensual => 'Monthly total';
+
+  @override
+  String get metaLabel => 'Target';
+
+  @override
+  String get confirmarEliminarMeta => 'Delete this goal?';
 }

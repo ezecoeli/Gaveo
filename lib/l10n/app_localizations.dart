@@ -727,6 +727,102 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Presupuesto'**
   String get presupuestoLabel;
+
+  /// No description provided for @agregarMeta.
+  ///
+  /// In es, this message translates to:
+  /// **'Agregar meta'**
+  String get agregarMeta;
+
+  /// No description provided for @editarMeta.
+  ///
+  /// In es, this message translates to:
+  /// **'Editar meta'**
+  String get editarMeta;
+
+  /// No description provided for @sinAhorros.
+  ///
+  /// In es, this message translates to:
+  /// **'Sin metas de ahorro'**
+  String get sinAhorros;
+
+  /// No description provided for @sinAhorrosDesc.
+  ///
+  /// In es, this message translates to:
+  /// **'Tocá + para crear tu primera meta'**
+  String get sinAhorrosDesc;
+
+  /// No description provided for @metaAgregada.
+  ///
+  /// In es, this message translates to:
+  /// **'Meta creada'**
+  String get metaAgregada;
+
+  /// No description provided for @metaActualizada.
+  ///
+  /// In es, this message translates to:
+  /// **'Meta actualizada'**
+  String get metaActualizada;
+
+  /// No description provided for @metaEliminada.
+  ///
+  /// In es, this message translates to:
+  /// **'Meta eliminada'**
+  String get metaEliminada;
+
+  /// No description provided for @nombreMeta.
+  ///
+  /// In es, this message translates to:
+  /// **'Nombre de la meta'**
+  String get nombreMeta;
+
+  /// No description provided for @montoMensual.
+  ///
+  /// In es, this message translates to:
+  /// **'Ahorro mensual'**
+  String get montoMensual;
+
+  /// No description provided for @montoObjetivo.
+  ///
+  /// In es, this message translates to:
+  /// **'Monto objetivo (opcional)'**
+  String get montoObjetivo;
+
+  /// No description provided for @emojiMeta.
+  ///
+  /// In es, this message translates to:
+  /// **'Emoji'**
+  String get emojiMeta;
+
+  /// No description provided for @activo.
+  ///
+  /// In es, this message translates to:
+  /// **'Activo'**
+  String get activo;
+
+  /// No description provided for @inactivo.
+  ///
+  /// In es, this message translates to:
+  /// **'Inactivo'**
+  String get inactivo;
+
+  /// No description provided for @totalMensual.
+  ///
+  /// In es, this message translates to:
+  /// **'Total mensual'**
+  String get totalMensual;
+
+  /// No description provided for @metaLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'Objetivo'**
+  String get metaLabel;
+
+  /// No description provided for @confirmarEliminarMeta.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Eliminar esta meta?'**
+  String get confirmarEliminarMeta;
 }
 
 class _AppLocalizationsDelegate

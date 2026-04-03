@@ -119,5 +119,22 @@
   "plataformaOpcional": "Platform (optional)",
   "presupuestoNoDefinido": "No budget defined",
   "gastadoLabel": "Spent",
-  "presupuestoLabel": "Budget"
+  "presupuestoLabel": "Budget",
+
+  "agregarMeta": "Add goal",
+  "editarMeta": "Edit goal",
+  "sinAhorros": "No savings goals",
+  "sinAhorrosDesc": "Tap + to create your first goal",
+  "metaAgregada": "Goal created",
+  "metaActualizada": "Goal updated",
+  "metaEliminada": "Goal deleted",
+  "nombreMeta": "Goal name",
+  "montoMensual": "Monthly savings",
+  "montoObjetivo": "Target amount (optional)",
+  "emojiMeta": "Emoji",
+  "activo": "Active",
+  "inactivo": "Inactive",
+  "totalMensual": "Monthly total",
+  "metaLabel": "Target",
+  "confirmarEliminarMeta": "Delete this goal?"
 }
