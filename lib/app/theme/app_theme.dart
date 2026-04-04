@@ -85,7 +85,10 @@ class AppTheme {
           secondary: AppColors.primaryLight,
           brightness: Brightness.dark,
         ),
-        textTheme: AppTextStyles.textTheme,
+        textTheme: AppTextStyles.textTheme.apply(
+          bodyColor: const Color(0xDEFFFFFF),
+          displayColor: const Color(0xDEFFFFFF),
+        ),
         appBarTheme: const AppBarTheme(
           elevation: 0,
           scrolledUnderElevation: 1,

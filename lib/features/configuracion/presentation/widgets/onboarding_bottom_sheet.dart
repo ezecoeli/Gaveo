@@ -73,7 +73,7 @@ class _OnboardingBottomSheetState
                   width: 40,
                   height: 4,
                   decoration: BoxDecoration(
-                    color: Colors.grey.shade300,
+                    color: Theme.of(context).colorScheme.outlineVariant,
                     borderRadius: BorderRadius.circular(2),
                   ),
                 ),
@@ -88,7 +88,7 @@ class _OnboardingBottomSheetState
               Text(
                 context.l10n.configuraTuPerfil,
                 style: theme.textTheme.bodyMedium
-                    ?.copyWith(color: Colors.grey.shade600),
+                    ?.copyWith(color: theme.colorScheme.onSurfaceVariant),
               ),
               const SizedBox(height: 32),
               TextFormField(

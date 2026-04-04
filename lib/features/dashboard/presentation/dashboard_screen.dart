@@ -279,7 +279,7 @@ class _SaldoCard extends StatelessWidget {
               child: LinearProgressIndicator(
                 value: (pct / 100).clamp(0.0, 1.0),
                 minHeight: 8,
-                backgroundColor: Colors.grey.shade200,
+                backgroundColor: theme.colorScheme.surfaceContainerHighest,
                 valueColor: AlwaysStoppedAnimation<Color>(
                   pct > 100
                       ? AppColors.expense
