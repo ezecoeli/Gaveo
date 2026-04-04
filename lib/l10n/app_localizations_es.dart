@@ -110,7 +110,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get bienvenido => '¡Bienvenido a Gaveo!';
 
   @override
-  String get configuraTuPerfil => 'Configurá tu perfil para comenzar.';
+  String get configuraTuPerfil => 'Configura tu perfil para comenzar.';
 
   @override
   String get tuNombreRequerido => 'Tu nombre *';

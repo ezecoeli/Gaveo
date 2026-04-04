@@ -299,7 +299,7 @@ abstract class AppLocalizations {
   /// No description provided for @configuraTuPerfil.
   ///
   /// In es, this message translates to:
-  /// **'Configurá tu perfil para comenzar.'**
+  /// **'Configura tu perfil para comenzar.'**
   String get configuraTuPerfil;
 
   /// No description provided for @tuNombreRequerido.
