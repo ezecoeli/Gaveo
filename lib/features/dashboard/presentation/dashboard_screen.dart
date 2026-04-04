@@ -69,8 +69,12 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: _MonthSelector(mes: monthState.mes, anio: monthState.anio),
-        centerTitle: true,
+        title: const Text('Gaveo'),
+        centerTitle: false,
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(48),
+          child: _MonthSelector(mes: monthState.mes, anio: monthState.anio),
+        ),
         actions: [
           // Historial
           IconButton(
@@ -134,38 +138,37 @@ class _MonthSelector extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final canGoNext = AppDateUtils.canGoToNextMonth(mes, anio);
-    const btnConstraints = BoxConstraints(minWidth: 32, minHeight: 32);
-    const btnPadding = EdgeInsets.zero;
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        IconButton(
-          icon: const Icon(Icons.chevron_left, size: 20),
-          onPressed: () =>
-              ref.read(selectedMonthProvider.notifier).goToPreviousMonth(),
-          constraints: btnConstraints,
-          padding: btnPadding,
-        ),
-        Flexible(
-          child: Text(
-            AppDateUtils.monthName(
-              mes,
-              anio,
-              Localizations.localeOf(context).languageCode,
-            ),
-            overflow: TextOverflow.ellipsis,
+    final label = AppDateUtils.monthName(
+      mes,
+      anio,
+      Localizations.localeOf(context).languageCode,
+    );
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          IconButton(
+            icon: const Icon(Icons.chevron_left),
+            onPressed: () =>
+                ref.read(selectedMonthProvider.notifier).goToPreviousMonth(),
           ),
-        ),
-        IconButton(
-          icon: const Icon(Icons.chevron_right, size: 20),
-          onPressed: canGoNext
-              ? () =>
-                  ref.read(selectedMonthProvider.notifier).goToNextMonth()
-              : null,
-          constraints: btnConstraints,
-          padding: btnPadding,
-        ),
-      ],
+          Text(
+            label,
+            style: Theme.of(context)
+                .textTheme
+                .titleMedium
+                ?.copyWith(fontWeight: FontWeight.w600),
+          ),
+          IconButton(
+            icon: const Icon(Icons.chevron_right),
+            onPressed: canGoNext
+                ? () =>
+                    ref.read(selectedMonthProvider.notifier).goToNextMonth()
+                : null,
+          ),
+        ],
+      ),
     );
   }
 }
