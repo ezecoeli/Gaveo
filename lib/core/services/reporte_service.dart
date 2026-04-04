@@ -39,7 +39,15 @@ class ReporteService {
     required int anio,
     required String locale,
   }) async {
-    final pdf = pw.Document();
+    final fontRegular = await PdfGoogleFonts.notoSansRegular();
+    final fontBold = await PdfGoogleFonts.notoSansBold();
+
+    final pdf = pw.Document(
+      theme: pw.ThemeData.withFont(
+        base: fontRegular,
+        bold: fontBold,
+      ),
+    );
     final simbolo = config.simbolo;
     final mesNombrePDF = DateFormat('MMMM yyyy', locale).format(DateTime(anio, mes));
 
