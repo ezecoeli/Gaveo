@@ -1,6 +1,6 @@
-# Gaveo 💰
+# Gaveo
 
-Aplicación móvil para la gestión financiera del hogar. Registra ingresos, gastos fijos, gastos variables, delivery y metas de ahorro — todo filtrado por mes.
+Aplicación móvil para la gestión financiera del hogar. Registra ingresos, gastos fijos, gastos variables, delivery y metas de ahorro mensualmente.
 
 ---
 
@@ -17,6 +17,7 @@ Aplicación móvil para la gestión financiera del hogar. Registra ingresos, gas
 - **Exportación PDF**: resumen mensual completo compartible desde el Dashboard
 - **Internacionalización**: soporte completo Español / Inglés (ARB files)
 - **Selector de moneda**: picker curado con ~40 monedas (LATAM + globales)
+- **Tema claro/oscuro**: selector en Configuración, sincronizado con el sistema
 
 ---
 
@@ -105,7 +106,7 @@ Cada feature sigue la estructura `data/` + `providers/` + `presentation/`.
 
 - **Nav bar (5 ítems):** Dashboard · Gastos Fijos · Variables · Delivery · Ahorros
 - **Ingresos:** accesible tocando la tarjeta de ingresos en el Dashboard
-- **Historial:** botón `🕐` en el AppBar del Dashboard
+- **Historial:** botón de historial en el AppBar del Dashboard
 - **Configuración:** ícono de engranaje en el AppBar del Dashboard (nombre, moneda, idioma)
 
 ---

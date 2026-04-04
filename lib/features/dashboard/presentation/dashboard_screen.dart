@@ -44,7 +44,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
       }
     });
 
-    // Schedule notifications once per session after data loads
+    // Programar notificaciones una vez por sesión, al cargar los datos
     if (!_notificationsScheduled) {
       ref.listen(dashboardSummaryProvider, (_, next) {
         next.whenData((_) async {
@@ -76,13 +76,12 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
           child: _MonthSelector(mes: monthState.mes, anio: monthState.anio),
         ),
         actions: [
-          // Historial
+          // Botones de acción
           IconButton(
             icon: const Icon(Icons.history_rounded),
             tooltip: context.l10n.historial,
             onPressed: () => context.push('/historial'),
           ),
-          // Export PDF
           summaryAsync.whenOrNull(
                 data: (summary) => IconButton(
                   icon: const Icon(Icons.picture_as_pdf_outlined),
