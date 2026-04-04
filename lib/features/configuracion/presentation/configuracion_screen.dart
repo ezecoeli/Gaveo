@@ -57,6 +57,7 @@ class _ConfiguracionFormState extends ConsumerState<_ConfiguracionForm> {
   late final TextEditingController _nombreCtrl;
   late CurrencyInfo _currency;
   late String _idioma;
+  late String _tema;
   bool _saving = false;
 
   @override
@@ -67,6 +68,7 @@ class _ConfiguracionFormState extends ConsumerState<_ConfiguracionForm> {
     _currency = currencyByCode(widget.config.moneda) ??
         kCurrencies.first;
     _idioma = widget.config.idioma;
+    _tema = widget.config.tema;
   }
 
   @override
@@ -85,6 +87,7 @@ class _ConfiguracionFormState extends ConsumerState<_ConfiguracionForm> {
             simbolo: _currency.symbol,
             presupuestoDelivery: widget.config.presupuestoDelivery,
             idioma: _idioma,
+            tema: _tema,
           );
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -143,6 +146,30 @@ class _ConfiguracionFormState extends ConsumerState<_ConfiguracionForm> {
               selected: {_idioma},
               onSelectionChanged: (s) =>
                   setState(() => _idioma = s.first),
+            ),
+            const SizedBox(height: 24),
+            Text(l10n.tema, style: theme.textTheme.titleMedium),
+            const SizedBox(height: 12),
+            SegmentedButton<String>(
+              segments: [
+                ButtonSegment(
+                  value: 'light',
+                  label: Text(l10n.temaClaro),
+                  icon: const Icon(Icons.light_mode_outlined),
+                ),
+                ButtonSegment(
+                  value: 'system',
+                  label: Text(l10n.temaSistema),
+                  icon: const Icon(Icons.brightness_auto_outlined),
+                ),
+                ButtonSegment(
+                  value: 'dark',
+                  label: Text(l10n.temaOscuro),
+                  icon: const Icon(Icons.dark_mode_outlined),
+                ),
+              ],
+              selected: {_tema},
+              onSelectionChanged: (s) => setState(() => _tema = s.first),
             ),
             const SizedBox(height: 32),
             SizedBox(

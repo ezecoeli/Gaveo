@@ -422,4 +422,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get saldo => 'Balance';
+
+  @override
+  String get tema => 'Appearance';
+
+  @override
+  String get temaClaro => 'Light';
+
+  @override
+  String get temaOscuro => 'Dark';
+
+  @override
+  String get temaSistema => 'System';
 }

@@ -22,5 +22,21 @@ final appLocaleProvider = Provider<Locale>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef AppLocaleRef = ProviderRef<Locale>;
+String _$appThemeModeHash() => r'62a7d8b88f82f2b98b7027a6f85beadc16be5da9';
+
+/// See also [appThemeMode].
+@ProviderFor(appThemeMode)
+final appThemeModeProvider = Provider<ThemeMode>.internal(
+  appThemeMode,
+  name: r'appThemeModeProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$appThemeModeHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef AppThemeModeRef = ProviderRef<ThemeMode>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

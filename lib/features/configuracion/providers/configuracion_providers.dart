@@ -13,6 +13,7 @@ class ConfiguracionData {
   final String simbolo;
   final double presupuestoDelivery;
   final String idioma;
+  final String tema; // 'light' | 'dark' | 'system'
 
   const ConfiguracionData({
     required this.nombreUsuario,
@@ -20,6 +21,7 @@ class ConfiguracionData {
     required this.simbolo,
     required this.presupuestoDelivery,
     this.idioma = AppConstants.defaultIdioma,
+    this.tema = AppConstants.defaultTema,
   });
 
   bool get estaConfigurado => nombreUsuario.isNotEmpty;
@@ -29,8 +31,7 @@ class ConfiguracionData {
     moneda: AppConstants.defaultMoneda,
     simbolo: AppConstants.defaultSimbolo,
     presupuestoDelivery: AppConstants.defaultPresupuestoDelivery,
-    idioma: AppConstants.defaultIdioma,
-  );
+    idioma: AppConstants.defaultIdioma,    tema: AppConstants.defaultTema,  );
 }
 
 // ── Notifier ──────────────────────────────────────────────────────────────────
@@ -50,6 +51,7 @@ class ConfiguracionNotifier extends _$ConfiguracionNotifier {
             ) ??
             0.0,
         idioma: map[AppConstants.keyIdioma] ?? AppConstants.defaultIdioma,
+        tema: map[AppConstants.keyTema] ?? AppConstants.defaultTema,
       );
     });
   }
@@ -60,6 +62,7 @@ class ConfiguracionNotifier extends _$ConfiguracionNotifier {
     required String simbolo,
     required double presupuestoDelivery,
     String idioma = AppConstants.defaultIdioma,
+    String tema = AppConstants.defaultTema,
   }) async {
     final dao = ref.read(appDatabaseProvider).configuracionDao;
     await dao.setValor(AppConstants.keyNombreUsuario, nombreUsuario);
@@ -70,5 +73,6 @@ class ConfiguracionNotifier extends _$ConfiguracionNotifier {
       presupuestoDelivery.toString(),
     );
     await dao.setValor(AppConstants.keyIdioma, idioma);
+    await dao.setValor(AppConstants.keyTema, tema);
   }
 }

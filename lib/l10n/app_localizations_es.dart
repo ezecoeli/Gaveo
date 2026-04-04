@@ -422,4 +422,16 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get saldo => 'Saldo';
+
+  @override
+  String get tema => 'Apariencia';
+
+  @override
+  String get temaClaro => 'Claro';
+
+  @override
+  String get temaOscuro => 'Oscuro';
+
+  @override
+  String get temaSistema => 'Sistema';
 }

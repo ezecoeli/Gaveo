@@ -152,5 +152,10 @@
 
   "historial": "History",
   "gastos": "Expenses",
-  "saldo": "Balance"
+  "saldo": "Balance",
+
+  "tema": "Appearance",
+  "temaClaro": "Light",
+  "temaOscuro": "Dark",
+  "temaSistema": "System"
 }

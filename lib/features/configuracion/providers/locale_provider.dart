@@ -14,3 +14,21 @@ Locale appLocale(Ref ref) {
     orElse: () => const Locale('es'),
   );
 }
+
+@Riverpod(keepAlive: true)
+ThemeMode appThemeMode(Ref ref) {
+  final config = ref.watch(configuracionNotifierProvider);
+  return config.maybeWhen(
+    data: (c) {
+      switch (c.tema) {
+        case 'light':
+          return ThemeMode.light;
+        case 'dark':
+          return ThemeMode.dark;
+        default:
+          return ThemeMode.system;
+      }
+    },
+    orElse: () => ThemeMode.system,
+  );
+}

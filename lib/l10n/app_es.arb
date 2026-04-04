@@ -308,5 +308,14 @@
   "gastos": "Gastos",
   "@gastos": {},
   "saldo": "Saldo",
-  "@saldo": {}
+  "@saldo": {},
+
+  "tema": "Apariencia",
+  "@tema": {},
+  "temaClaro": "Claro",
+  "@temaClaro": {},
+  "temaOscuro": "Oscuro",
+  "@temaOscuro": {},
+  "temaSistema": "Sistema",
+  "@temaSistema": {}
 }

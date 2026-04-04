@@ -901,6 +901,30 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Saldo'**
   String get saldo;
+
+  /// No description provided for @tema.
+  ///
+  /// In es, this message translates to:
+  /// **'Apariencia'**
+  String get tema;
+
+  /// No description provided for @temaClaro.
+  ///
+  /// In es, this message translates to:
+  /// **'Claro'**
+  String get temaClaro;
+
+  /// No description provided for @temaOscuro.
+  ///
+  /// In es, this message translates to:
+  /// **'Oscuro'**
+  String get temaOscuro;
+
+  /// No description provided for @temaSistema.
+  ///
+  /// In es, this message translates to:
+  /// **'Sistema'**
+  String get temaSistema;
 }
 
 class _AppLocalizationsDelegate

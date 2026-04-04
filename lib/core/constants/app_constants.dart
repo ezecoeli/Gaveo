@@ -7,12 +7,14 @@ class AppConstants {
   static const String keyNombreUsuario = 'nombre_usuario';
   static const String keyPresupuestoDelivery = 'presupuesto_delivery_mensual';
   static const String keyIdioma = 'idioma';
+  static const String keyTema = 'tema';
 
   // Defaults
   static const String defaultMoneda = 'ARS';
   static const String defaultSimbolo = '\$';
   static const double defaultPresupuestoDelivery = 0.0;
   static const String defaultIdioma = 'es';
+  static const String defaultTema = 'system';
 
   // Límites
   static const int maxMesesFuturo = 1;
