@@ -134,25 +134,36 @@ class _MonthSelector extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final canGoNext = AppDateUtils.canGoToNextMonth(mes, anio);
+    const btnConstraints = BoxConstraints(minWidth: 32, minHeight: 32);
+    const btnPadding = EdgeInsets.zero;
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
         IconButton(
-          icon: const Icon(Icons.chevron_left),
+          icon: const Icon(Icons.chevron_left, size: 20),
           onPressed: () =>
               ref.read(selectedMonthProvider.notifier).goToPreviousMonth(),
+          constraints: btnConstraints,
+          padding: btnPadding,
         ),
-        Text(AppDateUtils.monthName(
-          mes,
-          anio,
-          Localizations.localeOf(context).languageCode,
-        )),
+        Flexible(
+          child: Text(
+            AppDateUtils.monthName(
+              mes,
+              anio,
+              Localizations.localeOf(context).languageCode,
+            ),
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
         IconButton(
-          icon: const Icon(Icons.chevron_right),
+          icon: const Icon(Icons.chevron_right, size: 20),
           onPressed: canGoNext
               ? () =>
                   ref.read(selectedMonthProvider.notifier).goToNextMonth()
               : null,
+          constraints: btnConstraints,
+          padding: btnPadding,
         ),
       ],
     );
