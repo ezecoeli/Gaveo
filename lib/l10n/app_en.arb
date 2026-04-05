@@ -171,5 +171,18 @@
   "temaClaro": "Light",
   "temaOscuro": "Dark",
   "temaSistema": "System",
-  "navIngresos": "Income"
+  "navIngresos": "Income",
+
+  "mostrarEnInicio": "Show on home",
+  "mostrarEnInicioDesc": "Always appears in the dashboard summary regardless of other conditions",
+  "sinFechaVencimiento": "No due date",
+  "diaVencimientoOpcional": "Due day (optional)",
+  "limite": "Monthly limit",
+  "limiteOpcional": "Monthly limit (optional)",
+  "limiteDesc": "Shows this category on the dashboard with progress",
+  "configurarCategorias": "Configure categories",
+  "seguimiento": "Tracking",
+  "dePresupuesto": "of budget",
+  "sinLimite": "No limit",
+  "guardar": "Save"
 }

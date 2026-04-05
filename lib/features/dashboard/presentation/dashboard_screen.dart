@@ -9,6 +9,8 @@ import '../providers/dashboard_summary.dart';
 import '../providers/dashboard_summary_provider.dart';
 import '../../configuracion/providers/configuracion_providers.dart';
 import '../../configuracion/presentation/widgets/onboarding_bottom_sheet.dart';
+import '../../gastos_variables/presentation/widgets/add_gasto_variable_bottom_sheet.dart'
+    show categoriaVariableLabel, categoriaVariableIcon;
 import '../../../../app/theme/app_colors.dart';
 import '../../../../core/database/app_database.dart';
 import '../../../../core/services/notification_service.dart';
@@ -232,10 +234,38 @@ class _DashboardBody extends StatelessWidget {
           color: AppColors.savings,
           icon: Icons.savings_outlined,
         ).animate(delay: 260.ms).fadeIn(duration: 300.ms).slideY(begin: 0.08, curve: Curves.easeOut),
+        if (summary.trackedItems.isNotEmpty) ...
+          _buildSeguimiento(context, summary, simbolo),
         const SizedBox(height: 12),
         _ExpenseBreakdownCard(summary: summary).animate(delay: 320.ms).fadeIn(duration: 300.ms).slideY(begin: 0.08, curve: Curves.easeOut),
       ],
     );
+  }
+
+  List<Widget> _buildSeguimiento(
+    BuildContext context,
+    DashboardSummary summary,
+    String simbolo,
+  ) {
+    return [
+      const SizedBox(height: 12),
+      Padding(
+        padding: const EdgeInsets.only(left: 4, bottom: 4),
+        child: Text(
+          context.l10n.seguimiento,
+          style: Theme.of(context).textTheme.labelLarge?.copyWith(
+              color: Theme.of(context).colorScheme.onSurfaceVariant),
+        ),
+      ),
+      for (int i = 0; i < summary.trackedItems.length; i++)
+        _TrackedItemCard(
+          item: summary.trackedItems[i],
+          simbolo: simbolo,
+        )
+            .animate(delay: (280 + i * 40).ms)
+            .fadeIn(duration: 280.ms)
+            .slideY(begin: 0.08, curve: Curves.easeOut),
+    ];
   }
 }
 
@@ -452,6 +482,103 @@ class _LegendItem extends StatelessWidget {
         const SizedBox(width: 6),
         Text(label, style: Theme.of(context).textTheme.bodySmall),
       ],
+    );
+  }
+}
+
+// ── Tracked item card ─────────────────────────────────────────────────────────
+
+class _TrackedItemCard extends StatelessWidget {
+  const _TrackedItemCard({required this.item, required this.simbolo});
+
+  final TrackedItem item;
+  final String simbolo;
+
+  @override
+  Widget build(BuildContext context) {
+    final ratio = item.limite != null && item.limite! > 0
+        ? (item.amount / item.limite!).clamp(0.0, 1.0)
+        : null;
+    final progressColor = ratio == null
+        ? item.color
+        : ratio >= 1.0
+            ? AppColors.expense
+            : ratio >= 0.8
+                ? AppColors.warning
+                : item.color;
+    final displayLabel = item.isCategory
+        ? categoriaVariableLabel(context, item.label)
+        : item.label;
+    final displayIcon = item.isCategory
+        ? categoriaVariableIcon(item.label)
+        : item.icon;
+
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                CircleAvatar(
+                  radius: 18,
+                  backgroundColor: item.color.withValues(alpha: 0.15),
+                  child: Icon(displayIcon, size: 18, color: item.color),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Text(
+                    displayLabel,
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          fontWeight: FontWeight.w600,
+                        ),
+                  ),
+                ),
+                Text(
+                  CurrencyFormatter.format(item.amount, symbol: simbolo),
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        fontWeight: FontWeight.w700,
+                        color: progressColor,
+                      ),
+                ),
+              ],
+            ),
+            if (ratio != null) ...
+              [
+                const SizedBox(height: 8),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(4),
+                  child: LinearProgressIndicator(
+                    value: ratio,
+                    backgroundColor: progressColor.withValues(alpha: 0.15),
+                    valueColor: AlwaysStoppedAnimation<Color>(progressColor),
+                    minHeight: 6,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      '${(ratio * 100).toStringAsFixed(0)}% ${context.l10n.dePresupuesto}',
+                      style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                            color: progressColor,
+                          ),
+                    ),
+                    Text(
+                      '${CurrencyFormatter.format(item.amount, symbol: simbolo)} / ${CurrencyFormatter.format(item.limite!, symbol: simbolo)}',
+                      style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                            color: Theme.of(context)
+                                .colorScheme
+                                .onSurfaceVariant,
+                          ),
+                    ),
+                  ],
+                ),
+              ],
+          ],
+        ),
+      ),
     );
   }
 }

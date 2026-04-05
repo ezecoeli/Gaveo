@@ -26,7 +26,14 @@ class GastosFijosDao extends DatabaseAccessor<AppDatabase>
       ),
     ])
       ..where(gastosFijos.activo.equals(true))
-      ..orderBy([OrderingTerm.asc(gastosFijos.diaVencimiento)]);
+      ..orderBy([
+        // nulls last: sin fecha al final
+        OrderingTerm(
+          expression: gastosFijos.diaVencimiento,
+          mode: OrderingMode.asc,
+          nulls: NullsOrder.last,
+        )
+      ]);
 
     return query.watch().map(
           (rows) => rows

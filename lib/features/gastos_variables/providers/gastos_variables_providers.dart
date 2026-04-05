@@ -14,3 +14,11 @@ Stream<List<GastosVariable>> gastosVariablesDelMes(
   return db.gastosVariablesDao
       .watchGastosVariablesDelMes(month.mes, month.anio);
 }
+
+@riverpod
+Stream<List<CategoriasVariablesConfigData>> categoriasDestacadas(
+    // ignore: deprecated_member_use_from_same_package
+    CategoriasDestacadasRef ref) {
+  final db = ref.watch(appDatabaseProvider);
+  return db.categoriasVariablesConfigDao.watchDestacadas();
+}

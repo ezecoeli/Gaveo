@@ -10,6 +10,7 @@ part 'app_database.g.dart';
 part '../../features/ingresos/data/ingresos_dao.dart';
 part '../../features/gastos_fijos/data/gastos_fijos_dao.dart';
 part '../../features/gastos_variables/data/gastos_variables_dao.dart';
+part '../../features/gastos_variables/data/categorias_variables_config_dao.dart';
 part '../../features/delivery/data/delivery_dao.dart';
 part '../../features/ahorros/data/ahorros_dao.dart';
 part '../../features/configuracion/data/configuracion_dao.dart';
@@ -30,11 +31,13 @@ class GastosFijos extends Table {
   IntColumn get id => integer().autoIncrement()();
   TextColumn get nombre => text().withLength(min: 1, max: 100)();
   RealColumn get monto => real()();
-  IntColumn get diaVencimiento => integer()();
+  IntColumn get diaVencimiento => integer().nullable()();
   BoolColumn get activo => boolean().withDefault(const Constant(true))();
   TextColumn get categoria =>
       text().withDefault(const Constant('general'))();
   TextColumn get notas => text().nullable()();
+  BoolColumn get mostrarEnInicio =>
+      boolean().withDefault(const Constant(false))();
 }
 
 class GastosFijosPagos extends Table {
@@ -87,6 +90,16 @@ class Configuracion extends Table {
   TextColumn get valor => text()();
 }
 
+class CategoriasVariablesConfig extends Table {
+  TextColumn get categoria => text()();
+  RealColumn get limite => real().nullable()();
+  BoolColumn get mostrarEnInicio =>
+      boolean().withDefault(const Constant(false))();
+
+  @override
+  Set<Column> get primaryKey => {categoria};
+}
+
 // ── Database ──────────────────────────────────────────────────────────────────
 
 @DriftDatabase(
@@ -98,11 +111,13 @@ class Configuracion extends Table {
     DeliveryGastos,
     AhorrosMetas,
     Configuracion,
+    CategoriasVariablesConfig,
   ],
   daos: [
     IngresosDao,
     GastosFijosDao,
     GastosVariablesDao,
+    CategoriasVariablesConfigDao,
     DeliveryDao,
     AhorrosDao,
     ConfiguracionDao,
@@ -112,7 +127,7 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 
   @override
-  int get schemaVersion => 2;
+  int get schemaVersion => 3;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -126,6 +141,13 @@ class AppDatabase extends _$AppDatabase {
               'SELECT descripcion, monto, fecha, mes, anio, \'delivery\', plataforma '
               'FROM delivery_gastos',
             );
+          }
+          if (from < 3) {
+            // Nueva columna en gastos_fijos: mostrar_en_inicio
+            await m.addColumn(gastosFijos, gastosFijos.mostrarEnInicio);
+            // diaVencimiento ahora es nullable (SQLite ya lo permite, no requiere ALTER)
+            // Nueva tabla de configuración de categorías de gastos variables
+            await m.createTable(categoriasVariablesConfig);
           }
         },
       );

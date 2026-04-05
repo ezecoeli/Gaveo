@@ -10,6 +10,7 @@ import '../../configuracion/providers/configuracion_providers.dart';
 import '../../dashboard/providers/dashboard_providers.dart';
 import '../providers/gastos_variables_providers.dart';
 import 'widgets/add_gasto_variable_bottom_sheet.dart';
+import 'widgets/categorias_config_bottom_sheet.dart';
 
 class GastosVariablesScreen extends ConsumerWidget {
   const GastosVariablesScreen({super.key});
@@ -25,6 +26,13 @@ class GastosVariablesScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(context.l10n.gastosVariables),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.tune_outlined),
+            tooltip: context.l10n.configurarCategorias,
+            onPressed: () => showCategoriasConfigBottomSheet(context),
+          ),
+        ],
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(24),
           child: Padding(

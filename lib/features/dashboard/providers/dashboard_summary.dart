@@ -1,3 +1,27 @@
+import 'package:flutter/material.dart';
+
+// ── Tracked item (pinned on dashboard) ───────────────────────────────────────
+
+class TrackedItem {
+  final String label;
+  final IconData icon;
+  final Color color;
+  final double amount;
+  final double? limite;
+  final bool isCategory;
+
+  const TrackedItem({
+    required this.label,
+    required this.icon,
+    required this.color,
+    required this.amount,
+    this.limite,
+    this.isCategory = false,
+  });
+}
+
+// ── Dashboard summary ─────────────────────────────────────────────────────────
+
 class DashboardSummary {
   final double totalIngresos;
   final double totalGastosFijos;
@@ -6,6 +30,7 @@ class DashboardSummary {
   final double totalAhorros;
   final int gastosFijosPagadosCount;
   final int gastosFijosTotalCount;
+  final List<TrackedItem> trackedItems;
 
   const DashboardSummary({
     required this.totalIngresos,
@@ -15,6 +40,7 @@ class DashboardSummary {
     required this.totalAhorros,
     this.gastosFijosPagadosCount = 0,
     this.gastosFijosTotalCount = 0,
+    this.trackedItems = const [],
   });
 
   double get saldoDisponible =>

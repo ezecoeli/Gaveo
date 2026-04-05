@@ -475,4 +475,38 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get navIngresos => 'Income';
+
+  @override
+  String get mostrarEnInicio => 'Show on home';
+
+  @override
+  String get mostrarEnInicioDesc =>
+      'Always appears in the dashboard summary regardless of other conditions';
+
+  @override
+  String get sinFechaVencimiento => 'No due date';
+
+  @override
+  String get diaVencimientoOpcional => 'Due day (optional)';
+
+  @override
+  String get limite => 'Monthly limit';
+
+  @override
+  String get limiteOpcional => 'Monthly limit (optional)';
+
+  @override
+  String get limiteDesc => 'Shows this category on the dashboard with progress';
+
+  @override
+  String get configurarCategorias => 'Configure categories';
+
+  @override
+  String get seguimiento => 'Tracking';
+
+  @override
+  String get dePresupuesto => 'of budget';
+
+  @override
+  String get sinLimite => 'No limit';
 }

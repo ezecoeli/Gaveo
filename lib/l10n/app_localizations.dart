@@ -1009,6 +1009,72 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Ingresos'**
   String get navIngresos;
+
+  /// No description provided for @mostrarEnInicio.
+  ///
+  /// In es, this message translates to:
+  /// **'Mostrar en inicio'**
+  String get mostrarEnInicio;
+
+  /// No description provided for @mostrarEnInicioDesc.
+  ///
+  /// In es, this message translates to:
+  /// **'Aparece en el resumen del dashboard independientemente de otras condiciones'**
+  String get mostrarEnInicioDesc;
+
+  /// No description provided for @sinFechaVencimiento.
+  ///
+  /// In es, this message translates to:
+  /// **'Sin fecha de vencimiento'**
+  String get sinFechaVencimiento;
+
+  /// No description provided for @diaVencimientoOpcional.
+  ///
+  /// In es, this message translates to:
+  /// **'Día de vencimiento (opcional)'**
+  String get diaVencimientoOpcional;
+
+  /// No description provided for @limite.
+  ///
+  /// In es, this message translates to:
+  /// **'Límite mensual'**
+  String get limite;
+
+  /// No description provided for @limiteOpcional.
+  ///
+  /// In es, this message translates to:
+  /// **'Límite mensual (opcional)'**
+  String get limiteOpcional;
+
+  /// No description provided for @limiteDesc.
+  ///
+  /// In es, this message translates to:
+  /// **'Muestra esta categoría en el dashboard con progreso'**
+  String get limiteDesc;
+
+  /// No description provided for @configurarCategorias.
+  ///
+  /// In es, this message translates to:
+  /// **'Configurar categorías'**
+  String get configurarCategorias;
+
+  /// No description provided for @seguimiento.
+  ///
+  /// In es, this message translates to:
+  /// **'Seguimiento'**
+  String get seguimiento;
+
+  /// No description provided for @dePresupuesto.
+  ///
+  /// In es, this message translates to:
+  /// **'del presupuesto'**
+  String get dePresupuesto;
+
+  /// No description provided for @sinLimite.
+  ///
+  /// In es, this message translates to:
+  /// **'Sin límite'**
+  String get sinLimite;
 }
 
 class _AppLocalizationsDelegate

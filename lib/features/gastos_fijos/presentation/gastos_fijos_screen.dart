@@ -245,7 +245,7 @@ class _GastoFijoTile extends ConsumerWidget {
           ),
         ),
         subtitle: Text(
-          '${l10n.venceElDia(gasto.diaVencimiento)} · '
+          '${gasto.diaVencimiento != null ? l10n.venceElDia(gasto.diaVencimiento!) : l10n.sinFechaVencimiento} · '
           '${categoriaLabel(context, gasto.categoria)}',
           style: theme.textTheme.bodySmall?.copyWith(
             color: theme.colorScheme.onSurfaceVariant,

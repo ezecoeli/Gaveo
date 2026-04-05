@@ -46,8 +46,8 @@ class NotificationService {
     await _plugin.cancelAll();
 
     final today = DateTime.now().day;
-    final vencenHoy =
-        gastosFijos.where((g) => g.activo && g.diaVencimiento == today);
+    final vencenHoy = gastosFijos.where(
+        (g) => g.activo && g.diaVencimiento != null && g.diaVencimiento == today);
 
     int notifId = 0;
     for (final gasto in vencenHoy) {

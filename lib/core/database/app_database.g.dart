@@ -404,8 +404,8 @@ class $GastosFijosTable extends GastosFijos
       const VerificationMeta('diaVencimiento');
   @override
   late final GeneratedColumn<int> diaVencimiento = GeneratedColumn<int>(
-      'dia_vencimiento', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: true);
+      'dia_vencimiento', aliasedName, true,
+      type: DriftSqlType.int, requiredDuringInsert: false);
   static const VerificationMeta _activoMeta = const VerificationMeta('activo');
   @override
   late final GeneratedColumn<bool> activo = GeneratedColumn<bool>(
@@ -428,9 +428,27 @@ class $GastosFijosTable extends GastosFijos
   late final GeneratedColumn<String> notas = GeneratedColumn<String>(
       'notas', aliasedName, true,
       type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _mostrarEnInicioMeta =
+      const VerificationMeta('mostrarEnInicio');
   @override
-  List<GeneratedColumn> get $columns =>
-      [id, nombre, monto, diaVencimiento, activo, categoria, notas];
+  late final GeneratedColumn<bool> mostrarEnInicio = GeneratedColumn<bool>(
+      'mostrar_en_inicio', aliasedName, false,
+      type: DriftSqlType.bool,
+      requiredDuringInsert: false,
+      defaultConstraints: GeneratedColumn.constraintIsAlways(
+          'CHECK ("mostrar_en_inicio" IN (0, 1))'),
+      defaultValue: const Constant(false));
+  @override
+  List<GeneratedColumn> get $columns => [
+        id,
+        nombre,
+        monto,
+        diaVencimiento,
+        activo,
+        categoria,
+        notas,
+        mostrarEnInicio
+      ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -461,8 +479,6 @@ class $GastosFijosTable extends GastosFijos
           _diaVencimientoMeta,
           diaVencimiento.isAcceptableOrUnknown(
               data['dia_vencimiento']!, _diaVencimientoMeta));
-    } else if (isInserting) {
-      context.missing(_diaVencimientoMeta);
     }
     if (data.containsKey('activo')) {
       context.handle(_activoMeta,
@@ -475,6 +491,12 @@ class $GastosFijosTable extends GastosFijos
     if (data.containsKey('notas')) {
       context.handle(
           _notasMeta, notas.isAcceptableOrUnknown(data['notas']!, _notasMeta));
+    }
+    if (data.containsKey('mostrar_en_inicio')) {
+      context.handle(
+          _mostrarEnInicioMeta,
+          mostrarEnInicio.isAcceptableOrUnknown(
+              data['mostrar_en_inicio']!, _mostrarEnInicioMeta));
     }
     return context;
   }
@@ -492,13 +514,15 @@ class $GastosFijosTable extends GastosFijos
       monto: attachedDatabase.typeMapping
           .read(DriftSqlType.double, data['${effectivePrefix}monto'])!,
       diaVencimiento: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}dia_vencimiento'])!,
+          .read(DriftSqlType.int, data['${effectivePrefix}dia_vencimiento']),
       activo: attachedDatabase.typeMapping
           .read(DriftSqlType.bool, data['${effectivePrefix}activo'])!,
       categoria: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}categoria'])!,
       notas: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}notas']),
+      mostrarEnInicio: attachedDatabase.typeMapping.read(
+          DriftSqlType.bool, data['${effectivePrefix}mostrar_en_inicio'])!,
     );
   }
 
@@ -512,30 +536,35 @@ class GastosFijo extends DataClass implements Insertable<GastosFijo> {
   final int id;
   final String nombre;
   final double monto;
-  final int diaVencimiento;
+  final int? diaVencimiento;
   final bool activo;
   final String categoria;
   final String? notas;
+  final bool mostrarEnInicio;
   const GastosFijo(
       {required this.id,
       required this.nombre,
       required this.monto,
-      required this.diaVencimiento,
+      this.diaVencimiento,
       required this.activo,
       required this.categoria,
-      this.notas});
+      this.notas,
+      required this.mostrarEnInicio});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     map['id'] = Variable<int>(id);
     map['nombre'] = Variable<String>(nombre);
     map['monto'] = Variable<double>(monto);
-    map['dia_vencimiento'] = Variable<int>(diaVencimiento);
+    if (!nullToAbsent || diaVencimiento != null) {
+      map['dia_vencimiento'] = Variable<int>(diaVencimiento);
+    }
     map['activo'] = Variable<bool>(activo);
     map['categoria'] = Variable<String>(categoria);
     if (!nullToAbsent || notas != null) {
       map['notas'] = Variable<String>(notas);
     }
+    map['mostrar_en_inicio'] = Variable<bool>(mostrarEnInicio);
     return map;
   }
 
@@ -544,11 +573,14 @@ class GastosFijo extends DataClass implements Insertable<GastosFijo> {
       id: Value(id),
       nombre: Value(nombre),
       monto: Value(monto),
-      diaVencimiento: Value(diaVencimiento),
+      diaVencimiento: diaVencimiento == null && nullToAbsent
+          ? const Value.absent()
+          : Value(diaVencimiento),
       activo: Value(activo),
       categoria: Value(categoria),
       notas:
           notas == null && nullToAbsent ? const Value.absent() : Value(notas),
+      mostrarEnInicio: Value(mostrarEnInicio),
     );
   }
 
@@ -559,10 +591,11 @@ class GastosFijo extends DataClass implements Insertable<GastosFijo> {
       id: serializer.fromJson<int>(json['id']),
       nombre: serializer.fromJson<String>(json['nombre']),
       monto: serializer.fromJson<double>(json['monto']),
-      diaVencimiento: serializer.fromJson<int>(json['diaVencimiento']),
+      diaVencimiento: serializer.fromJson<int?>(json['diaVencimiento']),
       activo: serializer.fromJson<bool>(json['activo']),
       categoria: serializer.fromJson<String>(json['categoria']),
       notas: serializer.fromJson<String?>(json['notas']),
+      mostrarEnInicio: serializer.fromJson<bool>(json['mostrarEnInicio']),
     );
   }
   @override
@@ -572,10 +605,11 @@ class GastosFijo extends DataClass implements Insertable<GastosFijo> {
       'id': serializer.toJson<int>(id),
       'nombre': serializer.toJson<String>(nombre),
       'monto': serializer.toJson<double>(monto),
-      'diaVencimiento': serializer.toJson<int>(diaVencimiento),
+      'diaVencimiento': serializer.toJson<int?>(diaVencimiento),
       'activo': serializer.toJson<bool>(activo),
       'categoria': serializer.toJson<String>(categoria),
       'notas': serializer.toJson<String?>(notas),
+      'mostrarEnInicio': serializer.toJson<bool>(mostrarEnInicio),
     };
   }
 
@@ -583,18 +617,21 @@ class GastosFijo extends DataClass implements Insertable<GastosFijo> {
           {int? id,
           String? nombre,
           double? monto,
-          int? diaVencimiento,
+          Value<int?> diaVencimiento = const Value.absent(),
           bool? activo,
           String? categoria,
-          Value<String?> notas = const Value.absent()}) =>
+          Value<String?> notas = const Value.absent(),
+          bool? mostrarEnInicio}) =>
       GastosFijo(
         id: id ?? this.id,
         nombre: nombre ?? this.nombre,
         monto: monto ?? this.monto,
-        diaVencimiento: diaVencimiento ?? this.diaVencimiento,
+        diaVencimiento:
+            diaVencimiento.present ? diaVencimiento.value : this.diaVencimiento,
         activo: activo ?? this.activo,
         categoria: categoria ?? this.categoria,
         notas: notas.present ? notas.value : this.notas,
+        mostrarEnInicio: mostrarEnInicio ?? this.mostrarEnInicio,
       );
   GastosFijo copyWithCompanion(GastosFijosCompanion data) {
     return GastosFijo(
@@ -607,6 +644,9 @@ class GastosFijo extends DataClass implements Insertable<GastosFijo> {
       activo: data.activo.present ? data.activo.value : this.activo,
       categoria: data.categoria.present ? data.categoria.value : this.categoria,
       notas: data.notas.present ? data.notas.value : this.notas,
+      mostrarEnInicio: data.mostrarEnInicio.present
+          ? data.mostrarEnInicio.value
+          : this.mostrarEnInicio,
     );
   }
 
@@ -619,14 +659,15 @@ class GastosFijo extends DataClass implements Insertable<GastosFijo> {
           ..write('diaVencimiento: $diaVencimiento, ')
           ..write('activo: $activo, ')
           ..write('categoria: $categoria, ')
-          ..write('notas: $notas')
+          ..write('notas: $notas, ')
+          ..write('mostrarEnInicio: $mostrarEnInicio')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode =>
-      Object.hash(id, nombre, monto, diaVencimiento, activo, categoria, notas);
+  int get hashCode => Object.hash(id, nombre, monto, diaVencimiento, activo,
+      categoria, notas, mostrarEnInicio);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -637,17 +678,19 @@ class GastosFijo extends DataClass implements Insertable<GastosFijo> {
           other.diaVencimiento == this.diaVencimiento &&
           other.activo == this.activo &&
           other.categoria == this.categoria &&
-          other.notas == this.notas);
+          other.notas == this.notas &&
+          other.mostrarEnInicio == this.mostrarEnInicio);
 }
 
 class GastosFijosCompanion extends UpdateCompanion<GastosFijo> {
   final Value<int> id;
   final Value<String> nombre;
   final Value<double> monto;
-  final Value<int> diaVencimiento;
+  final Value<int?> diaVencimiento;
   final Value<bool> activo;
   final Value<String> categoria;
   final Value<String?> notas;
+  final Value<bool> mostrarEnInicio;
   const GastosFijosCompanion({
     this.id = const Value.absent(),
     this.nombre = const Value.absent(),
@@ -656,18 +699,19 @@ class GastosFijosCompanion extends UpdateCompanion<GastosFijo> {
     this.activo = const Value.absent(),
     this.categoria = const Value.absent(),
     this.notas = const Value.absent(),
+    this.mostrarEnInicio = const Value.absent(),
   });
   GastosFijosCompanion.insert({
     this.id = const Value.absent(),
     required String nombre,
     required double monto,
-    required int diaVencimiento,
+    this.diaVencimiento = const Value.absent(),
     this.activo = const Value.absent(),
     this.categoria = const Value.absent(),
     this.notas = const Value.absent(),
+    this.mostrarEnInicio = const Value.absent(),
   })  : nombre = Value(nombre),
-        monto = Value(monto),
-        diaVencimiento = Value(diaVencimiento);
+        monto = Value(monto);
   static Insertable<GastosFijo> custom({
     Expression<int>? id,
     Expression<String>? nombre,
@@ -676,6 +720,7 @@ class GastosFijosCompanion extends UpdateCompanion<GastosFijo> {
     Expression<bool>? activo,
     Expression<String>? categoria,
     Expression<String>? notas,
+    Expression<bool>? mostrarEnInicio,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -685,6 +730,7 @@ class GastosFijosCompanion extends UpdateCompanion<GastosFijo> {
       if (activo != null) 'activo': activo,
       if (categoria != null) 'categoria': categoria,
       if (notas != null) 'notas': notas,
+      if (mostrarEnInicio != null) 'mostrar_en_inicio': mostrarEnInicio,
     });
   }
 
@@ -692,10 +738,11 @@ class GastosFijosCompanion extends UpdateCompanion<GastosFijo> {
       {Value<int>? id,
       Value<String>? nombre,
       Value<double>? monto,
-      Value<int>? diaVencimiento,
+      Value<int?>? diaVencimiento,
       Value<bool>? activo,
       Value<String>? categoria,
-      Value<String?>? notas}) {
+      Value<String?>? notas,
+      Value<bool>? mostrarEnInicio}) {
     return GastosFijosCompanion(
       id: id ?? this.id,
       nombre: nombre ?? this.nombre,
@@ -704,6 +751,7 @@ class GastosFijosCompanion extends UpdateCompanion<GastosFijo> {
       activo: activo ?? this.activo,
       categoria: categoria ?? this.categoria,
       notas: notas ?? this.notas,
+      mostrarEnInicio: mostrarEnInicio ?? this.mostrarEnInicio,
     );
   }
 
@@ -731,6 +779,9 @@ class GastosFijosCompanion extends UpdateCompanion<GastosFijo> {
     if (notas.present) {
       map['notas'] = Variable<String>(notas.value);
     }
+    if (mostrarEnInicio.present) {
+      map['mostrar_en_inicio'] = Variable<bool>(mostrarEnInicio.value);
+    }
     return map;
   }
 
@@ -743,7 +794,8 @@ class GastosFijosCompanion extends UpdateCompanion<GastosFijo> {
           ..write('diaVencimiento: $diaVencimiento, ')
           ..write('activo: $activo, ')
           ..write('categoria: $categoria, ')
-          ..write('notas: $notas')
+          ..write('notas: $notas, ')
+          ..write('mostrarEnInicio: $mostrarEnInicio')
           ..write(')'))
         .toString();
   }
@@ -2447,6 +2499,251 @@ class ConfiguracionCompanion extends UpdateCompanion<ConfiguracionData> {
   }
 }
 
+class $CategoriasVariablesConfigTable extends CategoriasVariablesConfig
+    with
+        TableInfo<$CategoriasVariablesConfigTable,
+            CategoriasVariablesConfigData> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $CategoriasVariablesConfigTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _categoriaMeta =
+      const VerificationMeta('categoria');
+  @override
+  late final GeneratedColumn<String> categoria = GeneratedColumn<String>(
+      'categoria', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _limiteMeta = const VerificationMeta('limite');
+  @override
+  late final GeneratedColumn<double> limite = GeneratedColumn<double>(
+      'limite', aliasedName, true,
+      type: DriftSqlType.double, requiredDuringInsert: false);
+  static const VerificationMeta _mostrarEnInicioMeta =
+      const VerificationMeta('mostrarEnInicio');
+  @override
+  late final GeneratedColumn<bool> mostrarEnInicio = GeneratedColumn<bool>(
+      'mostrar_en_inicio', aliasedName, false,
+      type: DriftSqlType.bool,
+      requiredDuringInsert: false,
+      defaultConstraints: GeneratedColumn.constraintIsAlways(
+          'CHECK ("mostrar_en_inicio" IN (0, 1))'),
+      defaultValue: const Constant(false));
+  @override
+  List<GeneratedColumn> get $columns => [categoria, limite, mostrarEnInicio];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'categorias_variables_config';
+  @override
+  VerificationContext validateIntegrity(
+      Insertable<CategoriasVariablesConfigData> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('categoria')) {
+      context.handle(_categoriaMeta,
+          categoria.isAcceptableOrUnknown(data['categoria']!, _categoriaMeta));
+    } else if (isInserting) {
+      context.missing(_categoriaMeta);
+    }
+    if (data.containsKey('limite')) {
+      context.handle(_limiteMeta,
+          limite.isAcceptableOrUnknown(data['limite']!, _limiteMeta));
+    }
+    if (data.containsKey('mostrar_en_inicio')) {
+      context.handle(
+          _mostrarEnInicioMeta,
+          mostrarEnInicio.isAcceptableOrUnknown(
+              data['mostrar_en_inicio']!, _mostrarEnInicioMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {categoria};
+  @override
+  CategoriasVariablesConfigData map(Map<String, dynamic> data,
+      {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return CategoriasVariablesConfigData(
+      categoria: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}categoria'])!,
+      limite: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}limite']),
+      mostrarEnInicio: attachedDatabase.typeMapping.read(
+          DriftSqlType.bool, data['${effectivePrefix}mostrar_en_inicio'])!,
+    );
+  }
+
+  @override
+  $CategoriasVariablesConfigTable createAlias(String alias) {
+    return $CategoriasVariablesConfigTable(attachedDatabase, alias);
+  }
+}
+
+class CategoriasVariablesConfigData extends DataClass
+    implements Insertable<CategoriasVariablesConfigData> {
+  final String categoria;
+  final double? limite;
+  final bool mostrarEnInicio;
+  const CategoriasVariablesConfigData(
+      {required this.categoria, this.limite, required this.mostrarEnInicio});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['categoria'] = Variable<String>(categoria);
+    if (!nullToAbsent || limite != null) {
+      map['limite'] = Variable<double>(limite);
+    }
+    map['mostrar_en_inicio'] = Variable<bool>(mostrarEnInicio);
+    return map;
+  }
+
+  CategoriasVariablesConfigCompanion toCompanion(bool nullToAbsent) {
+    return CategoriasVariablesConfigCompanion(
+      categoria: Value(categoria),
+      limite:
+          limite == null && nullToAbsent ? const Value.absent() : Value(limite),
+      mostrarEnInicio: Value(mostrarEnInicio),
+    );
+  }
+
+  factory CategoriasVariablesConfigData.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return CategoriasVariablesConfigData(
+      categoria: serializer.fromJson<String>(json['categoria']),
+      limite: serializer.fromJson<double?>(json['limite']),
+      mostrarEnInicio: serializer.fromJson<bool>(json['mostrarEnInicio']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'categoria': serializer.toJson<String>(categoria),
+      'limite': serializer.toJson<double?>(limite),
+      'mostrarEnInicio': serializer.toJson<bool>(mostrarEnInicio),
+    };
+  }
+
+  CategoriasVariablesConfigData copyWith(
+          {String? categoria,
+          Value<double?> limite = const Value.absent(),
+          bool? mostrarEnInicio}) =>
+      CategoriasVariablesConfigData(
+        categoria: categoria ?? this.categoria,
+        limite: limite.present ? limite.value : this.limite,
+        mostrarEnInicio: mostrarEnInicio ?? this.mostrarEnInicio,
+      );
+  CategoriasVariablesConfigData copyWithCompanion(
+      CategoriasVariablesConfigCompanion data) {
+    return CategoriasVariablesConfigData(
+      categoria: data.categoria.present ? data.categoria.value : this.categoria,
+      limite: data.limite.present ? data.limite.value : this.limite,
+      mostrarEnInicio: data.mostrarEnInicio.present
+          ? data.mostrarEnInicio.value
+          : this.mostrarEnInicio,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('CategoriasVariablesConfigData(')
+          ..write('categoria: $categoria, ')
+          ..write('limite: $limite, ')
+          ..write('mostrarEnInicio: $mostrarEnInicio')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(categoria, limite, mostrarEnInicio);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is CategoriasVariablesConfigData &&
+          other.categoria == this.categoria &&
+          other.limite == this.limite &&
+          other.mostrarEnInicio == this.mostrarEnInicio);
+}
+
+class CategoriasVariablesConfigCompanion
+    extends UpdateCompanion<CategoriasVariablesConfigData> {
+  final Value<String> categoria;
+  final Value<double?> limite;
+  final Value<bool> mostrarEnInicio;
+  final Value<int> rowid;
+  const CategoriasVariablesConfigCompanion({
+    this.categoria = const Value.absent(),
+    this.limite = const Value.absent(),
+    this.mostrarEnInicio = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  CategoriasVariablesConfigCompanion.insert({
+    required String categoria,
+    this.limite = const Value.absent(),
+    this.mostrarEnInicio = const Value.absent(),
+    this.rowid = const Value.absent(),
+  }) : categoria = Value(categoria);
+  static Insertable<CategoriasVariablesConfigData> custom({
+    Expression<String>? categoria,
+    Expression<double>? limite,
+    Expression<bool>? mostrarEnInicio,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (categoria != null) 'categoria': categoria,
+      if (limite != null) 'limite': limite,
+      if (mostrarEnInicio != null) 'mostrar_en_inicio': mostrarEnInicio,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  CategoriasVariablesConfigCompanion copyWith(
+      {Value<String>? categoria,
+      Value<double?>? limite,
+      Value<bool>? mostrarEnInicio,
+      Value<int>? rowid}) {
+    return CategoriasVariablesConfigCompanion(
+      categoria: categoria ?? this.categoria,
+      limite: limite ?? this.limite,
+      mostrarEnInicio: mostrarEnInicio ?? this.mostrarEnInicio,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (categoria.present) {
+      map['categoria'] = Variable<String>(categoria.value);
+    }
+    if (limite.present) {
+      map['limite'] = Variable<double>(limite.value);
+    }
+    if (mostrarEnInicio.present) {
+      map['mostrar_en_inicio'] = Variable<bool>(mostrarEnInicio.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('CategoriasVariablesConfigCompanion(')
+          ..write('categoria: $categoria, ')
+          ..write('limite: $limite, ')
+          ..write('mostrarEnInicio: $mostrarEnInicio, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -2459,11 +2756,15 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $DeliveryGastosTable deliveryGastos = $DeliveryGastosTable(this);
   late final $AhorrosMetasTable ahorrosMetas = $AhorrosMetasTable(this);
   late final $ConfiguracionTable configuracion = $ConfiguracionTable(this);
+  late final $CategoriasVariablesConfigTable categoriasVariablesConfig =
+      $CategoriasVariablesConfigTable(this);
   late final IngresosDao ingresosDao = IngresosDao(this as AppDatabase);
   late final GastosFijosDao gastosFijosDao =
       GastosFijosDao(this as AppDatabase);
   late final GastosVariablesDao gastosVariablesDao =
       GastosVariablesDao(this as AppDatabase);
+  late final CategoriasVariablesConfigDao categoriasVariablesConfigDao =
+      CategoriasVariablesConfigDao(this as AppDatabase);
   late final DeliveryDao deliveryDao = DeliveryDao(this as AppDatabase);
   late final AhorrosDao ahorrosDao = AhorrosDao(this as AppDatabase);
   late final ConfiguracionDao configuracionDao =
@@ -2479,7 +2780,8 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         gastosVariables,
         deliveryGastos,
         ahorrosMetas,
-        configuracion
+        configuracion,
+        categoriasVariablesConfig
       ];
 }
 
@@ -2677,20 +2979,22 @@ typedef $$GastosFijosTableCreateCompanionBuilder = GastosFijosCompanion
   Value<int> id,
   required String nombre,
   required double monto,
-  required int diaVencimiento,
+  Value<int?> diaVencimiento,
   Value<bool> activo,
   Value<String> categoria,
   Value<String?> notas,
+  Value<bool> mostrarEnInicio,
 });
 typedef $$GastosFijosTableUpdateCompanionBuilder = GastosFijosCompanion
     Function({
   Value<int> id,
   Value<String> nombre,
   Value<double> monto,
-  Value<int> diaVencimiento,
+  Value<int?> diaVencimiento,
   Value<bool> activo,
   Value<String> categoria,
   Value<String?> notas,
+  Value<bool> mostrarEnInicio,
 });
 
 final class $$GastosFijosTableReferences
@@ -2746,6 +3050,10 @@ class $$GastosFijosTableFilterComposer
   ColumnFilters<String> get notas => $composableBuilder(
       column: $table.notas, builder: (column) => ColumnFilters(column));
 
+  ColumnFilters<bool> get mostrarEnInicio => $composableBuilder(
+      column: $table.mostrarEnInicio,
+      builder: (column) => ColumnFilters(column));
+
   Expression<bool> gastosFijosPagosRefs(
       Expression<bool> Function($$GastosFijosPagosTableFilterComposer f) f) {
     final $$GastosFijosPagosTableFilterComposer composer = $composerBuilder(
@@ -2798,6 +3106,10 @@ class $$GastosFijosTableOrderingComposer
 
   ColumnOrderings<String> get notas => $composableBuilder(
       column: $table.notas, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<bool> get mostrarEnInicio => $composableBuilder(
+      column: $table.mostrarEnInicio,
+      builder: (column) => ColumnOrderings(column));
 }
 
 class $$GastosFijosTableAnnotationComposer
@@ -2829,6 +3141,9 @@ class $$GastosFijosTableAnnotationComposer
 
   GeneratedColumn<String> get notas =>
       $composableBuilder(column: $table.notas, builder: (column) => column);
+
+  GeneratedColumn<bool> get mostrarEnInicio => $composableBuilder(
+      column: $table.mostrarEnInicio, builder: (column) => column);
 
   Expression<T> gastosFijosPagosRefs<T extends Object>(
       Expression<T> Function($$GastosFijosPagosTableAnnotationComposer a) f) {
@@ -2878,10 +3193,11 @@ class $$GastosFijosTableTableManager extends RootTableManager<
             Value<int> id = const Value.absent(),
             Value<String> nombre = const Value.absent(),
             Value<double> monto = const Value.absent(),
-            Value<int> diaVencimiento = const Value.absent(),
+            Value<int?> diaVencimiento = const Value.absent(),
             Value<bool> activo = const Value.absent(),
             Value<String> categoria = const Value.absent(),
             Value<String?> notas = const Value.absent(),
+            Value<bool> mostrarEnInicio = const Value.absent(),
           }) =>
               GastosFijosCompanion(
             id: id,
@@ -2891,15 +3207,17 @@ class $$GastosFijosTableTableManager extends RootTableManager<
             activo: activo,
             categoria: categoria,
             notas: notas,
+            mostrarEnInicio: mostrarEnInicio,
           ),
           createCompanionCallback: ({
             Value<int> id = const Value.absent(),
             required String nombre,
             required double monto,
-            required int diaVencimiento,
+            Value<int?> diaVencimiento = const Value.absent(),
             Value<bool> activo = const Value.absent(),
             Value<String> categoria = const Value.absent(),
             Value<String?> notas = const Value.absent(),
+            Value<bool> mostrarEnInicio = const Value.absent(),
           }) =>
               GastosFijosCompanion.insert(
             id: id,
@@ -2909,6 +3227,7 @@ class $$GastosFijosTableTableManager extends RootTableManager<
             activo: activo,
             categoria: categoria,
             notas: notas,
+            mostrarEnInicio: mostrarEnInicio,
           ),
           withReferenceMapper: (p0) => p0
               .map((e) => (
@@ -3976,6 +4295,158 @@ typedef $$ConfiguracionTableProcessedTableManager = ProcessedTableManager<
     ),
     ConfiguracionData,
     PrefetchHooks Function()>;
+typedef $$CategoriasVariablesConfigTableCreateCompanionBuilder
+    = CategoriasVariablesConfigCompanion Function({
+  required String categoria,
+  Value<double?> limite,
+  Value<bool> mostrarEnInicio,
+  Value<int> rowid,
+});
+typedef $$CategoriasVariablesConfigTableUpdateCompanionBuilder
+    = CategoriasVariablesConfigCompanion Function({
+  Value<String> categoria,
+  Value<double?> limite,
+  Value<bool> mostrarEnInicio,
+  Value<int> rowid,
+});
+
+class $$CategoriasVariablesConfigTableFilterComposer
+    extends Composer<_$AppDatabase, $CategoriasVariablesConfigTable> {
+  $$CategoriasVariablesConfigTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get categoria => $composableBuilder(
+      column: $table.categoria, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get limite => $composableBuilder(
+      column: $table.limite, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<bool> get mostrarEnInicio => $composableBuilder(
+      column: $table.mostrarEnInicio,
+      builder: (column) => ColumnFilters(column));
+}
+
+class $$CategoriasVariablesConfigTableOrderingComposer
+    extends Composer<_$AppDatabase, $CategoriasVariablesConfigTable> {
+  $$CategoriasVariablesConfigTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get categoria => $composableBuilder(
+      column: $table.categoria, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get limite => $composableBuilder(
+      column: $table.limite, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<bool> get mostrarEnInicio => $composableBuilder(
+      column: $table.mostrarEnInicio,
+      builder: (column) => ColumnOrderings(column));
+}
+
+class $$CategoriasVariablesConfigTableAnnotationComposer
+    extends Composer<_$AppDatabase, $CategoriasVariablesConfigTable> {
+  $$CategoriasVariablesConfigTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get categoria =>
+      $composableBuilder(column: $table.categoria, builder: (column) => column);
+
+  GeneratedColumn<double> get limite =>
+      $composableBuilder(column: $table.limite, builder: (column) => column);
+
+  GeneratedColumn<bool> get mostrarEnInicio => $composableBuilder(
+      column: $table.mostrarEnInicio, builder: (column) => column);
+}
+
+class $$CategoriasVariablesConfigTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $CategoriasVariablesConfigTable,
+    CategoriasVariablesConfigData,
+    $$CategoriasVariablesConfigTableFilterComposer,
+    $$CategoriasVariablesConfigTableOrderingComposer,
+    $$CategoriasVariablesConfigTableAnnotationComposer,
+    $$CategoriasVariablesConfigTableCreateCompanionBuilder,
+    $$CategoriasVariablesConfigTableUpdateCompanionBuilder,
+    (
+      CategoriasVariablesConfigData,
+      BaseReferences<_$AppDatabase, $CategoriasVariablesConfigTable,
+          CategoriasVariablesConfigData>
+    ),
+    CategoriasVariablesConfigData,
+    PrefetchHooks Function()> {
+  $$CategoriasVariablesConfigTableTableManager(
+      _$AppDatabase db, $CategoriasVariablesConfigTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$CategoriasVariablesConfigTableFilterComposer(
+                  $db: db, $table: table),
+          createOrderingComposer: () =>
+              $$CategoriasVariablesConfigTableOrderingComposer(
+                  $db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$CategoriasVariablesConfigTableAnnotationComposer(
+                  $db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<String> categoria = const Value.absent(),
+            Value<double?> limite = const Value.absent(),
+            Value<bool> mostrarEnInicio = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              CategoriasVariablesConfigCompanion(
+            categoria: categoria,
+            limite: limite,
+            mostrarEnInicio: mostrarEnInicio,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String categoria,
+            Value<double?> limite = const Value.absent(),
+            Value<bool> mostrarEnInicio = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              CategoriasVariablesConfigCompanion.insert(
+            categoria: categoria,
+            limite: limite,
+            mostrarEnInicio: mostrarEnInicio,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$CategoriasVariablesConfigTableProcessedTableManager
+    = ProcessedTableManager<
+        _$AppDatabase,
+        $CategoriasVariablesConfigTable,
+        CategoriasVariablesConfigData,
+        $$CategoriasVariablesConfigTableFilterComposer,
+        $$CategoriasVariablesConfigTableOrderingComposer,
+        $$CategoriasVariablesConfigTableAnnotationComposer,
+        $$CategoriasVariablesConfigTableCreateCompanionBuilder,
+        $$CategoriasVariablesConfigTableUpdateCompanionBuilder,
+        (
+          CategoriasVariablesConfigData,
+          BaseReferences<_$AppDatabase, $CategoriasVariablesConfigTable,
+              CategoriasVariablesConfigData>
+        ),
+        CategoriasVariablesConfigData,
+        PrefetchHooks Function()>;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -3994,6 +4465,9 @@ class $AppDatabaseManager {
       $$AhorrosMetasTableTableManager(_db, _db.ahorrosMetas);
   $$ConfiguracionTableTableManager get configuracion =>
       $$ConfiguracionTableTableManager(_db, _db.configuracion);
+  $$CategoriasVariablesConfigTableTableManager get categoriasVariablesConfig =>
+      $$CategoriasVariablesConfigTableTableManager(
+          _db, _db.categoriasVariablesConfig);
 }
 
 mixin _$IngresosDaoMixin on DatabaseAccessor<AppDatabase> {
@@ -4006,6 +4480,10 @@ mixin _$GastosFijosDaoMixin on DatabaseAccessor<AppDatabase> {
 }
 mixin _$GastosVariablesDaoMixin on DatabaseAccessor<AppDatabase> {
   $GastosVariablesTable get gastosVariables => attachedDatabase.gastosVariables;
+}
+mixin _$CategoriasVariablesConfigDaoMixin on DatabaseAccessor<AppDatabase> {
+  $CategoriasVariablesConfigTable get categoriasVariablesConfig =>
+      attachedDatabase.categoriasVariablesConfig;
 }
 mixin _$DeliveryDaoMixin on DatabaseAccessor<AppDatabase> {
   $DeliveryGastosTable get deliveryGastos => attachedDatabase.deliveryGastos;
