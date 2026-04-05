@@ -11,3 +11,11 @@ Stream<List<AhorrosMeta>> ahorrosActivos(
   final db = ref.watch(appDatabaseProvider);
   return db.ahorrosDao.watchAhorrosActivos();
 }
+
+@riverpod
+Stream<List<AhorrosMeta>> ahorrosTodos(
+    // ignore: deprecated_member_use_from_same_package
+    AhorrosTodosRef ref) {
+  final db = ref.watch(appDatabaseProvider);
+  return db.ahorrosDao.watchTodosLosAhorros();
+}

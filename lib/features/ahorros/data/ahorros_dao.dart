@@ -15,7 +15,12 @@ class AhorrosDao extends DatabaseAccessor<AppDatabase>
       (select(ahorrosMetas)..where((t) => t.activo.equals(true))).get();
 
   Stream<List<AhorrosMeta>> watchTodosLosAhorros() =>
-      select(ahorrosMetas).watch();
+      (select(ahorrosMetas)
+            ..orderBy([
+              (t) => OrderingTerm.desc(t.activo),
+              (t) => OrderingTerm.asc(t.nombre),
+            ]))
+          .watch();
 
   Future<int> insertAhorro(AhorrosMetasCompanion entry) =>
       into(ahorrosMetas).insert(entry);

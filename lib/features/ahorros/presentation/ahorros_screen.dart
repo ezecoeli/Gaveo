@@ -15,7 +15,7 @@ class AhorrosScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final ahorrosAsync = ref.watch(ahorrosActivosProvider);
+    final ahorrosAsync = ref.watch(ahorrosTodosProvider);
     final configAsync = ref.watch(configuracionNotifierProvider);
 
     final simbolo = configAsync.valueOrNull?.simbolo ?? '\$';
@@ -30,8 +30,9 @@ class AhorrosScreen extends ConsumerWidget {
             child: Builder(builder: (ctx) {
               final list = ahorrosAsync.valueOrNull;
               if (list == null) return const SizedBox.shrink();
-              final total =
-                  list.fold(0.0, (sum, a) => sum + a.montoMensual);
+              final total = list
+                  .where((a) => a.activo)
+                  .fold(0.0, (sum, a) => sum + a.montoMensual);
               return Text(
                 '${context.l10n.totalMensual}: ${CurrencyFormatter.format(total, symbol: simbolo)}',
                 style: Theme.of(ctx).textTheme.bodySmall?.copyWith(
@@ -51,7 +52,7 @@ class AhorrosScreen extends ConsumerWidget {
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (e, _) => _ErrorView(
           message: context.l10n.errorGenerico,
-          onRetry: () => ref.invalidate(ahorrosActivosProvider),
+          onRetry: () => ref.invalidate(ahorrosTodosProvider),
         ),
         data: (items) => items.isEmpty
             ? const _EmptyState()
@@ -190,31 +191,40 @@ class _AhorroTile extends StatelessWidget {
         color: AppColors.expense,
         child: const Icon(Icons.delete_outline, color: Colors.white),
       ),
-      child: ListTile(
-        leading: CircleAvatar(
-          backgroundColor: AppColors.savings.withValues(alpha: 0.12),
-          child: Icon(
-            categoriaAhorroIcon(ahorro.emoji),
-            color: AppColors.savings,
-            size: 20,
+      child: Opacity(
+        opacity: ahorro.activo ? 1.0 : 0.45,
+        child: ListTile(
+          leading: CircleAvatar(
+            backgroundColor: AppColors.savings.withValues(alpha: 0.12),
+            child: Icon(
+              categoriaAhorroIcon(ahorro.emoji),
+              color: AppColors.savings,
+              size: 20,
+            ),
           ),
-        ),
-        title: Text(ahorro.nombre, style: theme.textTheme.bodyLarge),
-        subtitle: ahorro.montoObjetivo != null
-            ? Text(
-                '${l10n.metaLabel}: ${CurrencyFormatter.format(ahorro.montoObjetivo!, symbol: simbolo)}',
-                style: theme.textTheme.bodySmall?.copyWith(
-                    color: theme.colorScheme.onSurfaceVariant),
-              )
-            : null,
-        trailing: Text(
-          CurrencyFormatter.format(ahorro.montoMensual, symbol: simbolo),
-          style: theme.textTheme.bodyMedium?.copyWith(
-            fontWeight: FontWeight.w600,
-            color: AppColors.savings,
+          title: Text(ahorro.nombre, style: theme.textTheme.bodyLarge),
+          subtitle: !ahorro.activo
+              ? Text(
+                  l10n.inactivo,
+                  style: theme.textTheme.bodySmall?.copyWith(
+                      color: theme.colorScheme.onSurfaceVariant),
+                )
+              : ahorro.montoObjetivo != null
+                  ? Text(
+                      '${l10n.metaLabel}: ${CurrencyFormatter.format(ahorro.montoObjetivo!, symbol: simbolo)}',
+                      style: theme.textTheme.bodySmall?.copyWith(
+                          color: theme.colorScheme.onSurfaceVariant),
+                    )
+                  : null,
+          trailing: Text(
+            CurrencyFormatter.format(ahorro.montoMensual, symbol: simbolo),
+            style: theme.textTheme.bodyMedium?.copyWith(
+              fontWeight: FontWeight.w600,
+              color: AppColors.savings,
+            ),
           ),
+          onTap: onEdit,
         ),
-        onTap: onEdit,
       ),
     );
   }
