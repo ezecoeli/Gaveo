@@ -311,7 +311,7 @@ abstract class AppLocalizations {
   /// No description provided for @presupuestoDeliveryOpcional.
   ///
   /// In es, this message translates to:
-  /// **'Presupuesto delivery mensual (opcional)'**
+  /// **'Monto mensual (opcional)'**
   String get presupuestoDeliveryOpcional;
 
   /// No description provided for @comenzar.
@@ -655,6 +655,18 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Hogar'**
   String get catHogar;
+
+  /// No description provided for @catElectricidad.
+  ///
+  /// In es, this message translates to:
+  /// **'Electricidad'**
+  String get catElectricidad;
+
+  /// No description provided for @catAgua.
+  ///
+  /// In es, this message translates to:
+  /// **'Agua'**
+  String get catAgua;
 
   /// No description provided for @catOtro.
   ///

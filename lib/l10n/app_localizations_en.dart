@@ -116,8 +116,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get tuNombreRequerido => 'Your name *';
 
   @override
-  String get presupuestoDeliveryOpcional =>
-      'Monthly delivery budget (optional)';
+  String get presupuestoDeliveryOpcional => 'Monthly amount (optional)';
 
   @override
   String get comenzar => 'Get started';
@@ -291,6 +290,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get catHogar => 'Home';
+
+  @override
+  String get catElectricidad => 'Electricity';
+
+  @override
+  String get catAgua => 'Water';
 
   @override
   String get catOtro => 'Other';

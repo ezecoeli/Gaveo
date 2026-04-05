@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../app/theme/app_colors.dart';
 import '../../../core/constants/app_constants.dart';
-import '../../../core/database/app_database.dart';
+import '../../../core/database/app_database.dart' hide ConfiguracionData;
 import '../../../core/utils/currency_formatter.dart';
 import '../../../core/utils/extensions.dart';
 import '../../configuracion/providers/configuracion_providers.dart';
@@ -65,6 +66,13 @@ class DeliveryScreen extends ConsumerWidget {
                 total: total,
                 presupuesto: presupuesto,
                 simbolo: simbolo,
+                onEdit: () => _showPresupuestoSheet(
+                  context,
+                  ref,
+                  presupuesto: presupuesto,
+                  config: config!,
+                  simbolo: simbolo,
+                ),
               ),
               Expanded(
                 child: items.isEmpty
@@ -82,6 +90,151 @@ class DeliveryScreen extends ConsumerWidget {
       ),
     );
   }
+
+  static Future<void> _showPresupuestoSheet(
+    BuildContext context,
+    WidgetRef ref, {
+    required double presupuesto,
+    required ConfiguracionData config,
+    required String simbolo,
+  }) async {
+    await showModalBottomSheet<void>(
+      context: context,
+      isScrollControlled: true,
+      useSafeArea: true,
+      builder: (_) => _PresupuestoSheet(
+        presupuesto: presupuesto,
+        config: config,
+        simbolo: simbolo,
+        ref: ref,
+      ),
+    );
+  }
+}
+
+// ── Presupuesto sheet ─────────────────────────────────────────────────────────
+
+class _PresupuestoSheet extends StatefulWidget {
+  const _PresupuestoSheet({
+    required this.presupuesto,
+    required this.config,
+    required this.simbolo,
+    required this.ref,
+  });
+
+  final double presupuesto;
+  final ConfiguracionData config;
+  final String simbolo;
+  final WidgetRef ref;
+
+  @override
+  State<_PresupuestoSheet> createState() => _PresupuestoSheetState();
+}
+
+class _PresupuestoSheetState extends State<_PresupuestoSheet> {
+  late final TextEditingController _ctrl;
+  bool _saving = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _ctrl = TextEditingController(
+      text: widget.presupuesto > 0
+          ? widget.presupuesto.toStringAsFixed(2)
+          : '',
+    );
+  }
+
+  @override
+  void dispose() {
+    _ctrl.dispose();
+    super.dispose();
+  }
+
+  Future<void> _guardar() async {
+    final valor = double.tryParse(_ctrl.text.trim()) ?? 0.0;
+    setState(() => _saving = true);
+    try {
+      await widget.ref
+          .read(configuracionNotifierProvider.notifier)
+          .guardar(
+            nombreUsuario: widget.config.nombreUsuario,
+            moneda: widget.config.moneda,
+            simbolo: widget.config.simbolo,
+            presupuestoDelivery: valor,
+            idioma: widget.config.idioma,
+            tema: widget.config.tema,
+          );
+      if (mounted) Navigator.of(context).pop();
+    } finally {
+      if (mounted) setState(() => _saving = false);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final theme = Theme.of(context);
+    return Padding(
+      padding: EdgeInsets.only(
+        left: 16,
+        right: 16,
+        top: 16,
+        bottom: MediaQuery.viewInsetsOf(context).bottom + 24,
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Center(
+            child: Container(
+              width: 40,
+              height: 4,
+              decoration: BoxDecoration(
+                color: theme.colorScheme.outlineVariant,
+                borderRadius: BorderRadius.circular(2),
+              ),
+            ),
+          ),
+          const SizedBox(height: 20),
+          Text(l10n.presupuestoDelivery,
+              style: theme.textTheme.titleMedium
+                  ?.copyWith(fontWeight: FontWeight.bold)),
+          const SizedBox(height: 16),
+          TextFormField(
+            controller: _ctrl,
+            autofocus: true,
+            decoration: InputDecoration(
+              labelText: l10n.presupuestoDeliveryOpcional,
+              prefixIcon: const Icon(Icons.delivery_dining_outlined),
+              prefixText: '${widget.simbolo} ',
+            ),
+            keyboardType:
+                const TextInputType.numberWithOptions(decimal: true),
+            inputFormatters: [
+              FilteringTextInputFormatter.allow(
+                  RegExp(r'^\d{0,10}(\.\d{0,2})?')),
+            ],
+          ),
+          const SizedBox(height: 24),
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton(
+              onPressed: _saving ? null : _guardar,
+              child: _saving
+                  ? const SizedBox(
+                      height: 20,
+                      width: 20,
+                      child: CircularProgressIndicator(
+                          strokeWidth: 2, color: Colors.white),
+                    )
+                  : Text(l10n.guardar),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }
 
 // ── Budget bar ────────────────────────────────────────────────────────────────
@@ -91,11 +244,13 @@ class _BudgetBar extends StatelessWidget {
     required this.total,
     required this.presupuesto,
     required this.simbolo,
+    required this.onEdit,
   });
 
   final double total;
   final double presupuesto;
   final String simbolo;
+  final VoidCallback onEdit;
 
   Color _barColor() {
     if (presupuesto <= 0) return AppColors.delivery;
@@ -127,12 +282,30 @@ class _BudgetBar extends StatelessWidget {
                 Text(l10n.gastadoLabel,
                     style: theme.textTheme.labelMedium?.copyWith(
                         color: theme.colorScheme.onSurfaceVariant)),
-                Text(
-                  presupuesto > 0
-                      ? l10n.presupuestoLabel
-                      : l10n.presupuestoNoDefinido,
-                  style: theme.textTheme.labelMedium?.copyWith(
-                      color: theme.colorScheme.onSurfaceVariant),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      presupuesto > 0
+                          ? l10n.presupuestoLabel
+                          : l10n.presupuestoNoDefinido,
+                      style: theme.textTheme.labelMedium?.copyWith(
+                          color: theme.colorScheme.onSurfaceVariant),
+                    ),
+                    const SizedBox(width: 4),
+                    InkWell(
+                      onTap: onEdit,
+                      borderRadius: BorderRadius.circular(12),
+                      child: Padding(
+                        padding: const EdgeInsets.all(2),
+                        child: Icon(
+                          Icons.edit_outlined,
+                          size: 14,
+                          color: theme.colorScheme.onSurfaceVariant,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),

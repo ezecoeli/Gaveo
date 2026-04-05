@@ -39,7 +39,7 @@
   "bienvenido": "Welcome to Gaveo!",
   "configuraTuPerfil": "Set up your profile to get started.",
   "tuNombreRequerido": "Your name *",
-  "presupuestoDeliveryOpcional": "Monthly delivery budget (optional)",
+  "presupuestoDeliveryOpcional": "Monthly amount (optional)",
   "comenzar": "Get started",
 
   "proximamente": "Coming soon",
@@ -107,6 +107,8 @@
   "catEntretenimiento": "Entertainment",
   "catFarmacia": "Pharmacy",
   "catHogar": "Home",
+  "catElectricidad": "Electricity",
+  "catAgua": "Water",
   "catOtro": "Other",
 
   "agregarDelivery": "Add order",
