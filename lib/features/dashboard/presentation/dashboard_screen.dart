@@ -361,9 +361,27 @@ class _SummaryTile extends StatelessWidget {
               style: theme.textTheme.titleMedium?.copyWith(color: color),
             ),
             if (onTap != null) ...[
-              const SizedBox(width: 4),
-              Icon(Icons.chevron_right,
-                  color: theme.colorScheme.onSurfaceVariant, size: 18),
+              const SizedBox(width: 8),
+              Container(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 8, vertical: 3),
+                decoration: BoxDecoration(
+                  color: color.withValues(alpha: 0.12),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      context.l10n.ver,
+                      style: theme.textTheme.labelSmall
+                          ?.copyWith(color: color, fontWeight: FontWeight.w600),
+                    ),
+                    const SizedBox(width: 2),
+                    Icon(Icons.arrow_forward, color: color, size: 12),
+                  ],
+                ),
+              ),
             ],
           ],
         ),

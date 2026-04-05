@@ -284,6 +284,12 @@ abstract class AppLocalizations {
   /// **'Guardar'**
   String get guardar;
 
+  /// No description provided for @ver.
+  ///
+  /// In es, this message translates to:
+  /// **'Ver'**
+  String get ver;
+
   /// No description provided for @idioma.
   ///
   /// In es, this message translates to:
@@ -800,11 +806,65 @@ abstract class AppLocalizations {
   /// **'Monto objetivo (opcional)'**
   String get montoObjetivo;
 
-  /// No description provided for @emojiMeta.
+  /// No description provided for @catAhorro.
   ///
   /// In es, this message translates to:
-  /// **'Emoji'**
-  String get emojiMeta;
+  /// **'Categoría'**
+  String get catAhorro;
+
+  /// No description provided for @catAhorroGeneral.
+  ///
+  /// In es, this message translates to:
+  /// **'General'**
+  String get catAhorroGeneral;
+
+  /// No description provided for @catAhorroVivienda.
+  ///
+  /// In es, this message translates to:
+  /// **'Vivienda'**
+  String get catAhorroVivienda;
+
+  /// No description provided for @catAhorroTransporte.
+  ///
+  /// In es, this message translates to:
+  /// **'Transporte'**
+  String get catAhorroTransporte;
+
+  /// No description provided for @catAhorroViaje.
+  ///
+  /// In es, this message translates to:
+  /// **'Viaje'**
+  String get catAhorroViaje;
+
+  /// No description provided for @catAhorroTecnologia.
+  ///
+  /// In es, this message translates to:
+  /// **'Tecnología'**
+  String get catAhorroTecnologia;
+
+  /// No description provided for @catAhorroEducacion.
+  ///
+  /// In es, this message translates to:
+  /// **'Educación'**
+  String get catAhorroEducacion;
+
+  /// No description provided for @catAhorroSalud.
+  ///
+  /// In es, this message translates to:
+  /// **'Salud'**
+  String get catAhorroSalud;
+
+  /// No description provided for @catAhorroEmergencia.
+  ///
+  /// In es, this message translates to:
+  /// **'Emergencia'**
+  String get catAhorroEmergencia;
+
+  /// No description provided for @catAhorroJubilacion.
+  ///
+  /// In es, this message translates to:
+  /// **'Jubilación'**
+  String get catAhorroJubilacion;
 
   /// No description provided for @activo.
   ///

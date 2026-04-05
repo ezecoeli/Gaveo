@@ -138,14 +138,34 @@ class _ConfiguracionFormState extends ConsumerState<_ConfiguracionForm> {
             const SizedBox(height: 24),
             Text(l10n.idioma, style: theme.textTheme.titleMedium),
             const SizedBox(height: 12),
-            SegmentedButton<String>(
-              segments: const [
-                ButtonSegment(value: 'es', label: Text('Español')),
-                ButtonSegment(value: 'en', label: Text('English')),
-              ],
-              selected: {_idioma},
-              onSelectionChanged: (s) =>
-                  setState(() => _idioma = s.first),
+            SizedBox(
+              width: double.infinity,
+              child: SegmentedButton<String>(
+                expandedInsets: EdgeInsets.zero,
+                segments: const [
+                  ButtonSegment(
+                    value: 'es',
+                    label: SizedBox(
+                      width: 72,
+                      child: Text('Español',
+                          textAlign: TextAlign.center,
+                          overflow: TextOverflow.ellipsis),
+                    ),
+                  ),
+                  ButtonSegment(
+                    value: 'en',
+                    label: SizedBox(
+                      width: 72,
+                      child: Text('English',
+                          textAlign: TextAlign.center,
+                          overflow: TextOverflow.ellipsis),
+                    ),
+                  ),
+                ],
+                selected: {_idioma},
+                onSelectionChanged: (s) =>
+                    setState(() => _idioma = s.first),
+              ),
             ),
             const SizedBox(height: 24),
             Text(l10n.tema, style: theme.textTheme.titleMedium),

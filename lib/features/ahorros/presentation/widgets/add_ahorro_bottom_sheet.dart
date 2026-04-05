@@ -6,11 +6,49 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/database/app_database.dart';
 import '../../../../core/utils/extensions.dart';
 
-// Emojis sugeridos para metas de ahorro
-const List<String> kSuggestedEmojis = [
-  '💰', '🏠', '🚗', '✈️', '📱', '💻', '🎓', '🏥',
-  '👶', '🐾', '🎁', '🏖️', '⛽', '🛒', '💍', '🎮',
+// ── Categorías de ahorro ─────────────────────────────────────────────────────
+
+const List<String> kCategoriasAhorros = [
+  'general',
+  'vivienda',
+  'transporte',
+  'viaje',
+  'tecnologia',
+  'educacion',
+  'salud',
+  'emergencia',
+  'jubilacion',
+  'otro',
 ];
+
+IconData categoriaAhorroIcon(String categoria) => switch (categoria) {
+      'vivienda' => Icons.home_outlined,
+      'transporte' => Icons.directions_car_outlined,
+      'viaje' => Icons.flight_outlined,
+      'tecnologia' => Icons.devices_outlined,
+      'educacion' => Icons.school_outlined,
+      'salud' => Icons.favorite_outline,
+      'emergencia' => Icons.shield_outlined,
+      'jubilacion' => Icons.elderly_outlined,
+      'otro' => Icons.category_outlined,
+      _ => Icons.savings_outlined, // general
+    };
+
+String categoriaAhorroLabel(BuildContext context, String categoria) {
+  final l = context.l10n;
+  return switch (categoria) {
+    'vivienda' => l.catAhorroVivienda,
+    'transporte' => l.catAhorroTransporte,
+    'viaje' => l.catAhorroViaje,
+    'tecnologia' => l.catAhorroTecnologia,
+    'educacion' => l.catAhorroEducacion,
+    'salud' => l.catAhorroSalud,
+    'emergencia' => l.catAhorroEmergencia,
+    'jubilacion' => l.catAhorroJubilacion,
+    'otro' => l.catOtro,
+    _ => l.catAhorroGeneral,
+  };
+}
 
 Future<void> showAddAhorroBottomSheet(
   BuildContext context,
@@ -41,7 +79,7 @@ class _AddAhorroBottomSheetState
   late final TextEditingController _nombreCtrl;
   late final TextEditingController _montoMensualCtrl;
   late final TextEditingController _montoObjetivoCtrl;
-  late String _emoji;
+  late String _categoria;
   late bool _activo;
   bool _saving = false;
 
@@ -60,7 +98,9 @@ class _AddAhorroBottomSheetState
           ? a!.montoObjetivo!.toStringAsFixed(2)
           : '',
     );
-    _emoji = a?.emoji ?? '💰';
+    _categoria = kCategoriasAhorros.contains(a?.emoji)
+        ? a!.emoji
+        : 'general';
     _activo = a?.activo ?? true;
   }
 
@@ -93,7 +133,7 @@ class _AddAhorroBottomSheetState
           montoMensual: Value(montoMensual),
           montoObjetivo: Value(montoObjetivo),
           activo: Value(_activo),
-          emoji: Value(_emoji),
+          emoji: Value(_categoria),
         ));
       } else {
         await dao.insertAhorro(AhorrosMetasCompanion(
@@ -101,7 +141,7 @@ class _AddAhorroBottomSheetState
           montoMensual: Value(montoMensual),
           montoObjetivo: Value(montoObjetivo),
           activo: Value(_activo),
-          emoji: Value(_emoji),
+          emoji: Value(_categoria),
         ));
       }
       if (mounted) {
@@ -154,45 +194,22 @@ class _AddAhorroBottomSheetState
                 style: theme.textTheme.titleLarge,
               ),
               const SizedBox(height: 20),
-              // Emoji selector
-              Text(l10n.emojiMeta,
-                  style: theme.textTheme.labelLarge?.copyWith(
-                      color: theme.colorScheme.onSurfaceVariant)),
-              const SizedBox(height: 8),
-              SizedBox(
-                height: 48,
-                child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: kSuggestedEmojis.length,
-                  separatorBuilder: (_, __) => const SizedBox(width: 8),
-                  itemBuilder: (_, i) {
-                    final e = kSuggestedEmojis[i];
-                    final selected = _emoji == e;
-                    return GestureDetector(
-                      onTap: () => setState(() => _emoji = e),
-                      child: AnimatedContainer(
-                        duration: const Duration(milliseconds: 150),
-                        width: 44,
-                        height: 44,
-                        decoration: BoxDecoration(
-                          color: selected
-                              ? theme.colorScheme.primaryContainer
-                              : theme.colorScheme.surfaceContainerHighest,
-                          borderRadius: BorderRadius.circular(10),
-                          border: selected
-                              ? Border.all(
-                                  color: theme.colorScheme.primary,
-                                  width: 2)
-                              : null,
-                        ),
-                        child: Center(
-                          child: Text(e,
-                              style: const TextStyle(fontSize: 22)),
-                        ),
-                      ),
-                    );
-                  },
+              // Categoría
+              DropdownButtonFormField<String>(
+                initialValue: _categoria,
+                decoration: InputDecoration(
+                  labelText: l10n.catAhorro,
+                  prefixIcon: Icon(categoriaAhorroIcon(_categoria)),
                 ),
+                items: kCategoriasAhorros.map((cat) {
+                  return DropdownMenuItem(
+                    value: cat,
+                    child: Text(categoriaAhorroLabel(context, cat)),
+                  );
+                }).toList(),
+                onChanged: (v) {
+                  if (v != null) setState(() => _categoria = v);
+                },
               ),
               const SizedBox(height: 16),
               // Nombre

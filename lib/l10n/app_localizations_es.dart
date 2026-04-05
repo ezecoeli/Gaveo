@@ -104,6 +104,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get guardar => 'Guardar';
 
   @override
+  String get ver => 'Ver';
+
+  @override
   String get idioma => 'Idioma';
 
   @override
@@ -364,7 +367,34 @@ class AppLocalizationsEs extends AppLocalizations {
   String get montoObjetivo => 'Monto objetivo (opcional)';
 
   @override
-  String get emojiMeta => 'Emoji';
+  String get catAhorro => 'Categoría';
+
+  @override
+  String get catAhorroGeneral => 'General';
+
+  @override
+  String get catAhorroVivienda => 'Vivienda';
+
+  @override
+  String get catAhorroTransporte => 'Transporte';
+
+  @override
+  String get catAhorroViaje => 'Viaje';
+
+  @override
+  String get catAhorroTecnologia => 'Tecnología';
+
+  @override
+  String get catAhorroEducacion => 'Educación';
+
+  @override
+  String get catAhorroSalud => 'Salud';
+
+  @override
+  String get catAhorroEmergencia => 'Emergencia';
+
+  @override
+  String get catAhorroJubilacion => 'Jubilación';
 
   @override
   String get activo => 'Activo';

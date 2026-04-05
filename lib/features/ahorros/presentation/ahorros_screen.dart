@@ -193,8 +193,11 @@ class _AhorroTile extends StatelessWidget {
       child: ListTile(
         leading: CircleAvatar(
           backgroundColor: AppColors.savings.withValues(alpha: 0.12),
-          child: Text(ahorro.emoji,
-              style: const TextStyle(fontSize: 20)),
+          child: Icon(
+            categoriaAhorroIcon(ahorro.emoji),
+            color: AppColors.savings,
+            size: 20,
+          ),
         ),
         title: Text(ahorro.nombre, style: theme.textTheme.bodyLarge),
         subtitle: ahorro.montoObjetivo != null
