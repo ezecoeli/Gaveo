@@ -4,11 +4,11 @@
   "appTitle": "Gaveo",
   "@appTitle": { "description": "Título de la app" },
 
-  "navInicio": "Inicio",
+  "navInicio": "Resumen",
   "@navInicio": {},
   "navFijos": "Fijos",
   "@navFijos": {},
-  "navVariables": "Variables",
+  "navVariables": "Varios",
   "@navVariables": {},
   "navDelivery": "Delivery",
   "@navDelivery": {},
@@ -212,6 +212,8 @@
   "@catAgua": {},
   "catOtro": "Otro",
   "@catOtro": {},
+  "catDelivery": "Delivery",
+  "@catDelivery": {},
 
   "agregarDelivery": "Agregar pedido",
   "@agregarDelivery": {},
@@ -341,5 +343,7 @@
   "temaOscuro": "Oscuro",
   "@temaOscuro": {},
   "temaSistema": "Sistema",
-  "@temaSistema": {}
+  "@temaSistema": {},
+  "navIngresos": "Ingresos",
+  "@navIngresos": {}
 }

@@ -6,10 +6,10 @@ part of 'dashboard_summary_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$dashboardSummaryHash() => r'cacd926004e162f7b4b0a02901e832c5966d8535';
+String _$dashboardSummaryHash() => r'71e171f0cc8b25df306d4c7f83cec3b898f5d3b3';
 
 /// Reactive dashboard summary — rebuilds automatically whenever any underlying
-/// data stream (ingresos, gastos, delivery, ahorros) emits a new value.
+/// data stream (ingresos, gastos, ahorros) emits a new value.
 ///
 /// Copied from [dashboardSummary].
 @ProviderFor(dashboardSummary)

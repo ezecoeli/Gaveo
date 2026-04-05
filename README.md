@@ -1,6 +1,6 @@
 # Gaveo
 
-Aplicación móvil para la gestión financiera del hogar. Registra ingresos, gastos fijos, gastos variables, delivery y metas de ahorro mensualmente.
+Aplicación móvil para la gestión financiera del hogar. Registra ingresos, gastos fijos, gastos variables y metas de ahorro mensualmente.
 
 ---
 
@@ -9,8 +9,7 @@ Aplicación móvil para la gestión financiera del hogar. Registra ingresos, gas
 - **Dashboard mensual**: saldo disponible, % comprometido y resumen de todas las categorías con gráfico de distribución
 - **Ingresos**: registro de fuentes de ingreso por mes
 - **Gastos fijos**: servicios y cuotas recurrentes con seguimiento de pago mes a mes
-- **Gastos variables**: imprevistos y compras esporádicas por categoría
-- **Delivery**: control de pedidos con presupuesto mensual y alerta de umbral
+- **Gastos variables**: imprevistos y compras esporádicas por categoría (incluye delivery como subcategoría)
 - **Ahorros**: metas de ahorro con monto mensual y objetivo total
 - **Historial**: resumen de los últimos 12 meses; toca un mes para navegar directo a él
 - **Notificaciones locales**: aviso el día que vence cada gasto fijo
@@ -91,11 +90,10 @@ lib/
     ├── dashboard/               # Resumen financiero mensual + gráfico
     ├── ingresos/                # Gestión de ingresos
     ├── gastos_fijos/            # Gastos recurrentes + tracking de pago
-    ├── gastos_variables/        # Gastos imprevistos por categoría
-    ├── delivery/                # Control de delivery con presupuesto
+    ├── gastos_variables/        # Gastos imprevistos por categoría (incl. delivery)
     ├── ahorros/                 # Metas de ahorro
     ├── historial/               # Resumen de los últimos 12 meses
-    └── configuracion/           # Perfil, moneda, idioma, presupuesto delivery
+    └── configuracion/           # Perfil, moneda, idioma, tema
 ```
 
 Cada feature sigue la estructura `data/` + `providers/` + `presentation/`.
@@ -104,10 +102,9 @@ Cada feature sigue la estructura `data/` + `providers/` + `presentation/`.
 
 ## Navegación
 
-- **Nav bar (5 ítems):** Dashboard · Gastos Fijos · Variables · Delivery · Ahorros
-- **Ingresos:** accesible tocando la tarjeta de ingresos en el Dashboard
+- **Nav bar (5 ítems):** Resumen · Gastos Fijos · Varios · Ingresos · Ahorros
 - **Historial:** botón de historial en el AppBar del Dashboard
-- **Configuración:** ícono de engranaje en el AppBar del Dashboard (nombre, moneda, idioma)
+- **Configuración:** ícono de engranaje en el AppBar del Dashboard (nombre, moneda, idioma, tema)
 
 ---
 
@@ -117,8 +114,7 @@ Cada feature sigue la estructura `data/` + `providers/` + `presentation/`.
 Saldo Disponible =
   totalIngresos
   - totalGastosFijosActivos    ← siempre, pagados o no
-  - totalGastosVariables
-  - totalDelivery
+  - totalGastosVariables       ← incluye gastos con categoría 'delivery'
   - totalAhorrosMensuales
 ```
 

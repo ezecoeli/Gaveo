@@ -22,7 +22,7 @@ final selectedMonthProvider =
 );
 
 typedef _$SelectedMonth = AutoDisposeNotifier<({int mes, int anio})>;
-String _$dashboardNotifierHash() => r'953ac3218199cac56372dc9bff15688111a42afc';
+String _$dashboardNotifierHash() => r'5b4d75afa614f7259e7acf47009ade4ea4dccf1d';
 
 /// See also [DashboardNotifier].
 @ProviderFor(DashboardNotifier)

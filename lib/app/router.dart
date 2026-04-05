@@ -5,7 +5,6 @@ import '../core/utils/extensions.dart';
 import '../features/ahorros/presentation/ahorros_screen.dart';
 import '../features/configuracion/presentation/configuracion_screen.dart';
 import '../features/dashboard/presentation/dashboard_screen.dart';
-import '../features/delivery/presentation/delivery_screen.dart';
 import '../features/gastos_fijos/presentation/gastos_fijos_screen.dart';
 import '../features/gastos_variables/presentation/gastos_variables_screen.dart';
 import '../features/historial/presentation/historial_screen.dart';
@@ -30,8 +29,8 @@ final appRouter = GoRouter(
           builder: (_, __) => const GastosVariablesScreen(),
         ),
         GoRoute(
-          path: '/delivery',
-          builder: (_, __) => const DeliveryScreen(),
+          path: '/ingresos',
+          builder: (_, __) => const IngresosScreen(),
         ),
         GoRoute(
           path: '/ahorros',
@@ -40,10 +39,6 @@ final appRouter = GoRouter(
       ],
     ),
     // Rutas fuera del shell (sin nav bar)
-    GoRoute(
-      path: '/ingresos',
-      builder: (_, __) => const IngresosScreen(),
-    ),
     GoRoute(
       path: '/configuracion',
       builder: (_, __) => const ConfiguracionScreen(),
@@ -64,7 +59,7 @@ class MainShell extends StatelessWidget {
     '/',
     '/gastos-fijos',
     '/gastos-variables',
-    '/delivery',
+    '/ingresos',
     '/ahorros',
   ];
 
@@ -99,9 +94,9 @@ class MainShell extends StatelessWidget {
         label: l10n.navVariables,
       ),
       NavigationDestination(
-        icon: const Icon(Icons.delivery_dining_outlined),
-        selectedIcon: const Icon(Icons.delivery_dining),
-        label: l10n.navDelivery,
+        icon: const Icon(Icons.account_balance_wallet_outlined),
+        selectedIcon: const Icon(Icons.account_balance_wallet),
+        label: l10n.ingresos,
       ),
       NavigationDestination(
         icon: const Icon(Icons.savings_outlined),

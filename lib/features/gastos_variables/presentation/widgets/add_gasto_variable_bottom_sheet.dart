@@ -18,6 +18,7 @@ const List<String> kCategoriasVariables = [
   'hogar',
   'electricidad',
   'agua',
+  'delivery',
   'otro',
 ];
 
@@ -30,6 +31,7 @@ IconData categoriaVariableIcon(String categoria) => switch (categoria) {
       'hogar' => Icons.home_outlined,
       'electricidad' => Icons.bolt_outlined,
       'agua' => Icons.water_drop_outlined,
+      'delivery' => Icons.delivery_dining_outlined,
       'otro' => Icons.category_outlined,
       _ => Icons.error_outline, // imprevisto
     };
@@ -45,6 +47,7 @@ String categoriaVariableLabel(BuildContext context, String categoria) {
     'hogar' => l.catHogar,
     'electricidad' => l.catElectricidad,
     'agua' => l.catAgua,
+    'delivery' => l.catDelivery,
     'otro' => l.catOtro,
     _ => l.catImprevisto,
   };

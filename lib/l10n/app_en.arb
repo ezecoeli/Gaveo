@@ -2,9 +2,9 @@
   "@@locale": "en",
 
   "appTitle": "Gaveo",
-  "navInicio": "Home",
+  "navInicio": "Summary",
   "navFijos": "Fixed",
-  "navVariables": "Variable",
+  "navVariables": "Others",
   "navDelivery": "Delivery",
   "navAhorros": "Savings",
 
@@ -111,6 +111,7 @@
   "catElectricidad": "Electricity",
   "catAgua": "Water",
   "catOtro": "Other",
+  "catDelivery": "Delivery",
 
   "agregarDelivery": "Add order",
   "editarDelivery": "Edit order",
@@ -169,5 +170,6 @@
   "tema": "Appearance",
   "temaClaro": "Light",
   "temaOscuro": "Dark",
-  "temaSistema": "System"
+  "temaSistema": "System",
+  "navIngresos": "Income"
 }

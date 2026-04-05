@@ -107,7 +107,7 @@ abstract class AppLocalizations {
   /// No description provided for @navInicio.
   ///
   /// In es, this message translates to:
-  /// **'Inicio'**
+  /// **'Resumen'**
   String get navInicio;
 
   /// No description provided for @navFijos.
@@ -119,7 +119,7 @@ abstract class AppLocalizations {
   /// No description provided for @navVariables.
   ///
   /// In es, this message translates to:
-  /// **'Variables'**
+  /// **'Varios'**
   String get navVariables;
 
   /// No description provided for @navDelivery.
@@ -680,6 +680,12 @@ abstract class AppLocalizations {
   /// **'Otro'**
   String get catOtro;
 
+  /// No description provided for @catDelivery.
+  ///
+  /// In es, this message translates to:
+  /// **'Delivery'**
+  String get catDelivery;
+
   /// No description provided for @agregarDelivery.
   ///
   /// In es, this message translates to:
@@ -997,6 +1003,12 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Sistema'**
   String get temaSistema;
+
+  /// No description provided for @navIngresos.
+  ///
+  /// In es, this message translates to:
+  /// **'Ingresos'**
+  String get navIngresos;
 }
 
 class _AppLocalizationsDelegate

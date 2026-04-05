@@ -12,13 +12,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appTitle => 'Gaveo';
 
   @override
-  String get navInicio => 'Home';
+  String get navInicio => 'Summary';
 
   @override
   String get navFijos => 'Fixed';
 
   @override
-  String get navVariables => 'Variable';
+  String get navVariables => 'Others';
 
   @override
   String get navDelivery => 'Delivery';
@@ -304,6 +304,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get catOtro => 'Other';
 
   @override
+  String get catDelivery => 'Delivery';
+
+  @override
   String get agregarDelivery => 'Add order';
 
   @override
@@ -469,4 +472,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get temaSistema => 'System';
+
+  @override
+  String get navIngresos => 'Income';
 }

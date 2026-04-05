@@ -112,7 +112,23 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 
   @override
-  int get schemaVersion => 1;
+  int get schemaVersion => 2;
+
+  @override
+  MigrationStrategy get migration => MigrationStrategy(
+        onUpgrade: (m, from, to) async {
+          if (from < 2) {
+            // Migrar registros de delivery_gastos a gastos_variables
+            // plataforma → notas para preservar la info
+            await customStatement(
+              'INSERT OR IGNORE INTO gastos_variables '
+              '(descripcion, monto, fecha, mes, anio, categoria, notas) '
+              'SELECT descripcion, monto, fecha, mes, anio, \'delivery\', plataforma '
+              'FROM delivery_gastos',
+            );
+          }
+        },
+      );
 }
 
 LazyDatabase _openConnection() {

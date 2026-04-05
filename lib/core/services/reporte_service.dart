@@ -56,7 +56,6 @@ class ReporteService {
     const incomeColor = PdfColor.fromInt(0xFF2D6A4F);
     const expenseColor = PdfColor.fromInt(0xFFE63946);
     const savingsColor = PdfColor.fromInt(0xFF457B9D);
-    const deliveryColor = PdfColor.fromInt(0xFFE76F51);
     const textLight = PdfColor.fromInt(0xFF6B7280);
     const bgLight = PdfColor.fromInt(0xFFF8F9FA);
 
@@ -161,7 +160,6 @@ class ReporteService {
               _buildRow(
                   'Gastos variables', fmt(summary.totalGastosVariables),
                   expenseColor),
-              _buildRow('Delivery', fmt(summary.totalDelivery), deliveryColor),
               _buildRow('Ahorros', fmt(summary.totalAhorros), savingsColor),
               _buildDivider(),
 
@@ -176,7 +174,6 @@ class ReporteService {
                   pw.Text(
                     fmt(summary.totalGastosFijos +
                         summary.totalGastosVariables +
-                        summary.totalDelivery +
                         summary.totalAhorros),
                     style: pw.TextStyle(
                         fontWeight: pw.FontWeight.bold,

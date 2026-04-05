@@ -1,6 +1,5 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../core/constants/app_constants.dart';
 import '../../../core/database/app_database.dart';
 import '../../../core/utils/date_utils.dart';
 import 'dashboard_summary.dart';
@@ -50,10 +49,7 @@ class DashboardNotifier extends _$DashboardNotifier {
     final gastosFijos = await db.gastosFijosDao.getGastosFijosActivos();
     final gastosVariables =
         await db.gastosVariablesDao.getGastosVariablesDelMes(mes, anio);
-    final delivery = await db.deliveryDao.getDeliveryDelMes(mes, anio);
     final ahorros = await db.ahorrosDao.getAhorrosActivos();
-    final presupuestoRaw = await db.configuracionDao
-        .getValor(AppConstants.keyPresupuestoDelivery);
 
     return DashboardSummary(
       totalIngresos: ingresos.fold(0.0, (sum, i) => sum + i.monto),
@@ -62,9 +58,6 @@ class DashboardNotifier extends _$DashboardNotifier {
       totalGastosFijosPagados: 0,
       totalGastosVariables:
           gastosVariables.fold(0.0, (sum, g) => sum + g.monto),
-      totalDelivery: delivery.fold(0.0, (sum, d) => sum + d.monto),
-      presupuestoDelivery:
-          double.tryParse(presupuestoRaw ?? '0') ?? 0.0,
       totalAhorros: ahorros.fold(0.0, (sum, a) => sum + a.montoMensual),
     );
   }

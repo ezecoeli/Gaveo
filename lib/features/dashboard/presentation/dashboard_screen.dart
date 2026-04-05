@@ -10,7 +10,6 @@ import '../providers/dashboard_summary_provider.dart';
 import '../../configuracion/providers/configuracion_providers.dart';
 import '../../configuracion/presentation/widgets/onboarding_bottom_sheet.dart';
 import '../../../../app/theme/app_colors.dart';
-import '../../../../core/constants/app_constants.dart';
 import '../../../../core/database/app_database.dart';
 import '../../../../core/services/notification_service.dart';
 import '../../../../core/services/reporte_service.dart';
@@ -69,8 +68,9 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Gaveo'),
+        title: const Icon(Icons.home_rounded, size: 30),
         centerTitle: false,
+        titleSpacing: 24,
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(48),
           child: _MonthSelector(mes: monthState.mes, anio: monthState.anio),
@@ -204,7 +204,6 @@ class _DashboardBody extends StatelessWidget {
           simbolo: simbolo,
           color: Theme.of(context).colorScheme.primary,
           icon: Icons.arrow_downward,
-          onTap: () => context.push('/ingresos'),
         ).animate(delay: 80.ms).fadeIn(duration: 300.ms).slideY(begin: 0.08, curve: Curves.easeOut),
         _SummaryTile(
           label: context.l10n.gastosFijos,
@@ -226,16 +225,15 @@ class _DashboardBody extends StatelessWidget {
           color: AppColors.variable,
           icon: Icons.shopping_bag_outlined,
         ).animate(delay: 200.ms).fadeIn(duration: 300.ms).slideY(begin: 0.08, curve: Curves.easeOut),
-        _DeliveryTile(summary: summary, simbolo: simbolo).animate(delay: 260.ms).fadeIn(duration: 300.ms).slideY(begin: 0.08, curve: Curves.easeOut),
         _SummaryTile(
           label: context.l10n.ahorros,
           amount: summary.totalAhorros,
           simbolo: simbolo,
           color: AppColors.savings,
           icon: Icons.savings_outlined,
-        ).animate(delay: 320.ms).fadeIn(duration: 300.ms).slideY(begin: 0.08, curve: Curves.easeOut),
+        ).animate(delay: 260.ms).fadeIn(duration: 300.ms).slideY(begin: 0.08, curve: Curves.easeOut),
         const SizedBox(height: 12),
-        _ExpenseBreakdownCard(summary: summary).animate(delay: 380.ms).fadeIn(duration: 300.ms).slideY(begin: 0.08, curve: Curves.easeOut),
+        _ExpenseBreakdownCard(summary: summary).animate(delay: 320.ms).fadeIn(duration: 300.ms).slideY(begin: 0.08, curve: Curves.easeOut),
       ],
     );
   }
@@ -326,7 +324,6 @@ class _SummaryTile extends StatelessWidget {
     required this.color,
     required this.icon,
     this.subtitle,
-    this.onTap,
   });
 
   final String label;
@@ -335,7 +332,6 @@ class _SummaryTile extends StatelessWidget {
   final Color color;
   final IconData icon;
   final String? subtitle;
-  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -353,116 +349,9 @@ class _SummaryTile extends StatelessWidget {
                 style: theme.textTheme.bodySmall
                     ?.copyWith(color: theme.colorScheme.onSurfaceVariant))
             : null,
-        trailing: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              CurrencyFormatter.format(amount, symbol: simbolo),
-              style: theme.textTheme.titleMedium?.copyWith(color: color),
-            ),
-            if (onTap != null) ...[
-              const SizedBox(width: 8),
-              Container(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 8, vertical: 3),
-                decoration: BoxDecoration(
-                  color: color.withValues(alpha: 0.12),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      context.l10n.ver,
-                      style: theme.textTheme.labelSmall
-                          ?.copyWith(color: color, fontWeight: FontWeight.w600),
-                    ),
-                    const SizedBox(width: 2),
-                    Icon(Icons.arrow_forward, color: color, size: 12),
-                  ],
-                ),
-              ),
-            ],
-          ],
-        ),
-        onTap: onTap,
-      ),
-    );
-  }
-}
-
-// ── Delivery tile (with budget bar) ──────────────────────────────────────────
-
-class _DeliveryTile extends StatelessWidget {
-  const _DeliveryTile({required this.summary, required this.simbolo});
-
-  final DashboardSummary summary;
-  final String simbolo;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final ratio = summary.porcentajeDelivery;
-    final barColor = ratio >= AppConstants.errorDeliveryPct
-        ? AppColors.expense
-        : ratio >= AppConstants.warningDeliveryPct
-            ? AppColors.warning
-            : AppColors.delivery;
-    final color = ratio >= AppConstants.warningDeliveryPct
-        ? AppColors.expense
-        : AppColors.delivery;
-    final hasBudget = summary.presupuestoDelivery > 0;
-
-    return Card(
-      margin: const EdgeInsets.only(bottom: 8),
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                CircleAvatar(
-                  backgroundColor: color.withValues(alpha: 0.12),
-                  child:
-                      Icon(Icons.delivery_dining, color: color, size: 20),
-                ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: Text(context.l10n.delivery,
-                      style: theme.textTheme.bodyMedium),
-                ),
-                Text(
-                  CurrencyFormatter.format(summary.totalDelivery,
-                      symbol: simbolo),
-                  style: theme.textTheme.titleMedium?.copyWith(color: color),
-                ),
-              ],
-            ),
-            if (hasBudget) ...[
-              const SizedBox(height: 8),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(4),
-                child: LinearProgressIndicator(
-                  value: ratio.clamp(0.0, 1.0),
-                  minHeight: 6,
-                  backgroundColor: barColor.withValues(alpha: 0.15),
-                  valueColor: AlwaysStoppedAnimation<Color>(barColor),
-                ),
-              ),
-              const SizedBox(height: 4),
-              Text(
-                context.l10n.gastadoDe(
-                  CurrencyFormatter.format(summary.totalDelivery,
-                      symbol: simbolo),
-                  CurrencyFormatter.format(summary.presupuestoDelivery,
-                      symbol: simbolo),
-                ),
-                style: theme.textTheme.bodySmall?.copyWith(
-                    color: theme.colorScheme.onSurfaceVariant),
-              ),
-            ],
-          ],
+        trailing: Text(
+          CurrencyFormatter.format(amount, symbol: simbolo),
+          style: theme.textTheme.titleMedium?.copyWith(color: color),
         ),
       ),
     );
@@ -485,7 +374,6 @@ class _ExpenseBreakdownCard extends StatelessWidget {
       (l10n.gastosFijos, summary.totalGastosFijos, AppColors.expense),
       (l10n.gastosVariables, summary.totalGastosVariables,
           AppColors.variable),
-      (l10n.delivery, summary.totalDelivery, AppColors.delivery),
       (l10n.ahorros, summary.totalAhorros, AppColors.savings),
     ].where((e) => e.$2 > 0).toList();
 
