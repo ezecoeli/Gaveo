@@ -81,9 +81,9 @@ class _EmptyState extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(Icons.account_balance_wallet_outlined,
+            Icon(Icons.account_balance_wallet_outlined,
                 size: 64,
-                color: AppColors.primaryLight),
+                color: theme.colorScheme.primary),
             const SizedBox(height: 16),
             Text(
               l10n.sinIngresos,
@@ -205,10 +205,10 @@ class _IngresoTile extends StatelessWidget {
         child: const Icon(Icons.delete_outline, color: Colors.white),
       ),
       child: ListTile(
-        leading: const CircleAvatar(
-          backgroundColor: AppColors.primaryContainer,
+        leading: CircleAvatar(
+          backgroundColor: theme.colorScheme.primaryContainer,
           child: Icon(Icons.arrow_downward,
-              color: AppColors.primary, size: 20),
+              color: theme.colorScheme.onPrimaryContainer, size: 20),
         ),
         title: Text(ingreso.fuente,
             style: theme.textTheme.bodyLarge),
@@ -227,7 +227,7 @@ class _IngresoTile extends StatelessWidget {
           CurrencyFormatter.format(ingreso.monto, symbol: simbolo),
           style: theme.textTheme.bodyMedium?.copyWith(
             fontWeight: FontWeight.w600,
-            color: AppColors.income,
+            color: theme.colorScheme.primary,
           ),
         ),
         onTap: onEdit,

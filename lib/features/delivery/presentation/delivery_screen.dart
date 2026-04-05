@@ -260,11 +260,19 @@ class _BudgetBar extends StatelessWidget {
     return AppColors.delivery;
   }
 
+  Color _textIconColor() {
+    if (presupuesto <= 0) return AppColors.delivery;
+    final ratio = total / presupuesto;
+    if (ratio >= AppConstants.warningDeliveryPct) return AppColors.expense;
+    return AppColors.delivery;
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final theme = Theme.of(context);
     final color = _barColor();
+    final textColor = _textIconColor();
     final progress = presupuesto > 0
         ? (total / presupuesto).clamp(0.0, 1.0)
         : 0.0;
@@ -316,7 +324,7 @@ class _BudgetBar extends StatelessWidget {
                 Text(
                   CurrencyFormatter.format(total, symbol: simbolo),
                   style: theme.textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.bold, color: color),
+                      fontWeight: FontWeight.bold, color: textColor),
                 ),
                 if (presupuesto > 0)
                   Text(

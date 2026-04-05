@@ -83,7 +83,7 @@ class _HistorialMesTile extends StatelessWidget {
     final l10n = context.l10n;
     final theme = Theme.of(context);
     final saldoPositivo = dato.saldo >= 0;
-    final saldoColor = saldoPositivo ? AppColors.income : AppColors.expense;
+    final saldoColor = saldoPositivo ? theme.colorScheme.primary : AppColors.expense;
     final mesNombre = AppDateUtils.monthName(dato.mes, dato.anio, locale);
 
     return Card(
@@ -110,7 +110,7 @@ class _HistorialMesTile extends StatelessWidget {
                       children: [
                         _AmountChip(
                           icon: Icons.arrow_upward_rounded,
-                          color: AppColors.income,
+                          color: theme.colorScheme.primary,
                           label: CurrencyFormatter.formatCompact(
                             dato.totalIngresos,
                             symbol: simbolo,

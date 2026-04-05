@@ -202,7 +202,7 @@ class _DashboardBody extends StatelessWidget {
           label: context.l10n.ingresos,
           amount: summary.totalIngresos,
           simbolo: simbolo,
-          color: AppColors.income,
+          color: Theme.of(context).colorScheme.primary,
           icon: Icons.arrow_downward,
           onTap: () => context.push('/ingresos'),
         ).animate(delay: 80.ms).fadeIn(duration: 300.ms).slideY(begin: 0.08, curve: Curves.easeOut),
@@ -258,7 +258,7 @@ class _SaldoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final saldo = summary.saldoDisponible;
-    final saldoColor = saldo >= 0 ? AppColors.income : AppColors.expense;
+    final saldoColor = saldo >= 0 ? theme.colorScheme.primary : AppColors.expense;
     final pct = summary.porcentajeComprometido;
 
     return Card(
@@ -403,11 +403,14 @@ class _DeliveryTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final ratio = summary.porcentajeDelivery;
-    final color = ratio >= AppConstants.errorDeliveryPct
+    final barColor = ratio >= AppConstants.errorDeliveryPct
         ? AppColors.expense
         : ratio >= AppConstants.warningDeliveryPct
             ? AppColors.warning
             : AppColors.delivery;
+    final color = ratio >= AppConstants.warningDeliveryPct
+        ? AppColors.expense
+        : AppColors.delivery;
     final hasBudget = summary.presupuestoDelivery > 0;
 
     return Card(
@@ -443,8 +446,8 @@ class _DeliveryTile extends StatelessWidget {
                 child: LinearProgressIndicator(
                   value: ratio.clamp(0.0, 1.0),
                   minHeight: 6,
-                  backgroundColor: color.withValues(alpha: 0.15),
-                  valueColor: AlwaysStoppedAnimation<Color>(color),
+                  backgroundColor: barColor.withValues(alpha: 0.15),
+                  valueColor: AlwaysStoppedAnimation<Color>(barColor),
                 ),
               ),
               const SizedBox(height: 4),

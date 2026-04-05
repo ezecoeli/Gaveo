@@ -82,8 +82,8 @@ class _EmptyState extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(Icons.receipt_long_outlined,
-                size: 64, color: AppColors.primaryLight),
+            Icon(Icons.receipt_long_outlined,
+                size: 64, color: theme.colorScheme.primary),
             const SizedBox(height: 16),
             Text(
               l10n.sinGastosVariables,
