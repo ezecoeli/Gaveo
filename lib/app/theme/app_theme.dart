@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'app_colors.dart';
 import 'app_text_styles.dart';
 
@@ -34,7 +35,7 @@ class AppTheme {
           backgroundColor: AppColors.cardBackground,
           indicatorColor: AppColors.primaryContainer,
           labelTextStyle: WidgetStateProperty.all(
-            AppTextStyles.textTheme.labelLarge?.copyWith(fontSize: 12),
+            GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600),
           ),
         ),
         inputDecorationTheme: InputDecorationTheme(
@@ -104,7 +105,7 @@ class AppTheme {
         navigationBarTheme: NavigationBarThemeData(
           indicatorColor: AppColors.primary.withValues(alpha: 0.4),
           labelTextStyle: WidgetStateProperty.all(
-            AppTextStyles.textTheme.labelLarge?.copyWith(fontSize: 12),
+            GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600),
           ),
         ),
         inputDecorationTheme: InputDecorationTheme(
