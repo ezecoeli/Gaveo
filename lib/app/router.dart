@@ -8,10 +8,11 @@ import '../features/dashboard/presentation/dashboard_screen.dart';
 import '../features/gastos_fijos/presentation/gastos_fijos_screen.dart';
 import '../features/gastos_variables/presentation/gastos_variables_screen.dart';
 import '../features/historial/presentation/historial_screen.dart';
+import '../features/home/presentation/home_screen.dart';
 import '../features/ingresos/presentation/ingresos_screen.dart';
 
 final appRouter = GoRouter(
-  initialLocation: '/',
+  initialLocation: '/home',
   routes: [
     ShellRoute(
       builder: (context, state, child) => MainShell(child: child),
@@ -39,6 +40,10 @@ final appRouter = GoRouter(
       ],
     ),
     // Rutas fuera del shell (sin nav bar)
+    GoRoute(
+      path: '/home',
+      builder: (_, __) => const HomeScreen(),
+    ),
     GoRoute(
       path: '/configuracion',
       builder: (_, __) => const ConfiguracionScreen(),

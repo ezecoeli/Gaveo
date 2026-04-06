@@ -1075,6 +1075,42 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Sin límite'**
   String get sinLimite;
+
+  /// No description provided for @verMisFinanzas.
+  ///
+  /// In es, this message translates to:
+  /// **'Ver mis finanzas'**
+  String get verMisFinanzas;
+
+  /// No description provided for @estadoDelMes.
+  ///
+  /// In es, this message translates to:
+  /// **'Estado del mes'**
+  String get estadoDelMes;
+
+  /// No description provided for @vasBien.
+  ///
+  /// In es, this message translates to:
+  /// **'Vas bien este mes 🟢'**
+  String get vasBien;
+
+  /// No description provided for @casiAlLimite.
+  ///
+  /// In es, this message translates to:
+  /// **'Casi al límite 🟡'**
+  String get casiAlLimite;
+
+  /// No description provided for @presupuestoComprometido.
+  ///
+  /// In es, this message translates to:
+  /// **'Presupuesto comprometido 🔴'**
+  String get presupuestoComprometido;
+
+  /// No description provided for @comprometido.
+  ///
+  /// In es, this message translates to:
+  /// **'comprometido'**
+  String get comprometido;
 }
 
 class _AppLocalizationsDelegate

@@ -6,6 +6,7 @@ Aplicación móvil para la gestión financiera del hogar. Registra ingresos, gas
 
 ## Características
 
+- **Pantalla de inicio (Home)**: saludo personalizado y tarjeta de estado del mes (% comprometido + gastos fijos pagados) sin mostrar montos, para proteger la privacidad del usuario
 - **Dashboard mensual**: saldo disponible, % comprometido y resumen de todas las categorías con gráfico de distribución
 - **Seguimiento personalizado**: categorías de gastos variables con `mostrarEnInicio=true` o límite definido aparecen en una sección dedicada del Dashboard con barra de progreso respecto al límite
 - **Ingresos**: registro de fuentes de ingreso por mes

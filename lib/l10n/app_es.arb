@@ -370,5 +370,18 @@
   "sinLimite": "Sin límite",
   "@sinLimite": {},
   "guardar": "Guardar",
-  "@guardar": {}
+  "@guardar": {},
+
+  "verMisFinanzas": "Ver mis finanzas",
+  "@verMisFinanzas": {},
+  "estadoDelMes": "Estado del mes",
+  "@estadoDelMes": {},
+  "vasBien": "Vas bien este mes 🟢",
+  "@vasBien": {},
+  "casiAlLimite": "Casi al límite 🟡",
+  "@casiAlLimite": {},
+  "presupuestoComprometido": "Presupuesto comprometido 🔴",
+  "@presupuestoComprometido": {},
+  "comprometido": "comprometido",
+  "@comprometido": {}
 }

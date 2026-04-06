@@ -184,5 +184,12 @@
   "seguimiento": "Tracking",
   "dePresupuesto": "of budget",
   "sinLimite": "No limit",
-  "guardar": "Save"
+  "guardar": "Save",
+
+  "verMisFinanzas": "View my finances",
+  "estadoDelMes": "Month status",
+  "vasBien": "You're on track 🟢",
+  "casiAlLimite": "Almost at the limit 🟡",
+  "presupuestoComprometido": "Budget committed 🔴",
+  "comprometido": "committed"
 }

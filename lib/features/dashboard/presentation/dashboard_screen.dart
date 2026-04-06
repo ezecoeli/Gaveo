@@ -8,7 +8,6 @@ import '../providers/dashboard_providers.dart';
 import '../providers/dashboard_summary.dart';
 import '../providers/dashboard_summary_provider.dart';
 import '../../configuracion/providers/configuracion_providers.dart';
-import '../../configuracion/presentation/widgets/onboarding_bottom_sheet.dart';
 import '../../gastos_variables/presentation/widgets/add_gasto_variable_bottom_sheet.dart'
     show categoriaVariableLabel, categoriaVariableIcon;
 import '../../../../app/theme/app_colors.dart';
@@ -27,7 +26,6 @@ class DashboardScreen extends ConsumerStatefulWidget {
 }
 
 class _DashboardScreenState extends ConsumerState<DashboardScreen> {
-  bool _onboardingShown = false;
   bool _notificationsScheduled = false;
 
   @override
@@ -35,15 +33,6 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
     final monthState = ref.watch(selectedMonthProvider);
     final summaryAsync = ref.watch(dashboardSummaryProvider);
     final configAsync = ref.watch(configuracionNotifierProvider);
-
-    configAsync.whenData((config) {
-      if (!config.estaConfigurado && !_onboardingShown) {
-        _onboardingShown = true;
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          if (mounted) showOnboardingBottomSheet(context);
-        });
-      }
-    });
 
     // Programar notificaciones una vez por sesión, al cargar los datos
     if (!_notificationsScheduled) {
@@ -70,7 +59,10 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Icon(Icons.home_rounded, size: 30),
+        title: GestureDetector(
+          onTap: () => context.go('/home'),
+          child: const Icon(Icons.home_rounded, size: 30),
+        ),
         centerTitle: false,
         titleSpacing: 24,
         bottom: PreferredSize(

@@ -509,4 +509,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get sinLimite => 'No limit';
+
+  @override
+  String get verMisFinanzas => 'View my finances';
+
+  @override
+  String get estadoDelMes => 'Month status';
+
+  @override
+  String get vasBien => 'You\'re on track 🟢';
+
+  @override
+  String get casiAlLimite => 'Almost at the limit 🟡';
+
+  @override
+  String get presupuestoComprometido => 'Budget committed 🔴';
+
+  @override
+  String get comprometido => 'committed';
 }

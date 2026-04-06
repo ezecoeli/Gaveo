@@ -510,4 +510,22 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get sinLimite => 'Sin límite';
+
+  @override
+  String get verMisFinanzas => 'Ver mis finanzas';
+
+  @override
+  String get estadoDelMes => 'Estado del mes';
+
+  @override
+  String get vasBien => 'Vas bien este mes 🟢';
+
+  @override
+  String get casiAlLimite => 'Casi al límite 🟡';
+
+  @override
+  String get presupuestoComprometido => 'Presupuesto comprometido 🔴';
+
+  @override
+  String get comprometido => 'comprometido';
 }
