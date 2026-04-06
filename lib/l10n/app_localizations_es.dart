@@ -31,7 +31,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String porcentajeComprometido(String pct) {
-    return '$pct% comprometido';
+    return '$pct% volando 💸';
   }
 
   @override
@@ -521,8 +521,8 @@ class AppLocalizationsEs extends AppLocalizations {
   String get casiAlLimite => 'Casi al límite 🟡';
 
   @override
-  String get presupuestoComprometido => 'Presupuesto comprometido 🔴';
+  String get presupuestoComprometido => '¡Al límite! 🔴';
 
   @override
-  String get comprometido => 'comprometido';
+  String get comprometido => 'volando 💸';
 }

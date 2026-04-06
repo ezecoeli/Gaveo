@@ -9,7 +9,7 @@
   "navAhorros": "Savings",
 
   "saldoDisponible": "Available balance",
-  "porcentajeComprometido": "{pct}% committed",
+  "porcentajeComprometido": "{pct}% gone 💸",
   "ingresos": "Income",
   "gastosFijos": "Fixed expenses",
   "gastosVariables": "Variable expenses",
@@ -189,6 +189,6 @@
   "estadoDelMes": "Month status",
   "vasBien": "You're on track 🟢",
   "casiAlLimite": "Almost at the limit 🟡",
-  "presupuestoComprometido": "Budget committed 🔴",
-  "comprometido": "committed"
+  "presupuestoComprometido": "Over the limit! 🔴",
+  "comprometido": "gone 💸"
 }

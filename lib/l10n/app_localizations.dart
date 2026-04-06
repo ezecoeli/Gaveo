@@ -143,7 +143,7 @@ abstract class AppLocalizations {
   /// No description provided for @porcentajeComprometido.
   ///
   /// In es, this message translates to:
-  /// **'{pct}% comprometido'**
+  /// **'{pct}% volando 💸'**
   String porcentajeComprometido(String pct);
 
   /// No description provided for @ingresos.
@@ -1097,13 +1097,13 @@ abstract class AppLocalizations {
   /// No description provided for @presupuestoComprometido.
   ///
   /// In es, this message translates to:
-  /// **'Presupuesto comprometido 🔴'**
+  /// **'¡Al límite! 🔴'**
   String get presupuestoComprometido;
 
   /// No description provided for @comprometido.
   ///
   /// In es, this message translates to:
-  /// **'comprometido'**
+  /// **'volando 💸'**
   String get comprometido;
 }
 

@@ -17,7 +17,7 @@
 
   "saldoDisponible": "Saldo disponible",
   "@saldoDisponible": {},
-  "porcentajeComprometido": "{pct}% comprometido",
+  "porcentajeComprometido": "{pct}% volando 💸",
   "@porcentajeComprometido": {
     "placeholders": {
       "pct": { "type": "String" }
@@ -378,8 +378,8 @@
   "@vasBien": {},
   "casiAlLimite": "Casi al límite 🟡",
   "@casiAlLimite": {},
-  "presupuestoComprometido": "Presupuesto comprometido 🔴",
+  "presupuestoComprometido": "¡Al límite! 🔴",
   "@presupuestoComprometido": {},
-  "comprometido": "comprometido",
+  "comprometido": "volando 💸",
   "@comprometido": {}
 }

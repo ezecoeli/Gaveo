@@ -4,11 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../app/theme/app_colors.dart';
-import '../../../core/utils/date_utils.dart';
 import '../../../core/utils/extensions.dart';
 import '../../configuracion/presentation/widgets/onboarding_bottom_sheet.dart';
 import '../../configuracion/providers/configuracion_providers.dart';
-import '../../dashboard/providers/dashboard_providers.dart';
 import '../../dashboard/providers/dashboard_summary.dart';
 import '../../dashboard/providers/dashboard_summary_provider.dart';
 
@@ -26,7 +24,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   Widget build(BuildContext context) {
     final configAsync = ref.watch(configuracionNotifierProvider);
     final summaryAsync = ref.watch(dashboardSummaryProvider);
-    final monthState = ref.watch(selectedMonthProvider);
 
     // Mostrar onboarding si el usuario aún no está configurado
     configAsync.whenData((config) {
@@ -41,9 +38,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final config = configAsync.valueOrNull;
     final nombre = config?.nombreUsuario ?? '';
     final summary = summaryAsync.valueOrNull;
-
-    final locale = Localizations.localeOf(context).languageCode;
-    final mesLabel = AppDateUtils.monthName(monthState.mes, monthState.anio, locale);
 
     return Scaffold(
       body: SafeArea(
@@ -77,19 +71,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     .animate(delay: 100.ms)
                     .fadeIn(duration: 350.ms)
                     .slideY(begin: 0.1, curve: Curves.easeOut),
-
-              const SizedBox(height: 6),
-
-              // ── Fecha actual ───────────────────────────────────────────
-              Text(
-                mesLabel,
-                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      color: Theme.of(context).colorScheme.onSurfaceVariant,
-                    ),
-              )
-                  .animate(delay: 160.ms)
-                  .fadeIn(duration: 350.ms)
-                  .slideY(begin: 0.1, curve: Curves.easeOut),
 
               const SizedBox(height: 32),
 
