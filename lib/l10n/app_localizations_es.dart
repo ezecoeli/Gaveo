@@ -471,9 +471,6 @@ class AppLocalizationsEs extends AppLocalizations {
   String get temaOscuro => 'Oscuro';
 
   @override
-  String get temaSistema => 'Sistema';
-
-  @override
   String get navIngresos => 'Ingresos';
 
   @override

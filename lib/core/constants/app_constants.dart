@@ -14,7 +14,7 @@ class AppConstants {
   static const String defaultSimbolo = '\$';
   static const double defaultPresupuestoDelivery = 0.0;
   static const String defaultIdioma = 'es';
-  static const String defaultTema = 'system';
+  static const String defaultTema = 'light';
 
   // Límites
   static const int maxMesesFuturo = 1;

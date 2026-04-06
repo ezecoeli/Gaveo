@@ -26,9 +26,9 @@ ThemeMode appThemeMode(Ref ref) {
         case 'dark':
           return ThemeMode.dark;
         default:
-          return ThemeMode.system;
+          return ThemeMode.light;
       }
     },
-    orElse: () => ThemeMode.system,
+    orElse: () => ThemeMode.light,
   );
 }

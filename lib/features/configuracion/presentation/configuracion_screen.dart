@@ -178,11 +178,6 @@ class _ConfiguracionFormState extends ConsumerState<_ConfiguracionForm> {
                   icon: const Icon(Icons.light_mode_outlined),
                 ),
                 ButtonSegment(
-                  value: 'system',
-                  label: Text(l10n.temaSistema),
-                  icon: const Icon(Icons.brightness_auto_outlined),
-                ),
-                ButtonSegment(
                   value: 'dark',
                   label: Text(l10n.temaOscuro),
                   icon: const Icon(Icons.dark_mode_outlined),

@@ -471,9 +471,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get temaOscuro => 'Dark';
 
   @override
-  String get temaSistema => 'System';
-
-  @override
   String get navIngresos => 'Income';
 
   @override

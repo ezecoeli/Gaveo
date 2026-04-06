@@ -998,12 +998,6 @@ abstract class AppLocalizations {
   /// **'Oscuro'**
   String get temaOscuro;
 
-  /// No description provided for @temaSistema.
-  ///
-  /// In es, this message translates to:
-  /// **'Sistema'**
-  String get temaSistema;
-
   /// No description provided for @navIngresos.
   ///
   /// In es, this message translates to:
