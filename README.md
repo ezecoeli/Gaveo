@@ -7,10 +7,10 @@ Aplicación móvil para la gestión financiera del hogar. Registra ingresos, gas
 ## Características
 
 - **Dashboard mensual**: saldo disponible, % comprometido y resumen de todas las categorías con gráfico de distribución
-- **Seguimiento personalizado**: gastos fijos y categorías de variables con `mostrarEnInicio=true` aparecen en una sección dedicada del Dashboard con barra de progreso respecto al límite
+- **Seguimiento personalizado**: categorías de gastos variables con `mostrarEnInicio=true` o límite definido aparecen en una sección dedicada del Dashboard con barra de progreso respecto al límite
 - **Ingresos**: registro de fuentes de ingreso por mes
-- **Gastos fijos**: servicios y cuotas recurrentes con seguimiento de pago mes a mes; día de vencimiento opcional; opción de fijar al Dashboard
-- **Gastos variables**: imprevistos y compras esporádicas por categoría (incluye delivery como subcategoría); límite mensual configurable por categoría con barra de progreso; botón de configuración de categorías en pantalla
+- **Gastos fijos**: servicios y cuotas recurrentes con seguimiento de pago mes a mes; día de vencimiento opcional
+- **Gastos variables**: imprevistos y compras esporádicas por categoría (incluye delivery como subcategoría); límite mensual y opción de fijar al Dashboard configurables por categoría desde el formulario de registro
 - **Ahorros**: metas de ahorro con monto mensual y objetivo total
 - **Historial**: resumen de los últimos 12 meses; toca un mes para navegar directo a él
 - **Notificaciones locales**: aviso el día que vence cada gasto fijo (solo los que tienen día de vencimiento configurado)
