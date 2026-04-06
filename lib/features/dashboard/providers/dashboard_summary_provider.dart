@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../ahorros/providers/ahorros_providers.dart';
@@ -31,16 +30,6 @@ Future<DashboardSummary> dashboardSummary(
 
   final pagadosConMonto = gastosFijosConPago.where((g) => g.estaPagado);
 
-  // ── Gastos fijos con mostrarEnInicio=true ───────────────────────────────
-  final pinnedFijos = gastosFijosConPago
-      .where((g) => g.gastoFijo.mostrarEnInicio)
-      .map((g) => TrackedItem(
-            label: g.gastoFijo.nombre,
-            icon: Icons.receipt_long,
-            color: AppColors.expense,
-            amount: g.gastoFijo.monto,
-          ))
-      .toList();
 
   // ── Categorías de variables destacadas ─────────────────────────────────
   final pinnedCategorias = categoriasDestacadasList.map((cfg) {
@@ -69,6 +58,6 @@ Future<DashboardSummary> dashboardSummary(
     gastosFijosPagadosCount:
         gastosFijosConPago.where((g) => g.estaPagado).length,
     gastosFijosTotalCount: gastosFijosConPago.length,
-    trackedItems: [...pinnedFijos, ...pinnedCategorias],
+    trackedItems: pinnedCategorias,
   );
 }

@@ -87,7 +87,9 @@ class _AddGastoVariableBottomSheetState
   late final TextEditingController _notasCtrl;
   late DateTime _fecha;
   late String _categoria;
+  bool _mostrarEnInicio = false;
   bool _saving = false;
+  late final TextEditingController _limiteCtrl;
 
   bool get _isEditing => widget.gastoVariable != null;
 
@@ -102,14 +104,32 @@ class _AddGastoVariableBottomSheetState
     _notasCtrl = TextEditingController(text: g?.notas ?? '');
     _fecha = g?.fecha ?? DateTime.now();
     _categoria = g?.categoria ?? 'imprevisto';
+    _limiteCtrl = TextEditingController();
+    WidgetsBinding.instance.addPostFrameCallback(
+        (_) => _loadCategoryConfig(_categoria));
   }
 
   @override
   void dispose() {
     _descCtrl.dispose();
     _montoCtrl.dispose();
+    _limiteCtrl.dispose();
     _notasCtrl.dispose();
     super.dispose();
+  }
+
+  Future<void> _loadCategoryConfig(String cat) async {
+    final dao =
+        ref.read(appDatabaseProvider).categoriasVariablesConfigDao;
+    final config = await dao.getConfigForCategoria(cat);
+    if (mounted) {
+      setState(() {
+        _mostrarEnInicio = config?.mostrarEnInicio ?? false;
+        _limiteCtrl.text = config?.limite != null
+            ? config!.limite!.toStringAsFixed(2)
+            : '';
+      });
+    }
   }
 
   Future<void> _pickDate() async {
@@ -164,6 +184,23 @@ class _AddGastoVariableBottomSheetState
           ),
         );
       }
+
+      // Upsert config de la categoría (límite + mostrarEnInicio)
+      final configDao =
+          ref.read(appDatabaseProvider).categoriasVariablesConfigDao;
+      final limiteText = _limiteCtrl.text.trim();
+      final limite = limiteText.isNotEmpty
+          ? double.tryParse(limiteText.replaceAll(',', '.'))
+          : null;
+      if (_mostrarEnInicio || limite != null) {
+        await configDao.upsertCategoria(CategoriasVariablesConfigCompanion(
+          categoria: Value(_categoria),
+          limite: Value(limite),
+          mostrarEnInicio: Value(_mostrarEnInicio),
+        ));
+      } else {
+        await configDao.deleteCategoria(_categoria);
+      }
     } finally {
       if (mounted) setState(() => _saving = false);
     }
@@ -183,10 +220,11 @@ class _AddGastoVariableBottomSheetState
       ),
       child: Form(
         key: _formKey,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
             Center(
               child: Container(
                 width: 40,
@@ -254,7 +292,10 @@ class _AddGastoVariableBottomSheetState
                       ))
                   .toList(),
               onChanged: (v) {
-                if (v != null) setState(() => _categoria = v);
+                if (v != null) {
+                  setState(() => _categoria = v);
+                  _loadCategoryConfig(v);
+                }
               },
             ),
             const SizedBox(height: 12),
@@ -287,6 +328,41 @@ class _AddGastoVariableBottomSheetState
               maxLines: 2,
               maxLength: 200,
             ),
+            const SizedBox(height: 12),
+            // Límite mensual (opcional)
+            TextFormField(
+              controller: _limiteCtrl,
+              decoration: InputDecoration(
+                labelText: l10n.limiteOpcional,
+                prefixIcon: const Icon(Icons.flag_outlined),
+                helperText: l10n.limiteDesc,
+              ),
+              keyboardType:
+                  const TextInputType.numberWithOptions(decimal: true),
+              inputFormatters: [
+                FilteringTextInputFormatter.allow(RegExp(r'[\d.,]')),
+              ],
+              validator: (v) {
+                if (v == null || v.trim().isEmpty) return null;
+                final n =
+                    double.tryParse(v.trim().replaceAll(',', '.'));
+                if (n == null || n <= 0) return l10n.montoInvalido;
+                return null;
+              },
+            ),
+            const SizedBox(height: 4),
+            // Mostrar en inicio
+            SwitchListTile(
+              value: _mostrarEnInicio,
+              onChanged: (v) => setState(() => _mostrarEnInicio = v),
+              title: Text(l10n.mostrarEnInicio),
+              subtitle: Text(
+                l10n.mostrarEnInicioDesc,
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: Theme.of(context).colorScheme.onSurfaceVariant),
+              ),
+              contentPadding: EdgeInsets.zero,
+            ),
             const SizedBox(height: 20),
             SizedBox(
               width: double.infinity,
@@ -303,6 +379,7 @@ class _AddGastoVariableBottomSheetState
               ),
             ),
           ],
+        ),
         ),
       ),
     );

@@ -78,7 +78,6 @@ class _AddGastoFijoBottomSheetState
   late final TextEditingController _diaCtrl;
   late final TextEditingController _notasCtrl;
   late String _categoria;
-  bool _mostrarEnInicio = false;
   bool _saving = false;
 
   bool get _isEditing => widget.gastoFijo != null;
@@ -98,7 +97,6 @@ class _AddGastoFijoBottomSheetState
     );
     _notasCtrl = TextEditingController(text: g?.notas ?? '');
     _categoria = g?.categoria ?? 'general';
-    _mostrarEnInicio = g?.mostrarEnInicio ?? false;
   }
 
   @override
@@ -131,7 +129,6 @@ class _AddGastoFijoBottomSheetState
           categoria: Value(_categoria),
           notas: Value(notas.isEmpty ? null : notas),
           activo: const Value(true),
-          mostrarEnInicio: Value(_mostrarEnInicio),
         ));
       } else {
         await dao.insertGastoFijo(GastosFijosCompanion(
@@ -140,7 +137,6 @@ class _AddGastoFijoBottomSheetState
           diaVencimiento: Value(dia),
           categoria: Value(_categoria),
           notas: Value(notas.isEmpty ? null : notas),
-          mostrarEnInicio: Value(_mostrarEnInicio),
         ));
       }
       if (mounted) {
@@ -278,19 +274,6 @@ class _AddGastoFijoBottomSheetState
               textCapitalization: TextCapitalization.sentences,
               maxLines: 2,
               maxLength: 200,
-            ),
-            const SizedBox(height: 12),
-            // Mostrar en inicio
-            SwitchListTile(
-              value: _mostrarEnInicio,
-              onChanged: (v) => setState(() => _mostrarEnInicio = v),
-              title: Text(l10n.mostrarEnInicio),
-              subtitle: Text(
-                l10n.mostrarEnInicioDesc,
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: Theme.of(context).colorScheme.onSurfaceVariant),
-              ),
-              contentPadding: EdgeInsets.zero,
             ),
             const SizedBox(height: 20),
             // Botón guardar
