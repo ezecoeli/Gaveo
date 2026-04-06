@@ -50,6 +50,13 @@ dev_dependencies:
   drift_dev: ^2.18.0
   riverpod_generator: ^2.4.3
   flutter_lints: ^4.0.0
+  flutter_launcher_icons: ^0.14.3
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/gaveo-logo.png"
+  min_sdk_android: 21
 
 flutter:
   uses-material-design: true
