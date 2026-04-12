@@ -168,9 +168,10 @@ class _AddGastoFijoBottomSheetState
       ),
       child: Form(
         key: _formKey,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Handle
             Center(
@@ -292,6 +293,7 @@ class _AddGastoFijoBottomSheetState
               ),
             ),
           ],
+        ),
         ),
       ),
     );
