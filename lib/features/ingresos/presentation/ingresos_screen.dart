@@ -10,6 +10,7 @@ import '../../configuracion/providers/configuracion_providers.dart';
 import '../../dashboard/providers/dashboard_providers.dart';
 import '../providers/ingresos_providers.dart';
 import 'widgets/add_ingreso_bottom_sheet.dart';
+import '../../../shared/widgets/help_bottom_sheet.dart';
 
 class IngresosScreen extends ConsumerWidget {
   const IngresosScreen({super.key});
@@ -43,6 +44,26 @@ class IngresosScreen extends ConsumerWidget {
             }),
           ),
         ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.help_outline_rounded),
+            onPressed: () => showHelpBottomSheet(
+              context,
+              title: context.l10n.helpTitulo,
+              items: [
+                HelpItem(
+                    icon: Icons.swipe,
+                    text: context.l10n.helpDeslizarEliminar),
+                HelpItem(
+                    icon: Icons.edit_outlined,
+                    text: context.l10n.helpTocarEditar),
+                HelpItem(
+                    icon: Icons.calendar_today_outlined,
+                    text: context.l10n.helpIngresosMes),
+              ],
+            ),
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => showAddIngresoBottomSheet(context, ref),

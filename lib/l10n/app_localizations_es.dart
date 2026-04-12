@@ -525,4 +525,54 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get comprometido => 'volando 💸';
+
+  @override
+  String get helpTitulo => 'Ayuda';
+
+  @override
+  String get helpDeslizarEliminar =>
+      'Deslizá hacia la izquierda para eliminar un elemento';
+
+  @override
+  String get helpTocarEditar => 'Tocá un elemento para editarlo';
+
+  @override
+  String get helpFijosToggle =>
+      'Tocá el ícono de verificación para marcar el gasto como pagado o pendiente';
+
+  @override
+  String get helpFijosSaldo =>
+      'Los gastos fijos siempre se descuentan del saldo, estén pagados o no';
+
+  @override
+  String get helpVariablesLimite =>
+      'En el formulario podés definir un límite mensual para cada categoría';
+
+  @override
+  String get helpVariablesDestacado =>
+      'Activá \'Mostrar en inicio\' para ver la categoría en la sección Seguimiento del Resumen';
+
+  @override
+  String get helpDashboardMeses =>
+      'Usá las flechas del encabezado para navegar entre meses';
+
+  @override
+  String get helpDashboardSeguimiento =>
+      'Las categorías con límite o fijadas al inicio aparecen en la sección Seguimiento';
+
+  @override
+  String get helpDashboardPDF =>
+      'Exportá el resumen del mes como PDF desde el ícono de documento en el encabezado del Resumen';
+
+  @override
+  String get helpHistorialNavegar =>
+      'Tocá un mes para ir directamente a él en el Resumen';
+
+  @override
+  String get helpAhorroInactivo =>
+      'Las metas inactivas no se incluyen en el total mensual pero permanecen en la lista';
+
+  @override
+  String get helpIngresosMes =>
+      'Los ingresos se registran por mes; usá las flechas del Resumen para ver otros períodos';
 }

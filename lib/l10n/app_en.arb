@@ -190,5 +190,19 @@
   "vasBien": "You're on track 🟢",
   "casiAlLimite": "Almost at the limit 🟡",
   "presupuestoComprometido": "Over the limit! 🔴",
-  "comprometido": "gone 💸"
+  "comprometido": "gone 💸",
+
+  "helpTitulo": "Help",
+  "helpDeslizarEliminar": "Swipe left on an item to delete it",
+  "helpTocarEditar": "Tap an item to edit it",
+  "helpFijosToggle": "Tap the check icon to mark an expense as paid or pending",
+  "helpFijosSaldo": "Fixed expenses are always deducted from the balance, paid or not",
+  "helpVariablesLimite": "In the form you can set a monthly limit for each category",
+  "helpVariablesDestacado": "Enable 'Show on home' to make the category appear in the Summary tracking section",
+  "helpDashboardMeses": "Use the header arrows to navigate between months",
+  "helpDashboardSeguimiento": "Categories with a limit or pinned to home appear in the Tracking section",
+  "helpDashboardPDF": "Export the monthly summary as PDF from the document icon in the Summary header",
+  "helpHistorialNavegar": "Tap a month to go directly to it in the Summary",
+  "helpAhorroInactivo": "Inactive goals are not included in the monthly total but remain in the list",
+  "helpIngresosMes": "Income is recorded per month; use the Summary arrows to view other periods"
 }

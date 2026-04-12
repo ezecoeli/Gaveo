@@ -9,6 +9,7 @@ import '../../../core/utils/extensions.dart';
 import '../../configuracion/providers/configuracion_providers.dart';
 import '../providers/ahorros_providers.dart';
 import 'widgets/add_ahorro_bottom_sheet.dart';
+import '../../../shared/widgets/help_bottom_sheet.dart';
 
 class AhorrosScreen extends ConsumerWidget {
   const AhorrosScreen({super.key});
@@ -42,6 +43,26 @@ class AhorrosScreen extends ConsumerWidget {
             }),
           ),
         ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.help_outline_rounded),
+            onPressed: () => showHelpBottomSheet(
+              context,
+              title: context.l10n.helpTitulo,
+              items: [
+                HelpItem(
+                    icon: Icons.swipe,
+                    text: context.l10n.helpDeslizarEliminar),
+                HelpItem(
+                    icon: Icons.edit_outlined,
+                    text: context.l10n.helpTocarEditar),
+                HelpItem(
+                    icon: Icons.visibility_off_outlined,
+                    text: context.l10n.helpAhorroInactivo),
+              ],
+            ),
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => showAddAhorroBottomSheet(context, ref),

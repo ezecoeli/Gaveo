@@ -19,6 +19,7 @@ Aplicación móvil para la gestión financiera del hogar. Registra ingresos, gas
 - **Internacionalización**: soporte completo Español / Inglés (ARB files)
 - **Selector de moneda**: picker curado con ~40 monedas (LATAM + globales)
 - **Tema claro/oscuro**: selector en Configuración, sincronizado con el sistema
+- **Ayuda contextual**: botón de ayuda en cada sección con tips específicos sobre cómo interactuar con ella
 
 ---
 

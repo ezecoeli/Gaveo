@@ -17,6 +17,7 @@ import '../../../../core/services/reporte_service.dart';
 import '../../../../core/utils/currency_formatter.dart';
 import '../../../../core/utils/date_utils.dart';
 import '../../../../core/utils/extensions.dart';
+import '../../../../shared/widgets/help_bottom_sheet.dart';
 
 class DashboardScreen extends ConsumerStatefulWidget {
   const DashboardScreen({super.key});
@@ -181,13 +182,27 @@ class _DashboardBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return ListView(
       padding: const EdgeInsets.fromLTRB(16, 8, 16, 96),
       children: [
         _SaldoCard(
             summary: summary,
             simbolo: simbolo,
-            nombreUsuario: nombreUsuario)
+            nombreUsuario: nombreUsuario,
+            onHelpTap: () => showHelpBottomSheet(
+              context,
+              title: l10n.helpTitulo,
+              items: [
+                HelpItem(icon: Icons.swap_horiz, text: l10n.helpDashboardMeses),
+                HelpItem(
+                    icon: Icons.track_changes,
+                    text: l10n.helpDashboardSeguimiento),
+                HelpItem(
+                    icon: Icons.picture_as_pdf_outlined,
+                    text: l10n.helpDashboardPDF),
+              ],
+            ))
             .animate()
             .fadeIn(duration: 400.ms)
             .slideY(begin: 0.1, curve: Curves.easeOut),
@@ -268,11 +283,13 @@ class _SaldoCard extends StatelessWidget {
     required this.summary,
     required this.simbolo,
     required this.nombreUsuario,
+    this.onHelpTap,
   });
 
   final DashboardSummary summary;
   final String simbolo;
   final String nombreUsuario;
+  final VoidCallback? onHelpTap;
 
   @override
   Widget build(BuildContext context) {
@@ -287,17 +304,40 @@ class _SaldoCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (nombreUsuario.isNotEmpty) ...[
-              Text(
-                context.l10n.hola(nombreUsuario),
-                style: theme.textTheme.bodyMedium?.copyWith(
-                    color: theme.colorScheme.onSurfaceVariant),
-              ),
-              const SizedBox(height: 4),
-            ],
-            Text(context.l10n.saldoDisponible,
-                style: theme.textTheme.labelLarge?.copyWith(
-                    color: theme.colorScheme.onSurfaceVariant)),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (nombreUsuario.isNotEmpty) ...[
+                        Text(
+                          context.l10n.hola(nombreUsuario),
+                          style: theme.textTheme.bodyMedium?.copyWith(
+                              color: theme.colorScheme.onSurfaceVariant),
+                        ),
+                        const SizedBox(height: 4),
+                      ],
+                      Text(
+                        context.l10n.saldoDisponible,
+                        style: theme.textTheme.labelLarge?.copyWith(
+                            color: theme.colorScheme.onSurfaceVariant),
+                      ),
+                    ],
+                  ),
+                ),
+                if (onHelpTap != null)
+                  IconButton(
+                    icon: const Icon(Icons.help_outline_rounded),
+                    onPressed: onHelpTap,
+                    visualDensity: VisualDensity.compact,
+                    padding: EdgeInsets.zero,
+                    constraints: const BoxConstraints(),
+                    color: theme.colorScheme.onSurfaceVariant,
+                  ),
+              ],
+            ),
             const SizedBox(height: 4),
             Text(
               CurrencyFormatter.format(saldo, symbol: simbolo),

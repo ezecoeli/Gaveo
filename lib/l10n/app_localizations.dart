@@ -1105,6 +1105,84 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'volando 💸'**
   String get comprometido;
+
+  /// No description provided for @helpTitulo.
+  ///
+  /// In es, this message translates to:
+  /// **'Ayuda'**
+  String get helpTitulo;
+
+  /// No description provided for @helpDeslizarEliminar.
+  ///
+  /// In es, this message translates to:
+  /// **'Deslizá hacia la izquierda para eliminar un elemento'**
+  String get helpDeslizarEliminar;
+
+  /// No description provided for @helpTocarEditar.
+  ///
+  /// In es, this message translates to:
+  /// **'Tocá un elemento para editarlo'**
+  String get helpTocarEditar;
+
+  /// No description provided for @helpFijosToggle.
+  ///
+  /// In es, this message translates to:
+  /// **'Tocá el ícono de verificación para marcar el gasto como pagado o pendiente'**
+  String get helpFijosToggle;
+
+  /// No description provided for @helpFijosSaldo.
+  ///
+  /// In es, this message translates to:
+  /// **'Los gastos fijos siempre se descuentan del saldo, estén pagados o no'**
+  String get helpFijosSaldo;
+
+  /// No description provided for @helpVariablesLimite.
+  ///
+  /// In es, this message translates to:
+  /// **'En el formulario podés definir un límite mensual para cada categoría'**
+  String get helpVariablesLimite;
+
+  /// No description provided for @helpVariablesDestacado.
+  ///
+  /// In es, this message translates to:
+  /// **'Activá \'Mostrar en inicio\' para ver la categoría en la sección Seguimiento del Resumen'**
+  String get helpVariablesDestacado;
+
+  /// No description provided for @helpDashboardMeses.
+  ///
+  /// In es, this message translates to:
+  /// **'Usá las flechas del encabezado para navegar entre meses'**
+  String get helpDashboardMeses;
+
+  /// No description provided for @helpDashboardSeguimiento.
+  ///
+  /// In es, this message translates to:
+  /// **'Las categorías con límite o fijadas al inicio aparecen en la sección Seguimiento'**
+  String get helpDashboardSeguimiento;
+
+  /// No description provided for @helpDashboardPDF.
+  ///
+  /// In es, this message translates to:
+  /// **'Exportá el resumen del mes como PDF desde el ícono de documento en el encabezado del Resumen'**
+  String get helpDashboardPDF;
+
+  /// No description provided for @helpHistorialNavegar.
+  ///
+  /// In es, this message translates to:
+  /// **'Tocá un mes para ir directamente a él en el Resumen'**
+  String get helpHistorialNavegar;
+
+  /// No description provided for @helpAhorroInactivo.
+  ///
+  /// In es, this message translates to:
+  /// **'Las metas inactivas no se incluyen en el total mensual pero permanecen en la lista'**
+  String get helpAhorroInactivo;
+
+  /// No description provided for @helpIngresosMes.
+  ///
+  /// In es, this message translates to:
+  /// **'Los ingresos se registran por mes; usá las flechas del Resumen para ver otros períodos'**
+  String get helpIngresosMes;
 }
 
 class _AppLocalizationsDelegate

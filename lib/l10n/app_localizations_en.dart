@@ -524,4 +524,53 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get comprometido => 'gone 💸';
+
+  @override
+  String get helpTitulo => 'Help';
+
+  @override
+  String get helpDeslizarEliminar => 'Swipe left on an item to delete it';
+
+  @override
+  String get helpTocarEditar => 'Tap an item to edit it';
+
+  @override
+  String get helpFijosToggle =>
+      'Tap the check icon to mark an expense as paid or pending';
+
+  @override
+  String get helpFijosSaldo =>
+      'Fixed expenses are always deducted from the balance, paid or not';
+
+  @override
+  String get helpVariablesLimite =>
+      'In the form you can set a monthly limit for each category';
+
+  @override
+  String get helpVariablesDestacado =>
+      'Enable \'Show on home\' to make the category appear in the Summary tracking section';
+
+  @override
+  String get helpDashboardMeses =>
+      'Use the header arrows to navigate between months';
+
+  @override
+  String get helpDashboardSeguimiento =>
+      'Categories with a limit or pinned to home appear in the Tracking section';
+
+  @override
+  String get helpDashboardPDF =>
+      'Export the monthly summary as PDF from the document icon in the Summary header';
+
+  @override
+  String get helpHistorialNavegar =>
+      'Tap a month to go directly to it in the Summary';
+
+  @override
+  String get helpAhorroInactivo =>
+      'Inactive goals are not included in the monthly total but remain in the list';
+
+  @override
+  String get helpIngresosMes =>
+      'Income is recorded per month; use the Summary arrows to view other periods';
 }

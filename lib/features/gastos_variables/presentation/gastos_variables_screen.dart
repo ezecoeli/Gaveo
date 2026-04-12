@@ -10,6 +10,7 @@ import '../../configuracion/providers/configuracion_providers.dart';
 import '../../dashboard/providers/dashboard_providers.dart';
 import '../providers/gastos_variables_providers.dart';
 import 'widgets/add_gasto_variable_bottom_sheet.dart';
+import '../../../shared/widgets/help_bottom_sheet.dart';
 
 class GastosVariablesScreen extends ConsumerWidget {
   const GastosVariablesScreen({super.key});
@@ -42,6 +43,29 @@ class GastosVariablesScreen extends ConsumerWidget {
             }),
           ),
         ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.help_outline_rounded),
+            onPressed: () => showHelpBottomSheet(
+              context,
+              title: context.l10n.helpTitulo,
+              items: [
+                HelpItem(
+                    icon: Icons.swipe,
+                    text: context.l10n.helpDeslizarEliminar),
+                HelpItem(
+                    icon: Icons.edit_outlined,
+                    text: context.l10n.helpTocarEditar),
+                HelpItem(
+                    icon: Icons.tune,
+                    text: context.l10n.helpVariablesLimite),
+                HelpItem(
+                    icon: Icons.push_pin,
+                    text: context.l10n.helpVariablesDestacado),
+              ],
+            ),
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => showAddGastoVariableBottomSheet(context, ref),

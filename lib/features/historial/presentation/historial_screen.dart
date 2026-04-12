@@ -11,6 +11,7 @@ import '../../configuracion/providers/configuracion_providers.dart';
 import '../../dashboard/providers/dashboard_providers.dart';
 import '../data/historial_mes_data.dart';
 import '../providers/historial_providers.dart';
+import '../../../shared/widgets/help_bottom_sheet.dart';
 
 class HistorialScreen extends ConsumerWidget {
   const HistorialScreen({super.key});
@@ -26,6 +27,20 @@ class HistorialScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(l10n.historial),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.help_outline_rounded),
+            onPressed: () => showHelpBottomSheet(
+              context,
+              title: l10n.helpTitulo,
+              items: [
+                HelpItem(
+                    icon: Icons.touch_app_outlined,
+                    text: l10n.helpHistorialNavegar),
+              ],
+            ),
+          ),
+        ],
       ),
       body: historialAsync.when(
         loading: () => const Center(child: CircularProgressIndicator()),

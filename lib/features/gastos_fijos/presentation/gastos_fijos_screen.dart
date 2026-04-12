@@ -10,6 +10,7 @@ import '../../../features/dashboard/providers/dashboard_providers.dart';
 import '../../../core/database/app_database.dart';
 import '../providers/gastos_fijos_providers.dart';
 import 'widgets/add_gasto_fijo_bottom_sheet.dart';
+import '../../../shared/widgets/help_bottom_sheet.dart';
 
 class GastosFijosScreen extends ConsumerWidget {
   const GastosFijosScreen({super.key});
@@ -47,6 +48,29 @@ class GastosFijosScreen extends ConsumerWidget {
             }),
           ),
         ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.help_outline_rounded),
+            onPressed: () => showHelpBottomSheet(
+              context,
+              title: context.l10n.helpTitulo,
+              items: [
+                HelpItem(
+                    icon: Icons.swipe,
+                    text: context.l10n.helpDeslizarEliminar),
+                HelpItem(
+                    icon: Icons.edit_outlined,
+                    text: context.l10n.helpTocarEditar),
+                HelpItem(
+                    icon: Icons.check_circle_outline,
+                    text: context.l10n.helpFijosToggle),
+                HelpItem(
+                    icon: Icons.info_outline,
+                    text: context.l10n.helpFijosSaldo),
+              ],
+            ),
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () =>
