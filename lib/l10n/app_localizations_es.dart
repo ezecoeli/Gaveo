@@ -471,6 +471,13 @@ class AppLocalizationsEs extends AppLocalizations {
   String get temaOscuro => 'Oscuro';
 
   @override
+  String get notificaciones => 'Notificaciones';
+
+  @override
+  String get notificacionesDesc =>
+      'Recordatorios de vencimientos de gastos fijos';
+
+  @override
   String get navIngresos => 'Ingresos';
 
   @override

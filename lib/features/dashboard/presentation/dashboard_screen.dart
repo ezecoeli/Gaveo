@@ -41,12 +41,15 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
         next.whenData((_) async {
           if (_notificationsScheduled) return;
           _notificationsScheduled = true;
+          final config =
+              ref.read(configuracionNotifierProvider).valueOrNull;
+          if (config?.notificaciones != true) return;
           final db = ref.read(appDatabaseProvider);
           final l10n = context.l10n;
           final gastosFijos =
               await db.gastosFijosDao.getGastosFijosActivos();
           if (!context.mounted) return;
-          await NotificationService.scheduleVencimientosHoy(
+          await NotificationService.scheduleVencimientosMensuales(
             gastosFijos,
             title: l10n.notifVencimientoTitle,
             bodyBuilder: (nombre) => l10n.notifVencimientoBody(nombre),

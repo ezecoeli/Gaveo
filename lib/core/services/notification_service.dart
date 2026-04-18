@@ -1,4 +1,5 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:timezone/timezone.dart' as tz;
 
 import '../../core/database/app_database.dart';
 
@@ -37,29 +38,52 @@ class NotificationService {
     await android?.requestNotificationsPermission();
   }
 
-  /// Cancels all pending notifications and re-schedules one immediate
-  /// notification for each gasto fijo whose due day is today.
-  static Future<void> scheduleVencimientosHoy(
+  /// Cancela todas las notificaciones pendientes.
+  static Future<void> cancelAll() async {
+    await _plugin.cancelAll();
+  }
+
+  /// Cancela todas las notificaciones pendientes y programa una notificación
+  /// a las 9:00 AM para el día de vencimiento de cada gasto fijo activo.
+  /// Si el día ya pasó este mes, programa para el mes siguiente.
+  static Future<void> scheduleVencimientosMensuales(
     List<GastosFijo> gastosFijos, {
     String? title,
     String Function(String nombre)? bodyBuilder,
   }) async {
     await _plugin.cancelAll();
 
-    final today = DateTime.now().day;
-    final vencenHoy = gastosFijos.where(
-        (g) => g.activo && g.diaVencimiento != null && g.diaVencimiento == today);
+    final now = tz.TZDateTime.now(tz.local);
 
-    int notifId = 0;
-    for (final gasto in vencenHoy) {
+    for (final gasto in gastosFijos) {
+      if (!gasto.activo || gasto.diaVencimiento == null) continue;
+
+      // Clamp day to valid range for the current month
+      final daysInCurrentMonth = DateTime(now.year, now.month + 1, 0).day;
+      final dia = gasto.diaVencimiento!.clamp(1, daysInCurrentMonth);
+
+      tz.TZDateTime scheduled = tz.TZDateTime(
+        tz.local, now.year, now.month, dia, 9,
+      );
+
+      // If the due day already passed this month, schedule for next month
+      if (scheduled.isBefore(now)) {
+        final nextYear = now.month == 12 ? now.year + 1 : now.year;
+        final nextMonth = now.month == 12 ? 1 : now.month + 1;
+        final daysInNextMonth = DateTime(nextYear, nextMonth + 1, 0).day;
+        final diaNext = gasto.diaVencimiento!.clamp(1, daysInNextMonth);
+        scheduled = tz.TZDateTime(tz.local, nextYear, nextMonth, diaNext, 9);
+      }
+
       final body = bodyBuilder != null
           ? bodyBuilder(gasto.nombre)
           : '${gasto.nombre} vence hoy';
 
-      await _plugin.show(
-        notifId++,
-        title ?? 'Vencimiento hoy',
+      await _plugin.zonedSchedule(
+        gasto.id,
+        title ?? 'Vencimiento',
         body,
+        scheduled,
         const NotificationDetails(
           android: AndroidNotificationDetails(
             _channelId,
@@ -73,6 +97,9 @@ class NotificationService {
             presentSound: true,
           ),
         ),
+        androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+        uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.absoluteTime,
       );
     }
   }

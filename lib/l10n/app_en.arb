@@ -170,6 +170,8 @@
   "tema": "Appearance",
   "temaClaro": "Light",
   "temaOscuro": "Dark",
+  "notificaciones": "Notifications",
+  "notificacionesDesc": "Reminders for fixed expense due dates",
   "navIngresos": "Income",
 
   "mostrarEnInicio": "Show on home",

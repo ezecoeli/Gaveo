@@ -8,6 +8,7 @@ class AppConstants {
   static const String keyPresupuestoDelivery = 'presupuesto_delivery_mensual';
   static const String keyIdioma = 'idioma';
   static const String keyTema = 'tema';
+  static const String keyNotificaciones = 'notificaciones';
 
   // Defaults
   static const String defaultMoneda = 'ARS';
@@ -15,6 +16,7 @@ class AppConstants {
   static const double defaultPresupuestoDelivery = 0.0;
   static const String defaultIdioma = 'es';
   static const String defaultTema = 'light';
+  static const bool defaultNotificaciones = true;
 
   // Límites
   static const int maxMesesFuturo = 1;

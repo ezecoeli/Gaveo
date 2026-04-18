@@ -342,6 +342,10 @@
   "@temaClaro": {},
   "temaOscuro": "Oscuro",
   "@temaOscuro": {},
+  "notificaciones": "Notificaciones",
+  "@notificaciones": {},
+  "notificacionesDesc": "Recordatorios de vencimientos de gastos fijos",
+  "@notificacionesDesc": {},
   "navIngresos": "Ingresos",
   "@navIngresos": {},
 

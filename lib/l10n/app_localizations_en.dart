@@ -471,6 +471,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get temaOscuro => 'Dark';
 
   @override
+  String get notificaciones => 'Notifications';
+
+  @override
+  String get notificacionesDesc => 'Reminders for fixed expense due dates';
+
+  @override
   String get navIngresos => 'Income';
 
   @override

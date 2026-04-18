@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../providers/configuracion_providers.dart';
 import '../../../app/theme/app_colors.dart';
 import '../../../core/constants/currencies.dart';
+import '../../../core/services/notification_service.dart';
 import '../../../core/utils/extensions.dart';
 import 'widgets/currency_picker_sheet.dart';
 
@@ -58,6 +59,7 @@ class _ConfiguracionFormState extends ConsumerState<_ConfiguracionForm> {
   late CurrencyInfo _currency;
   late String _idioma;
   late String _tema;
+  late bool _notificaciones;
   bool _saving = false;
 
   @override
@@ -69,6 +71,7 @@ class _ConfiguracionFormState extends ConsumerState<_ConfiguracionForm> {
         kCurrencies.first;
     _idioma = widget.config.idioma;
     _tema = widget.config.tema;
+    _notificaciones = widget.config.notificaciones;
   }
 
   @override
@@ -88,6 +91,7 @@ class _ConfiguracionFormState extends ConsumerState<_ConfiguracionForm> {
             presupuestoDelivery: widget.config.presupuestoDelivery,
             idioma: _idioma,
             tema: _tema,
+            notificaciones: _notificaciones,
           );
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -185,6 +189,19 @@ class _ConfiguracionFormState extends ConsumerState<_ConfiguracionForm> {
               ],
               selected: {_tema},
               onSelectionChanged: (s) => setState(() => _tema = s.first),
+            ),
+            const SizedBox(height: 24),
+            Text(l10n.notificaciones, style: theme.textTheme.titleMedium),
+            const SizedBox(height: 4),
+            SwitchListTile.adaptive(
+              value: _notificaciones,
+              onChanged: (v) async {
+                setState(() => _notificaciones = v);
+                if (!v) await NotificationService.cancelAll();
+              },
+              title: Text(l10n.notificacionesDesc),
+              secondary: const Icon(Icons.notifications_outlined),
+              contentPadding: EdgeInsets.zero,
             ),
             const SizedBox(height: 32),
             SizedBox(

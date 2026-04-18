@@ -998,6 +998,18 @@ abstract class AppLocalizations {
   /// **'Oscuro'**
   String get temaOscuro;
 
+  /// No description provided for @notificaciones.
+  ///
+  /// In es, this message translates to:
+  /// **'Notificaciones'**
+  String get notificaciones;
+
+  /// No description provided for @notificacionesDesc.
+  ///
+  /// In es, this message translates to:
+  /// **'Recordatorios de vencimientos de gastos fijos'**
+  String get notificacionesDesc;
+
   /// No description provided for @navIngresos.
   ///
   /// In es, this message translates to:

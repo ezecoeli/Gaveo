@@ -37,6 +37,7 @@ dependencies:
 
   # Notificaciones
   flutter_local_notifications: ^17.2.0
+  timezone: ^0.9.4
 
   # Exportación
   pdf: ^3.11.0
