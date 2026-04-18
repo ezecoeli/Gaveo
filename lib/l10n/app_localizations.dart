@@ -422,6 +422,30 @@ abstract class AppLocalizations {
   /// **'Vence el día {dia}'**
   String venceElDia(int dia);
 
+  /// No description provided for @proximosVencimientos.
+  ///
+  /// In es, this message translates to:
+  /// **'Próximos vencimientos'**
+  String get proximosVencimientos;
+
+  /// No description provided for @venceHoy.
+  ///
+  /// In es, this message translates to:
+  /// **'Hoy'**
+  String get venceHoy;
+
+  /// No description provided for @venceManana.
+  ///
+  /// In es, this message translates to:
+  /// **'Mañana'**
+  String get venceManana;
+
+  /// No description provided for @venceEnDias.
+  ///
+  /// In es, this message translates to:
+  /// **'En {n} días'**
+  String venceEnDias(int n);
+
   /// No description provided for @pagado.
   ///
   /// In es, this message translates to:

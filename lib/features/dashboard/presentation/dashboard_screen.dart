@@ -8,6 +8,7 @@ import '../providers/dashboard_providers.dart';
 import '../providers/dashboard_summary.dart';
 import '../providers/dashboard_summary_provider.dart';
 import '../../configuracion/providers/configuracion_providers.dart';
+import '../../gastos_fijos/providers/gastos_fijos_providers.dart';
 import '../../gastos_variables/presentation/widgets/add_gasto_variable_bottom_sheet.dart'
     show categoriaVariableLabel, categoriaVariableIcon;
 import '../../../../app/theme/app_colors.dart';
@@ -219,6 +220,10 @@ class _DashboardBody extends StatelessWidget {
           color: AppColors.savings,
           icon: Icons.savings_outlined,
         ).animate(delay: 260.ms).fadeIn(duration: 300.ms).slideY(begin: 0.08, curve: Curves.easeOut),
+        const _ProximosVencimientosCard()
+            .animate(delay: 300.ms)
+            .fadeIn(duration: 300.ms)
+            .slideY(begin: 0.08, curve: Curves.easeOut),
         if (summary.trackedItems.isNotEmpty) ...
           _buildSeguimiento(context, summary, simbolo),
         const SizedBox(height: 12),
@@ -621,6 +626,109 @@ class _ErrorView extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+// ── Próximos vencimientos ─────────────────────────────────────────────────────
+
+class _ProximosVencimientosCard extends ConsumerWidget {
+  const _ProximosVencimientosCard();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final listAsync = ref.watch(proximosVencimientosProvider);
+
+    return listAsync.when(
+      loading: () => const SizedBox.shrink(),
+      error: (_, __) => const SizedBox.shrink(),
+      data: (items) {
+        if (items.isEmpty) return const SizedBox.shrink();
+        final theme = Theme.of(context);
+        return Card(
+          margin: const EdgeInsets.only(bottom: 8),
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(16, 14, 16, 14),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Icon(
+                      Icons.schedule_rounded,
+                      size: 18,
+                      color: theme.colorScheme.onSurfaceVariant,
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      context.l10n.proximosVencimientos,
+                      style: theme.textTheme.titleSmall,
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 12),
+                for (final v in items) _VencimientoRow(vencimiento: v),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _VencimientoRow extends StatelessWidget {
+  const _VencimientoRow({required this.vencimiento});
+
+  final VencimientoProximo vencimiento;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final theme = Theme.of(context);
+    final dias = vencimiento.diasRestantes;
+
+    final chipColor = dias == 0
+        ? AppColors.expense
+        : dias == 1
+            ? AppColors.warning
+            : theme.colorScheme.primary;
+
+    final chipLabel = dias == 0
+        ? l10n.venceHoy
+        : dias == 1
+            ? l10n.venceManana
+            : l10n.venceEnDias(dias);
+
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8),
+      child: Row(
+        children: [
+          Expanded(
+            child: Text(
+              vencimiento.gastoFijo.nombre,
+              style: theme.textTheme.bodyMedium,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+          const SizedBox(width: 8),
+          Container(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+            decoration: BoxDecoration(
+              color: chipColor.withValues(alpha: 0.12),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Text(
+              chipLabel,
+              style: theme.textTheme.labelSmall?.copyWith(
+                color: chipColor,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

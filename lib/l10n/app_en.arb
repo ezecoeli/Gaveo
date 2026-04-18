@@ -66,6 +66,15 @@
       "dia": { "type": "int" }
     }
   },
+  "proximosVencimientos": "Upcoming due dates",
+  "venceHoy": "Today",
+  "venceManana": "Tomorrow",
+  "venceEnDias": "In {n} days",
+  "@venceEnDias": {
+    "placeholders": {
+      "n": { "type": "int" }
+    }
+  },
   "pagado": "Paid",
   "pendiente": "Pending",
   "confirmarEliminar": "Delete this expense?",

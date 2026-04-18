@@ -175,6 +175,20 @@ class AppLocalizationsEs extends AppLocalizations {
   }
 
   @override
+  String get proximosVencimientos => 'Próximos vencimientos';
+
+  @override
+  String get venceHoy => 'Hoy';
+
+  @override
+  String get venceManana => 'Mañana';
+
+  @override
+  String venceEnDias(int n) {
+    return 'En $n días';
+  }
+
+  @override
   String get pagado => 'Pagado';
 
   @override

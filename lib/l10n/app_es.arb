@@ -124,6 +124,18 @@
       "dia": { "type": "int" }
     }
   },
+  "proximosVencimientos": "Próximos vencimientos",
+  "@proximosVencimientos": {},
+  "venceHoy": "Hoy",
+  "@venceHoy": {},
+  "venceManana": "Mañana",
+  "@venceManana": {},
+  "venceEnDias": "En {n} días",
+  "@venceEnDias": {
+    "placeholders": {
+      "n": { "type": "int" }
+    }
+  },
   "pagado": "Pagado",
   "@pagado": {},
   "pendiente": "Pendiente",
