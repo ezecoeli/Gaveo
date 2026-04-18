@@ -1070,6 +1070,24 @@ abstract class AppLocalizations {
   /// **'Sin límite'**
   String get sinLimite;
 
+  /// No description provided for @pdfDetalle.
+  ///
+  /// In es, this message translates to:
+  /// **'Detalle'**
+  String get pdfDetalle;
+
+  /// No description provided for @pdfTotalGastos.
+  ///
+  /// In es, this message translates to:
+  /// **'Total gastos + ahorros'**
+  String get pdfTotalGastos;
+
+  /// No description provided for @pdfGeneradoPor.
+  ///
+  /// In es, this message translates to:
+  /// **'Generado por Gaveo'**
+  String get pdfGeneradoPor;
+
   /// No description provided for @verMisFinanzas.
   ///
   /// In es, this message translates to:

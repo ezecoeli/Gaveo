@@ -367,8 +367,13 @@
   "@dePresupuesto": {},
   "sinLimite": "Sin límite",
   "@sinLimite": {},
-  "guardar": "Guardar",
-  "@guardar": {},
+
+  "pdfDetalle": "Detalle",
+  "@pdfDetalle": {},
+  "pdfTotalGastos": "Total gastos + ahorros",
+  "@pdfTotalGastos": {},
+  "pdfGeneradoPor": "Generado por Gaveo",
+  "@pdfGeneradoPor": {},
 
   "verMisFinanzas": "Ver mis finanzas",
   "@verMisFinanzas": {},

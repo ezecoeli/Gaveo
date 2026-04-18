@@ -509,6 +509,15 @@ class AppLocalizationsEs extends AppLocalizations {
   String get sinLimite => 'Sin límite';
 
   @override
+  String get pdfDetalle => 'Detalle';
+
+  @override
+  String get pdfTotalGastos => 'Total gastos + ahorros';
+
+  @override
+  String get pdfGeneradoPor => 'Generado por Gaveo';
+
+  @override
   String get verMisFinanzas => 'Ver mis finanzas';
 
   @override

@@ -48,6 +48,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
           if (!context.mounted) return;
           await NotificationService.scheduleVencimientosHoy(
             gastosFijos,
+            title: l10n.notifVencimientoTitle,
             bodyBuilder: (nombre) => l10n.notifVencimientoBody(nombre),
           );
         });
@@ -94,6 +95,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                       mes: monthState.mes,
                       anio: monthState.anio,
                       locale: Localizations.localeOf(context).languageCode,
+                      l10n: context.l10n,
                     );
                   },
                 ),

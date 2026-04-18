@@ -6,7 +6,7 @@ part of 'historial_providers.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$historialMesesHash() => r'b931300cb5769e2f20d47a2906843d286e9647f8';
+String _$historialMesesHash() => r'479191a6e49f672f5683a0fb8560441fae1ec043';
 
 /// Returns monthly summaries for the last 12 months (newest first).
 /// Gastos fijos and ahorros are recurring — same total for every month.

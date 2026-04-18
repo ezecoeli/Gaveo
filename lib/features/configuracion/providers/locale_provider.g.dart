@@ -22,7 +22,7 @@ final appLocaleProvider = Provider<Locale>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef AppLocaleRef = ProviderRef<Locale>;
-String _$appThemeModeHash() => r'62a7d8b88f82f2b98b7027a6f85beadc16be5da9';
+String _$appThemeModeHash() => r'b60e8df0192a69317daeb9f5ceff65827c0c5728';
 
 /// See also [appThemeMode].
 @ProviderFor(appThemeMode)

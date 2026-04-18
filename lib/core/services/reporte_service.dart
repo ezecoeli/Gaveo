@@ -3,6 +3,7 @@ import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
 
+import '../../l10n/app_localizations.dart';
 import '../utils/currency_formatter.dart';
 import '../../features/configuracion/providers/configuracion_providers.dart';
 import '../../features/dashboard/providers/dashboard_summary.dart';
@@ -17,6 +18,7 @@ class ReporteService {
     required int mes,
     required int anio,
     required String locale,
+    required AppLocalizations l10n,
   }) async {
     final pdf = await _buildPdf(
       summary: summary,
@@ -24,6 +26,7 @@ class ReporteService {
       mes: mes,
       anio: anio,
       locale: locale,
+      l10n: l10n,
     );
 
     await Printing.sharePdf(
@@ -38,6 +41,7 @@ class ReporteService {
     required int mes,
     required int anio,
     required String locale,
+    required AppLocalizations l10n,
   }) async {
     final fontRegular = await PdfGoogleFonts.notoSansRegular();
     final fontBold = await PdfGoogleFonts.notoSansBold();
@@ -128,7 +132,7 @@ class ReporteService {
                 child: pw.Column(
                   crossAxisAlignment: pw.CrossAxisAlignment.start,
                   children: [
-                    pw.Text('Saldo disponible',
+                    pw.Text(l10n.saldoDisponible,
                         style: const pw.TextStyle(
                             fontSize: 11, color: textLight)),
                     pw.SizedBox(height: 4),
@@ -148,19 +152,19 @@ class ReporteService {
               pw.SizedBox(height: 20),
 
               // Tabla de conceptos
-              pw.Text('Detalle',
+              pw.Text(l10n.pdfDetalle,
                   style: pw.TextStyle(
                       fontSize: 13, fontWeight: pw.FontWeight.bold)),
               pw.SizedBox(height: 8),
-              _buildRow('Ingresos', fmt(summary.totalIngresos),
+              _buildRow(l10n.ingresos, fmt(summary.totalIngresos),
                   incomeColor, isHeader: false),
               _buildDivider(),
-              _buildRow('Gastos fijos', fmt(summary.totalGastosFijos),
+              _buildRow(l10n.gastosFijos, fmt(summary.totalGastosFijos),
                   expenseColor),
               _buildRow(
-                  'Gastos variables', fmt(summary.totalGastosVariables),
+                  l10n.gastosVariables, fmt(summary.totalGastosVariables),
                   expenseColor),
-              _buildRow('Ahorros', fmt(summary.totalAhorros), savingsColor),
+              _buildRow(l10n.ahorros, fmt(summary.totalAhorros), savingsColor),
               _buildDivider(),
 
               // Totales resumen
@@ -168,7 +172,7 @@ class ReporteService {
               pw.Row(
                 mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                 children: [
-                  pw.Text('Total gastos + ahorros',
+                  pw.Text(l10n.pdfTotalGastos,
                       style: pw.TextStyle(
                           fontWeight: pw.FontWeight.bold, fontSize: 12)),
                   pw.Text(
@@ -190,7 +194,7 @@ class ReporteService {
               pw.Row(
                 mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                 children: [
-                  pw.Text('Generado por Gaveo',
+                  pw.Text(l10n.pdfGeneradoPor,
                       style:
                           const pw.TextStyle(fontSize: 9, color: textLight)),
                   pw.Text(

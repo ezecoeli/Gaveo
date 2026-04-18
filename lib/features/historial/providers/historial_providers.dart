@@ -36,7 +36,6 @@ Future<List<HistorialMesData>> historialMeses(
     final ingresos = await db.ingresosDao.getIngresosDelMes(mes, anio);
     final variables =
         await db.gastosVariablesDao.getGastosVariablesDelMes(mes, anio);
-    final delivery = await db.deliveryDao.getDeliveryDelMes(mes, anio);
 
     result.add(HistorialMesData(
       mes: mes,
@@ -44,7 +43,6 @@ Future<List<HistorialMesData>> historialMeses(
       totalIngresos: ingresos.fold(0.0, (sum, i) => sum + i.monto),
       totalGastosFijos: totalFijos,
       totalVariables: variables.fold(0.0, (sum, v) => sum + v.monto),
-      totalDelivery: delivery.fold(0.0, (sum, d) => sum + d.monto),
       totalAhorros: totalAhorros,
     ));
   }

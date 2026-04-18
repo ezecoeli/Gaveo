@@ -41,6 +41,7 @@ class NotificationService {
   /// notification for each gasto fijo whose due day is today.
   static Future<void> scheduleVencimientosHoy(
     List<GastosFijo> gastosFijos, {
+    String? title,
     String Function(String nombre)? bodyBuilder,
   }) async {
     await _plugin.cancelAll();
@@ -57,7 +58,7 @@ class NotificationService {
 
       await _plugin.show(
         notifId++,
-        'Vencimiento hoy',
+        title ?? 'Vencimiento hoy',
         body,
         const NotificationDetails(
           android: AndroidNotificationDetails(
