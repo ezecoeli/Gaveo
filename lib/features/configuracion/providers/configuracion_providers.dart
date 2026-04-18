@@ -14,7 +14,6 @@ class ConfiguracionData {
   final double presupuestoDelivery;
   final String idioma;
   final String tema; // 'light' | 'dark'
-  final bool notificaciones;
 
   const ConfiguracionData({
     required this.nombreUsuario,
@@ -23,7 +22,6 @@ class ConfiguracionData {
     required this.presupuestoDelivery,
     this.idioma = AppConstants.defaultIdioma,
     this.tema = AppConstants.defaultTema,
-    this.notificaciones = AppConstants.defaultNotificaciones,
   });
 
   bool get estaConfigurado => nombreUsuario.isNotEmpty;
@@ -54,8 +52,6 @@ class ConfiguracionNotifier extends _$ConfiguracionNotifier {
             0.0,
         idioma: map[AppConstants.keyIdioma] ?? AppConstants.defaultIdioma,
         tema: map[AppConstants.keyTema] ?? AppConstants.defaultTema,
-        notificaciones:
-            (map[AppConstants.keyNotificaciones] ?? 'true') == 'true',
       );
     });
   }
@@ -67,7 +63,6 @@ class ConfiguracionNotifier extends _$ConfiguracionNotifier {
     required double presupuestoDelivery,
     String idioma = AppConstants.defaultIdioma,
     String tema = AppConstants.defaultTema,
-    bool notificaciones = AppConstants.defaultNotificaciones,
   }) async {
     final dao = ref.read(appDatabaseProvider).configuracionDao;
     await dao.setValor(AppConstants.keyNombreUsuario, nombreUsuario);
@@ -79,7 +74,5 @@ class ConfiguracionNotifier extends _$ConfiguracionNotifier {
     );
     await dao.setValor(AppConstants.keyIdioma, idioma);
     await dao.setValor(AppConstants.keyTema, tema);
-    await dao.setValor(
-        AppConstants.keyNotificaciones, notificaciones.toString());
   }
 }

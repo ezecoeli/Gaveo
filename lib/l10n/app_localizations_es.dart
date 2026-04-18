@@ -445,14 +445,6 @@ class AppLocalizationsEs extends AppLocalizations {
   String get resumenMensual => 'Resumen mensual';
 
   @override
-  String get notifVencimientoTitle => 'Vencimiento hoy';
-
-  @override
-  String notifVencimientoBody(String nombre) {
-    return '$nombre vence hoy';
-  }
-
-  @override
   String get historial => 'Historial';
 
   @override
@@ -469,13 +461,6 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get temaOscuro => 'Oscuro';
-
-  @override
-  String get notificaciones => 'Notificaciones';
-
-  @override
-  String get notificacionesDesc =>
-      'Recordatorios de vencimientos de gastos fijos';
 
   @override
   String get navIngresos => 'Ingresos';

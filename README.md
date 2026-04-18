@@ -14,7 +14,6 @@ Aplicación móvil para la gestión financiera del hogar. Registra ingresos, gas
 - **Gastos variables**: imprevistos y compras esporádicas por categoría (incluye delivery como subcategoría); límite mensual y opción de fijar al Dashboard configurables por categoría desde el formulario de registro
 - **Ahorros**: metas de ahorro con monto mensual y objetivo total
 - **Historial**: resumen de los últimos 12 meses; toca un mes para navegar directo a él
-- **Notificaciones locales**: aviso el día que vence cada gasto fijo (solo los que tienen día de vencimiento configurado)
 - **Exportación PDF**: resumen mensual completo compartible desde el Dashboard
 - **Internacionalización**: soporte completo Español / Inglés (ARB files)
 - **Selector de moneda**: picker curado con ~40 monedas (LATAM + globales)
@@ -33,7 +32,6 @@ Aplicación móvil para la gestión financiera del hogar. Registra ingresos, gas
 | Navegación | GoRouter |
 | Gráficos | fl_chart |
 | UI | Material 3, google_fonts, flutter_animate |
-| Notificaciones | flutter_local_notifications |
 | Exportación | pdf + printing |
 
 ---

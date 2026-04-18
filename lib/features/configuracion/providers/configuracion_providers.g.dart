@@ -7,7 +7,7 @@ part of 'configuracion_providers.dart';
 // **************************************************************************
 
 String _$configuracionNotifierHash() =>
-    r'caccccc3eb61770f53432ffb64e739c8256d6f80';
+    r'53d92560b502538043428aefa1b20d21e83de583';
 
 /// See also [ConfiguracionNotifier].
 @ProviderFor(ConfiguracionNotifier)

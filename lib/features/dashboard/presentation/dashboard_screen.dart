@@ -11,8 +11,6 @@ import '../../configuracion/providers/configuracion_providers.dart';
 import '../../gastos_variables/presentation/widgets/add_gasto_variable_bottom_sheet.dart'
     show categoriaVariableLabel, categoriaVariableIcon;
 import '../../../../app/theme/app_colors.dart';
-import '../../../../core/database/app_database.dart';
-import '../../../../core/services/notification_service.dart';
 import '../../../../core/services/reporte_service.dart';
 import '../../../../core/utils/currency_formatter.dart';
 import '../../../../core/utils/date_utils.dart';
@@ -27,36 +25,11 @@ class DashboardScreen extends ConsumerStatefulWidget {
 }
 
 class _DashboardScreenState extends ConsumerState<DashboardScreen> {
-  bool _notificationsScheduled = false;
-
   @override
   Widget build(BuildContext context) {
     final monthState = ref.watch(selectedMonthProvider);
     final summaryAsync = ref.watch(dashboardSummaryProvider);
     final configAsync = ref.watch(configuracionNotifierProvider);
-
-    // Programar notificaciones una vez por sesión, al cargar los datos
-    if (!_notificationsScheduled) {
-      ref.listen(dashboardSummaryProvider, (_, next) {
-        next.whenData((_) async {
-          if (_notificationsScheduled) return;
-          _notificationsScheduled = true;
-          final config =
-              ref.read(configuracionNotifierProvider).valueOrNull;
-          if (config?.notificaciones != true) return;
-          final db = ref.read(appDatabaseProvider);
-          final l10n = context.l10n;
-          final gastosFijos =
-              await db.gastosFijosDao.getGastosFijosActivos();
-          if (!context.mounted) return;
-          await NotificationService.scheduleVencimientosMensuales(
-            gastosFijos,
-            title: l10n.notifVencimientoTitle,
-            bodyBuilder: (nombre) => l10n.notifVencimientoBody(nombre),
-          );
-        });
-      });
-    }
 
     final config = configAsync.valueOrNull;
     final simbolo = config?.simbolo ?? '\$';

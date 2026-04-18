@@ -445,14 +445,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get resumenMensual => 'Monthly summary';
 
   @override
-  String get notifVencimientoTitle => 'Due today';
-
-  @override
-  String notifVencimientoBody(String nombre) {
-    return '$nombre is due today';
-  }
-
-  @override
   String get historial => 'History';
 
   @override
@@ -469,12 +461,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get temaOscuro => 'Dark';
-
-  @override
-  String get notificaciones => 'Notifications';
-
-  @override
-  String get notificacionesDesc => 'Reminders for fixed expense due dates';
 
   @override
   String get navIngresos => 'Income';

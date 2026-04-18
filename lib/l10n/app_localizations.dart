@@ -950,18 +950,6 @@ abstract class AppLocalizations {
   /// **'Resumen mensual'**
   String get resumenMensual;
 
-  /// No description provided for @notifVencimientoTitle.
-  ///
-  /// In es, this message translates to:
-  /// **'Vencimiento hoy'**
-  String get notifVencimientoTitle;
-
-  /// No description provided for @notifVencimientoBody.
-  ///
-  /// In es, this message translates to:
-  /// **'{nombre} vence hoy'**
-  String notifVencimientoBody(String nombre);
-
   /// No description provided for @historial.
   ///
   /// In es, this message translates to:
@@ -997,18 +985,6 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Oscuro'**
   String get temaOscuro;
-
-  /// No description provided for @notificaciones.
-  ///
-  /// In es, this message translates to:
-  /// **'Notificaciones'**
-  String get notificaciones;
-
-  /// No description provided for @notificacionesDesc.
-  ///
-  /// In es, this message translates to:
-  /// **'Recordatorios de vencimientos de gastos fijos'**
-  String get notificacionesDesc;
 
   /// No description provided for @navIngresos.
   ///

@@ -320,14 +320,6 @@
   "@generandoPDF": {},
   "resumenMensual": "Resumen mensual",
   "@resumenMensual": {},
-  "notifVencimientoTitle": "Vencimiento hoy",
-  "@notifVencimientoTitle": {},
-  "notifVencimientoBody": "{nombre} vence hoy",
-  "@notifVencimientoBody": {
-    "placeholders": {
-      "nombre": { "type": "String" }
-    }
-  },
 
   "historial": "Historial",
   "@historial": {},
@@ -342,10 +334,6 @@
   "@temaClaro": {},
   "temaOscuro": "Oscuro",
   "@temaOscuro": {},
-  "notificaciones": "Notificaciones",
-  "@notificaciones": {},
-  "notificacionesDesc": "Recordatorios de vencimientos de gastos fijos",
-  "@notificacionesDesc": {},
   "navIngresos": "Ingresos",
   "@navIngresos": {},
 
